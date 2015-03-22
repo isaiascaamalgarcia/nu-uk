@@ -1,0 +1,8 @@
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\bin\Debug\15Puzzle.exe
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\bin\Debug\15Puzzle.pdb
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\15Puzzle.csprojResolveAssemblyReference.cache
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\Puzzle.Form1.resources
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\Puzzle.Properties.Resources.resources
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\15Puzzle.csproj.GenerateResource.Cache
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\15Puzzle.exe
+C:\Users\Izzy-Izumi\Desktop\PhoneApp3\15Puzzle\obj\Debug\15Puzzle.pdb
