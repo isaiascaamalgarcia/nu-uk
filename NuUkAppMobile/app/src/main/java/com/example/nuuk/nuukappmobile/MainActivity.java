@@ -2,6 +2,7 @@ package com.example.nuuk.nuukappmobile;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
@@ -58,10 +59,16 @@ public class MainActivity extends Activity {
 
                     }
                 }
+
                 threadRunning = false;
+                Intent i = new Intent(getApplicationContext(), Main.class);
+                startActivity(i);
+                finish();
             }
         }).start();
     }
+
+
 
     private void updateProgressIndicatorValue() {
         this.runOnUiThread(new Runnable() {

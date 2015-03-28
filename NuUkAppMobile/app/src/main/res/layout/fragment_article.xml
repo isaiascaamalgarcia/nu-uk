@@ -1,0 +1,55 @@
+<AbsoluteLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#fff"
+    android:padding="10dp"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/headlines"
+        android:id="@+id/headline"
+        android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="134dp"
+        android:layout_height="134dp"
+        android:id="@+id/imageView"
+        android:layout_below="@+id/headline"
+        android:src="@drawable/icon_logo"
+        android:layout_alignRight="@+id/headline"
+        android:layout_alignEnd="@+id/headline"
+        android:layout_alignLeft="@+id/headline"
+        android:layout_alignStart="@+id/headline"
+        android:layout_alignParentBottom="true"
+        android:layout_weight="0.38"
+        android:layout_x="100dp"
+        android:layout_y="8dp"/>
+
+    <EditText
+        android:layout_width="230dp"
+        android:layout_height="48dp"
+        android:id="@+id/editText"
+        android:layout_x="53dp"
+        android:layout_y="186dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aceptar"
+        android:id="@+id/button"
+        android:layout_x="117dp"
+        android:layout_y="250dp"/>
+
+    <TextView
+        android:layout_width="271dp"
+        android:layout_height="43dp"
+        android:text="Ingrese su Curp"
+        android:id="@+id/textView"
+        android:layout_x="3dp"
+        android:layout_y="170dp"/>
+
+</AbsoluteLayout>
