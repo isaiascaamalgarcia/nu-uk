@@ -16,6 +16,7 @@
     <string name="drawer_open">Abrir navigation drawer</string>
     <string name="drawer_close">Cerrar navigation drawer</string>
     <string name="headlines">Encabezados de</string>
+    <string name="title_activity_curp">curp</string>
 
 
 </resources>

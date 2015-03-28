@@ -2,6 +2,7 @@ package com.example.nuuk.nuukappmobile;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -124,8 +126,25 @@ public class Main extends ActionBarActivity {
         args.putInt(ArticleFragment.ARG_ARTICLES_NUMBER, position);
         fragment.setArguments(args);
 
+        Fragment fragment1 = null;
+        switch (position){
+            case 0:
+                fragment1 = new Sec_home();
+                break;
+            case 1:
+                fragment1 = new Sec_test();
+                break;
+            case 2:
+                fragment1 = new Sec_carrer();
+                break;
+            case 3:
+                fragment1 = new Sec_location();
+                break;
+            default:break;
+        }
+
         FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment1).commit();
 
         // Se actualiza el item seleccionado y el título, después de cerrar el drawer
         drawerList.setItemChecked(position, true);
@@ -152,5 +171,10 @@ public class Main extends ActionBarActivity {
         super.onConfigurationChanged(newConfig);
         // Cambiar las configuraciones del drawer si hubo modificaciones
         drawerToggle.onConfigurationChanged(newConfig);
+    }
+
+    public void getCurpt(View v){
+        Intent i =  new Intent(this, curp.class);
+        startActivity(i);
     }
 }
