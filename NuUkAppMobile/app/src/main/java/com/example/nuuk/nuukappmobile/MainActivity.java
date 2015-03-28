@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Configuration;
 import android.graphics.Color;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
@@ -28,21 +29,26 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         mProgressIndicator3 = (ProgressIndicatorbar) findViewById(R.id.determinate_progress_indicator3);
-        LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(getWindowManager().getDefaultDisplay().getWidth(),getWindowManager().getDefaultDisplay().getWidth());
-        params2.setMargins(0,getWindowManager().getDefaultDisplay().getHeight()/20,0,0);
-        mProgressIndicator3.setLayoutParams(params2);
+        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(getWindowManager().getDefaultDisplay().getWidth(),getWindowManager().getDefaultDisplay().getWidth());
+            params2.setMargins(0,getWindowManager().getDefaultDisplay().getHeight()/20,0,0);
+            mProgressIndicator3.setLayoutParams(params2);
+        }
+        else{
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(getWindowManager().getDefaultDisplay().getHeight(),getWindowManager().getDefaultDisplay().getHeight());
+
+            mProgressIndicator3.setLayoutParams(params2);
+        }
         mProgressIndicator3.setForegroundColor(Color.parseColor("#4a148c"));
         mProgressIndicator3.setBackgroundColor(Color.parseColor("#ce93d8"));
         startThread();
 
     }
+
 
     private void startThread() {
         new Thread(new Runnable() {
@@ -59,7 +65,6 @@ public class MainActivity extends Activity {
 
                     }
                 }
-
                 threadRunning = false;
                 Intent i = new Intent(getApplicationContext(), Main.class);
                 startActivity(i);
@@ -74,9 +79,7 @@ public class MainActivity extends Activity {
         this.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-
                 mProgressIndicator3.setValue(update);
-
             }
         });
     }
