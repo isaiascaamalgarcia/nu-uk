@@ -142,10 +142,8 @@ public class MapsActivity extends FragmentActivity {
                 .title(titulo)  //Agrega un titulo al marcador
                 .snippet(info)   //Agrega información detalle relacionada con el marcador
                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))); //Color del marcador
-
-       // mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("Yo aqui").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)).snippet("App Nu'uk"));
-        mcamera= CameraUpdateFactory.newLatLngZoom((position), 14);
-        mMap.animateCamera(mcamera);
+                mcamera= CameraUpdateFactory.newLatLngZoom((position), 14);
+                mMap.animateCamera(mcamera);
     }
 
 
