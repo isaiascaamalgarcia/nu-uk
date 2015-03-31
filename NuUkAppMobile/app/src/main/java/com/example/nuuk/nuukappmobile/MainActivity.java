@@ -31,16 +31,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
         setContentView(R.layout.activity_main);
         mProgressIndicator3 = (ProgressIndicatorbar) findViewById(R.id.determinate_progress_indicator3);
-        if(getRequestedOrientation()==ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE){
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(getWindowManager().getDefaultDisplay().getWidth(),getWindowManager().getDefaultDisplay().getWidth());
-            params2.setMargins(0,getWindowManager().getDefaultDisplay().getHeight()/20,0,0);
+        int _W = getWindowManager().getDefaultDisplay().getWidth();
+        int _H = getWindowManager().getDefaultDisplay().getHeight();
+        if(_W > _H ){
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(_H,_H);
             mProgressIndicator3.setLayoutParams(params2);
         }
         else{
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(getWindowManager().getDefaultDisplay().getHeight(),getWindowManager().getDefaultDisplay().getHeight());
-
+            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(_W,_W);
             mProgressIndicator3.setLayoutParams(params2);
         }
         mProgressIndicator3.setForegroundColor(Color.parseColor("#4a148c"));
