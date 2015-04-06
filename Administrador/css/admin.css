@@ -1,0 +1,80 @@
+@font-face {
+    	font-family: 'Dungeon'; /*a name to be used later*/
+    	src: url('../fonts/dungeon.TTF'); /*URL to font*/
+		}
+.menu
+{
+	list-style: none;
+	line-height: 42px;
+	margin: 2em auto;
+	/*outline: 1px solid red;*/
+	padding-left: 0;
+	width: 15em;
+}
+
+.menu a
+{
+	background: url(icons.png) no-repeat left top;
+	color: #ddd;
+	display: block;
+	padding-left: 3em;
+	text-decoration: none;
+	text-transform: uppercase;
+	--webkit-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+	width: 100%;
+}
+
+.menu a:hover
+{
+	margin-left: 1em;
+}
+
+.menu li
+{
+	box-shadow: 3px 0 rgba(255,255,255,1) inset;
+	margin-bottom: 5px;
+	padding-left: .8em;
+	/*outline: 1px solid green;*/
+	--webkit-transition: all .5s;
+	-o-transition: all .5s;
+	transition: all .5s;
+}
+#title{
+	font-family: Dungeon;
+	font-size: 20px;
+}
+
+.menu li:hover
+{
+	box-shadow: 15em 0 rgba(255,255,255,.3) inset;
+}
+#img-brand {
+	white-space: nowrap;
+	padding: 5px;
+	padding-left: 20px;
+}
+.side-bar {
+	padding-top: 2em;
+	background: #6A0888;
+	top: 0px;
+	position: absolute;
+	left: 0;
+	z-index: 20;
+	height: 100%;
+}
+.side-bar-title {
+	margin-left: 2em;
+	color: white;
+	font-size: 24px;
+}
+#body {
+	margin-top: 4em;
+	margin-left: 15em;
+}
+#body form {
+	margin: 0 30px auto 0;
+	width: 100%;
+
+}

@@ -1,0 +1,114 @@
+@font-face {
+    	font-family: 'Dungeon'; /*a name to be used later*/
+    	src: url('../fonts/dungeon.TTF'); /*URL to font*/
+		}
+		.login-form {
+			background-color:rgba(106,8,136,0.7);
+			width: 32%;
+			margin: 9% auto 4% auto;
+			position: relative;
+			border-radius: 10px;
+		}
+		@media (max-width: 1024px){
+			.login-form {
+				margin: 8% auto 0;
+				width: 45%;
+			}
+		}
+		@media (max-width: 768px) {
+			.login-form {
+				margin: 12% auto 0;
+				width: 57%;
+			}
+		}
+		@media (max-width: 640px){
+			.login-form {
+				margin: 13% auto 0;
+				width: 70%;
+			}
+		}
+		@media (max-width: 640px){
+			.login-form {
+				margin: 20% auto 0;
+				width: 90%;
+			}
+		}
+		@media (max-width: 320px){
+			.login-form {
+				margin: 20% auto 0;
+				width: 95%;
+			}
+		}
+
+		.head{
+			position: absolute;
+			top:-15%;
+			left: 35.5%;
+		}
+		.head img {
+			width: 60%;
+		}
+		body {
+			background: url("../img/graduacion_2.jpg") no-repeat fixed center;
+			background-size: cover;
+			position: relative;
+			font-family: Dungeon;
+			
+		}
+		form {
+			padding: 24% 2.5em;
+			
+		}
+		form li {
+			border: 1px solid #B4B2B2;
+			list-style: none;
+			margin-bottom: 25px;
+			width: 100%;
+			background: none;
+			border-radius: 0.3em;
+		}
+		input[type="submit"] {
+			float:right;
+			font-size: 18px;
+			display: inline-block;
+			font-weight: 600;
+			color:#4C0B5F;
+			transition: 0.1s all;
+			cursor: pointer;
+			outline: none;
+			padding: 15px 10px;
+			margin-top: 3px;
+			font-family: Dungeon;
+			width: 40%;
+			border: none;
+			border-radius: 0.3em;
+			background: white;
+		}
+		input[type="submit"]:hover {
+			background:#4C0B5F;
+			color: white;
+			display: block;
+		}
+		input[type="text"], input[type="password"] {
+			font-family: Dungeon;
+			width: 60%;
+			padding: 0.7em 2em 0.7em 1.7em;
+			color: white;
+			font-size: 18px;
+			outline: none;
+			background: none;
+			border: none;
+			font-family: Dungeon;
+			font-weight: 200;
+		}
+		form li:hover {
+			border: 1px solid #40A9DF;
+			box-shadow: 0 0 1em #40A9DF;
+		}
+		.p-container {
+			margin-top: 2em;
+		}
+		a {
+			margin-left: 15px;
+			color: white;
+		}
