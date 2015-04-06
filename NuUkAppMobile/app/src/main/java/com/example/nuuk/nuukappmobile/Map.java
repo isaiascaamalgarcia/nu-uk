@@ -17,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -36,8 +37,11 @@ public class Map extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map);
+        googleMap = ((MapFragment) getFragmentManager().findFragmentById(
+                R.id.map)).getMap();
         createMapView();
         addOnMapClickListener();
+        setOnMarkerDragListener();
     }
 
 
@@ -99,11 +103,38 @@ public class Map extends ActionBarActivity {
                 .position(position)
                 .title(titulo)  //Agrega un titulo al marcador
                 .snippet(info)   //Agrega información detalle relacionada con el marcador
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))); //Color del marcador
+                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET))//Color del marcador
+                .draggable(true));
 
         // mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("Yo aqui").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)).snippet("App Nu'uk"));
         mcamera= CameraUpdateFactory.newLatLngZoom((position), 14);
         googleMap.animateCamera(mcamera);
+
+
+    }
+
+
+
+    public void setOnMarkerDragListener()
+    {
+        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
+            @Override
+            public void onMarkerDragStart(Marker marker) {
+                marker.getId();
+            }
+
+            @Override
+            public void onMarkerDrag(Marker marker) {
+                marker.getId();
+                marker.getPosition();
+            }
+
+            @Override
+            public void onMarkerDragEnd(Marker marker) {
+                marker.getId();
+            }
+        });
+
     }
 
     public void addOnMapClickListener()
