@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 public class Sec_carrer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
-        View rootView = inflater.inflate(R.layout.lay_carrer, container, false);
+        View rootView = inflater.inflate(R.layout.lay_schooltype, container, false);
         return rootView;
     }
 }

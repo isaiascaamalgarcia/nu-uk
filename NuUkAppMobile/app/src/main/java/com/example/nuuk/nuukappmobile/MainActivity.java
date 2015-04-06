@@ -1,16 +1,13 @@
 package com.example.nuuk.nuukappmobile;
 
-import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.content.res.Configuration;
 import android.graphics.Color;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
@@ -36,14 +33,15 @@ public class MainActivity extends Activity {
         mProgressIndicator3 = (ProgressIndicatorbar) findViewById(R.id.determinate_progress_indicator3);
         int _W = getWindowManager().getDefaultDisplay().getWidth();
         int _H = getWindowManager().getDefaultDisplay().getHeight();
+        FrameLayout.LayoutParams params2;
         if(_W > _H ){
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(_H,_H);
-            mProgressIndicator3.setLayoutParams(params2);
+            params2 = new FrameLayout.LayoutParams(_H,_H);
         }
         else{
-            LinearLayout.LayoutParams params2 = new LinearLayout.LayoutParams(_W,_W);
-            mProgressIndicator3.setLayoutParams(params2);
+            params2 = new FrameLayout.LayoutParams(_W,_W);
         }
+        params2.gravity = Gravity.CENTER;
+        mProgressIndicator3.setLayoutParams(params2);
         mProgressIndicator3.setForegroundColor(Color.parseColor("#4a148c"));
         mProgressIndicator3.setBackgroundColor(Color.parseColor("#ce93d8"));
         startThread();
