@@ -115,9 +115,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         db.execSQL("DROP DATABASE IF EXISTS " + DATABASE_NAME);
         onCreate(db);
-
     }
 }
