@@ -9,14 +9,15 @@
         android:background="#DC73FF"
         android:baselineAligned="false">
     <AbsoluteLayout
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1">
+        android:paddingBottom="10dp">
         <com.example.nuuk.nuukappmobile.RoundedImageView
             android:id="@+id/schoollogo_round"
             android:layout_width="200dp"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
+            android:paddingBottom="10dp"
             android:layout_x="-50dp"
             android:layout_y="-35dp" />
 
@@ -24,7 +25,7 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="0.6"
             android:orientation="vertical"
             android:gravity="center">
             <TextView
@@ -45,6 +46,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
+        <com.example.nuuk.nuukappmobile.SlidingTabLayout
+            android:id="@+id/sliding_tabs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#69008C"/>
         <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"

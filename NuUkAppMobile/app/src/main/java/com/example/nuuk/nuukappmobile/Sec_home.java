@@ -36,15 +36,11 @@ public class Sec_home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
             rootView = inflater.inflate(R.layout.lay_home, container, false);
-        imageViewRound=(ImageView)rootView.findViewById(R.id.imageView_round);
-        new LoadImage().execute("http://imagenestiernas.info/wp-content/uploads/2013/03/16917_540713432628376_2067568813_n-550x550.jpg");
+        //imageViewRound=(ImageView)rootView.findViewById(R.id.imageView_round);
+        //new LoadImage().execute("http://imagenestiernas.info/wp-content/uploads/2013/03/16917_540713432628376_2067568813_n-550x550.jpg");
         //loadImageFromURL("http://imagenestiernas.info/wp-content/uploads/2013/03/16917_540713432628376_2067568813_n-550x550.jpg",imageViewRound);
         /*Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.logobw);
-
         imageViewRound.setImageBitmap(icon);*/
-
-
-
             //Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/dungeon.ttf");
             //tv.setTypeface(font);
         return rootView;

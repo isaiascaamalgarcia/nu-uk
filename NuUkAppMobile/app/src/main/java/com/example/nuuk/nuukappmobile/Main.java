@@ -183,8 +183,4 @@ public class Main extends ActionBarActivity {
         drawerToggle.onConfigurationChanged(newConfig);
     }
 
-    public void getCurpt(View v){
-        Intent i =  new Intent(this, curp.class);
-        startActivity(i);
-    }
 }

@@ -40,10 +40,6 @@
         </activity>
         <activity android:name=".Main" />
         <activity
-            android:name=".curp"
-            android:label="@string/title_activity_curp" >
-        </activity>
-        <activity
             android:name=".Map"
             android:label="@string/title_activity_map" >
         </activity>

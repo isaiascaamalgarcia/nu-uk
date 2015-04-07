@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:background="#69008C">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -19,38 +20,42 @@
             android:src="@drawable/logonuukfinal"
             android:background="#DC73FF" />
     </LinearLayout>
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical"
-        android:background="#69008C"
-        android:gravity="center_horizontal">
-
-        <com.example.nuuk.nuukappmobile.RoundedImageView
-            android:id="@+id/imageView_round"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAlignment="center"
-            android:text="Ingrese su curp"
-            android:layout_marginBottom="50dp"
-            android:textColor="#ffffffff"
-            android:layout_gravity="center_horizontal"
-            android:textSize="40sp" />
-
-        <EditText
+        android:layout_height="wrap_content">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="30dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/rounded_edittext"
-            android:id="@+id/editText"
-            android:inputType="text" />
-    </LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:text="Ingrese su curp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="#ffffffff"
+                android:layout_gravity="center_horizontal"
+                android:textSize="40sp" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/rounded_edittext"
+                android:id="@+id/editText"
+                android:inputType="text" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_okbutton"
+                android:paddingTop="30dp"
+                android:paddingBottom="30dp"/>
+        </LinearLayout>
+    </ScrollView>
 </LinearLayout>
