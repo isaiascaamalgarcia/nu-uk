@@ -21,6 +21,7 @@ public class MainActivity extends Activity {
     float max = 1;
     float update = 0;
     boolean threadRunning = false;
+    private String g;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

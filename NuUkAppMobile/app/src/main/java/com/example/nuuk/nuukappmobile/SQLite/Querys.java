@@ -11,14 +11,14 @@ import java.util.List;
 /**
  * Created by Shary on 07/04/2015.
  */
-public class Consultas {
+public class Querys {
     public Context context;
     public String tableName;
     public String [] columns;
     public String [] values;
     public AdminSQLiteOpenHelper admin;
     public Variables variables;
-    public  Consultas(Context context,String table)
+    public Querys(Context context, String table)
     {
         this.context=context;
         this.tableName=table;

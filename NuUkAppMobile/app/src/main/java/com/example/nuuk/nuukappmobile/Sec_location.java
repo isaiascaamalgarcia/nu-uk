@@ -42,4 +42,6 @@ public class Sec_location extends Fragment {
     public void addListenerOnSpinnerItemSelection(){
         spinType.setOnItemSelectedListener(new CustomOnItemSelectedListener());
     }
+
+
 }
