@@ -7,9 +7,8 @@
     tools:context="com.example.nuuk.nuukappmobile.Map"
     android:background="#ff80ff3b">
 
-    <fragment
+    <com.google.android.gms.maps.MapView
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="match_parent"
         android:layout_height="350dp"
         android:layout_below="@+id/searchView"

@@ -54,7 +54,6 @@ public class Selected_school extends FragmentActivity{
         fragments.add(Fragment.instantiate(this,Map.class.getName()));
         mPagerAdapter = new Pager_schools(getSupportFragmentManager(),fragments,this);
         pager = (ViewPager)findViewById(R.id.schoolpager);
-        //abar = getActionBar();
         pager.setAdapter(mPagerAdapter);
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
         slidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
@@ -66,8 +65,6 @@ public class Selected_school extends FragmentActivity{
             }
         });
         slidingTabLayout.setViewPager(pager);
-        //abar.setHomeButtonEnabled(false);
-        //abar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
     }
 
 
