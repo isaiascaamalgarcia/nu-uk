@@ -1,15 +1,19 @@
 package com.example.nuuk.nuukappmobile;
 
 import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -24,7 +28,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class Map extends ActionBarActivity {
+public class Map extends FragmentActivity {
     private GoogleMap googleMap;
     private CameraUpdate mcamera;
     private Location location;
@@ -32,7 +36,10 @@ public class Map extends ActionBarActivity {
     private double longitude=0;
     private LocationManager locationManager;
     private Activity context;
+    private View rootView;
+    public Map(){
 
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -45,7 +52,6 @@ public class Map extends ActionBarActivity {
     }
 
 
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_map, menu);
@@ -81,7 +87,7 @@ public class Map extends ActionBarActivity {
                     LatLng latLng=new LatLng(latitude,longitude);
 
                     List<Address> addresses;
-                    Geocoder geocoder = new Geocoder(getBaseContext(), Locale.getDefault());
+                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
                     addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
@@ -146,7 +152,7 @@ public class Map extends ActionBarActivity {
             public void onMapClick(LatLng latLng) {
                 try {
                     List<Address> addresses;
-                    Geocoder geocoder = new Geocoder(getBaseContext(), Locale.getDefault());
+                    Geocoder geocoder = new Geocoder(Map.this, Locale.getDefault());
                     addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();

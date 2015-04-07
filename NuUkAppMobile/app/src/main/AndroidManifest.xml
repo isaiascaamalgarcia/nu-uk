@@ -30,7 +30,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBQQJo_1zy3-l3jNI2PZQcj1Z0yR-DT5ks"/>
         <activity
-            android:name=".Selected_school"
+            android:name=".Map"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -39,10 +39,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".Main" />
-        <activity
-            android:name=".Map"
-            android:label="@string/title_activity_map" >
-        </activity>
     </application>
 
 </manifest>
