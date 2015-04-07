@@ -8,7 +8,6 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,7 +27,7 @@ import java.util.List;
 import java.util.Locale;
 
 
-public class Map extends FragmentActivity {
+public class Map extends Fragment {
     private GoogleMap googleMap;
     private CameraUpdate mcamera;
     private Location location;
@@ -40,21 +39,20 @@ public class Map extends FragmentActivity {
     public Map(){
 
     }
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        rootView = inflater.inflate(R.layout.activity_map, container, false);
         googleMap = ((MapFragment) getFragmentManager().findFragmentById(
                 R.id.map)).getMap();
         createMapView();
         addOnMapClickListener();
         setOnMarkerDragListener();
+        return rootView;
     }
 
 
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_map, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_map, menu);
         return true;
     }
 
@@ -80,14 +78,14 @@ public class Map extends FragmentActivity {
             if (googleMap != null) {
                 googleMap.setMyLocationEnabled(true);
                 try {
-                    locationManager = (LocationManager)getSystemService(Context.LOCATION_SERVICE);
+                    locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
                     location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                     longitude = location.getLongitude();
                     latitude = location.getLatitude();
                     LatLng latLng=new LatLng(latitude,longitude);
 
                     List<Address> addresses;
-                    Geocoder geocoder = new Geocoder(this, Locale.getDefault());
+                    Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
                     addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();
@@ -152,7 +150,7 @@ public class Map extends FragmentActivity {
             public void onMapClick(LatLng latLng) {
                 try {
                     List<Address> addresses;
-                    Geocoder geocoder = new Geocoder(Map.this, Locale.getDefault());
+                    Geocoder geocoder = new Geocoder(getActivity(), Locale.getDefault());
                     addresses = geocoder.getFromLocation(latLng.latitude,latLng.longitude, 1);
                     String city = addresses.get(0).getLocality();
                     String state = addresses.get(0).getAdminArea();

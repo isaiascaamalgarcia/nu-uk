@@ -23,7 +23,7 @@ public class Pager_schools extends FragmentStatePagerAdapter {
     private int[] imageResId = {
             R.drawable.ic_info,
             R.drawable.ic_majors,
-            R.drawable.ic_css
+            R.drawable.ic_map
     };
     Context ctx;
     private List<Fragment> fragments;

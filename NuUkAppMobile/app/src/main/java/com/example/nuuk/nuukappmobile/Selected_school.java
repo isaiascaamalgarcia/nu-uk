@@ -51,6 +51,7 @@ public class Selected_school extends FragmentActivity{
         List<Fragment> fragments = new Vector<Fragment>();
         fragments.add(Fragment.instantiate(this, frag_infoschools.class.getName()));
         fragments.add(Fragment.instantiate(this,frag_carrersonschool.class.getName()));
+        fragments.add(Fragment.instantiate(this,Map.class.getName()));
         mPagerAdapter = new Pager_schools(getSupportFragmentManager(),fragments,this);
         pager = (ViewPager)findViewById(R.id.schoolpager);
         //abar = getActionBar();
