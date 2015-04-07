@@ -13,9 +13,6 @@ import java.util.List;
 
 import com.example.nuuk.nuukappmobile.NuukClass.CustomOnItemSelectedListener;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Created by Kody on 28/03/2015.
  */
