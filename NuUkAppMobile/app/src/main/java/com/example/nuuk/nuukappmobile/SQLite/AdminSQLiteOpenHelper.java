@@ -1,4 +1,4 @@
-package com.example.nuuk.nuukappmobile;
+package com.example.nuuk.nuukappmobile.SQLite;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -52,9 +52,18 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         private static final String RESULTADO_IDCARRERA = "idCarrera";
 
     private static final String TABLE_RELACION_ESC = "relacion_escuela";
-    private static final String RELACION_ID = "id";
-    private static final String RELACION_IDESCUELA = "idEscuela";
-    private static final String RELACION_IDCARRERA = "idCarrera";
+        private static final String RELACION_ID = "id";
+        private static final String RELACION_IDESCUELA = "idEscuela";
+        private static final String RELACION_IDCARRERA = "idCarrera";
+
+    private static final String TABLE_TIPO_CARRERA = "tipo";
+        private static final String TIPOCARRERA_TIPO = "tipo";
+        private static final String TIPOCARRERA_NOMBRE = "nombre";
+
+    private static final String TABLE_USUARIO = "usuario";
+        private static final String USUARIO_CURP = "curp";
+        private static final String USUARIO_DIRECCION = "direccion";
+
 
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
@@ -87,6 +96,12 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 + RELACION_ID + " INTEGER PRIMARY KEY," + RELACION_IDESCUELA + " INTEGER,"
                 + RELACION_IDCARRERA + " INTEGER" + ")";
 
+        String CREATE_TIPO_CARR_TABLE = "CREATE TABLE " + TABLE_TIPO_CARRERA + "("
+                + TIPOCARRERA_TIPO + " TEXT PRIMARY KEY," + TIPOCARRERA_NOMBRE + " TEXT"+ ")";
+
+        String CREATE_USUARIO_TABLE = "CREATE TABLE " + TABLE_USUARIO + "("
+                + USUARIO_CURP + " TEXT PRIMARY KEY," + USUARIO_DIRECCION + " TEXT"+ ")";
+
         db.execSQL(CREATE_MUNICIPIO_TABLE);
         db.execSQL(CREATE_LOCALIDAD_TABLE);
         db.execSQL(CREATE_ENCUESTA_TABLE);
@@ -94,13 +109,15 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         db.execSQL(CREATE_CARRERA_TABLE);
         db.execSQL(CREATE_RESULTADO_TABLE);
         db.execSQL(CREATE_RELACION_ESC_TABLE);
+        db.execSQL(CREATE_TIPO_CARR_TABLE);
+        db.execSQL(CREATE_USUARIO_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
-        /*db.execSQL("DROP TABLE IF EXISTS " + TABLE_CONTACTS);
-        onCreate(db);*/
+        db.execSQL("DROP DATABASE IF EXISTS " + DATABASE_NAME);
+        onCreate(db);
 
     }
 }
