@@ -19,15 +19,21 @@ import java.util.ArrayList;
 public class UpdateRecords {
     ListView listado;
     Context context;
-    public UpdateRecords(Context context)
+    String tableName;
+    String[]columnas;
+    String[]valores;
+    public UpdateRecords(Context context,String tableName,String[]columnas)
     {
-     this.context=context;
+        this.context=context;
+        this.tableName=tableName;
+        this.columnas=columnas;
+        valores=new String[this.columnas.length];
     }
-    public void getData(String tableName) {
+    public void getData() {
         AsyncHttpClient client = new AsyncHttpClient();
         String url = "http://192.168.0.19/Administrador/index.php/consultas";
         RequestParams params = new RequestParams();
-        params.put("tableName", tableName);
+        params.put("tableName", this.tableName);
 
         client.post(url, params, new AsyncHttpResponseHandler() {
             @Override
@@ -56,6 +62,10 @@ public class UpdateRecords {
             JSONArray jsonArray = new JSONArray(response);
             String text;
             for (int i=0; i<jsonArray.length();i++) {
+                for(int j=0;j<this.columnas.length;j++)
+                {
+                    valores[j]=jsonArray.getJSONObject(i).getString(columnas[j]);
+                }
                 text = jsonArray.getJSONObject(i).getString("pregunta")+" "+
                         jsonArray.getJSONObject(i).getString("tipoCarrera")+" ";
                 list.add(text);
