@@ -21,7 +21,15 @@ public class MainActivity extends Activity {
     float max = 1;
     float update = 0;
     boolean threadRunning = false;
-    private String g;
+    String[] tableCarrera               = {"id", "carrera","tipoCarrera"};
+    String[] tableEncuesta              = {"id", "pregunta","tipoCarrera"};
+    String[] tableEscuela               = {"id", "tipo", "nombre", "direccion" ,"latitud", "longitud",
+            "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};
+    String[] tableLocalidad             = {"id", "localidad", "idmunicipio"};
+    String[] tableRelacionEscuela       = {"id", "idEscuela", "idCarrera"};
+    String[] tableResultado_Sugerencias = {"id", "curp", "carrera"};
+    String[] tableTipo                  = {"tipo", "nombre"};
+    String[] tableUsuario               = {"curp", "direccion"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
