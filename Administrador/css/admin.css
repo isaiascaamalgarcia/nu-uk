@@ -74,7 +74,10 @@
 	margin-left: 15em;
 }
 #body form {
-	margin: 0 30px auto 0;
+	margin: 0 35px auto 0;
 	width: 100%;
 
+}
+#body h1 {
+	text-align: center;
 }

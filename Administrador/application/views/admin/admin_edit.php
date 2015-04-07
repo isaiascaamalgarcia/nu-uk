@@ -47,10 +47,10 @@
 		<nav class="side-bar" style="position:fixed;">
 			<ul class="menu">
 				<h2 class="side-bar-title"> Escuelas</h2>
-				<li><a href="<?=base_url();?>index.php/admin_school/edit"><span class="glyphicon glyphicon-pencil"> Modificar</span></a></li>
-				<li><a href="<?php echo base_url();?>index.php/admin_school/carreras"><span class="glyphicon glyphicon-pencil"> Carreras</span></a></li>
-				<li><a href="<?php echo base_url();?>index.php/admin_school/view_location"><span class="glyphicon glyphicon-pencil"> Ubicacion</span></a></li>
-				
+				<li><a href="<?=base_url();?>index.php/cruds"><span class="glyphicon glyphicon-plus"> Agregar</span></a></li>
+				<li><a href="<?=base_url();?>index.php/cruds/delete"><span class="glyphicon glyphicon-remove"> Eliminar</span></a></li>
+				<li><a href="<?= base_url();?>index.php/cruds/modify"><span class="glyphicon glyphicon-pencil"> Editar</span></a></li>
+				<li><a href="<?=base_url();?>index.php/encuestas"><span class="glyphicon glyphicon-pencil"> Preguntas</span></a></li>
 			</ul>
 		</nav>
 

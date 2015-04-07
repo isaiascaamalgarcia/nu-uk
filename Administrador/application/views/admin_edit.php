@@ -47,7 +47,7 @@
 				<li><a href="<?=base_url();?>index.php/cruds"><span class="glyphicon glyphicon-plus"> Agregar</span></a></li>
 				<li><a href="<?=base_url();?>index.php/cruds/delete"><span class="glyphicon glyphicon-remove"> Eliminar</span></a></li>
 				<li><a href="<?= base_url();?>index.php/cruds/modify"><span class="glyphicon glyphicon-pencil"> Editar</span></a></li>
-				
+				<li><a href="<?=base_url();?>index.php/encuestas"><span class="glyphicon glyphicon-pencil"> Preguntas</span></a></li>
 			</ul>
 		</nav>
 		<div class="panel panel-default" id="body">
