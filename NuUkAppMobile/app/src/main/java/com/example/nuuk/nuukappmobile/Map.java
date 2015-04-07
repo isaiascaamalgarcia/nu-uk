@@ -7,18 +7,21 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -40,20 +43,26 @@ public class Map extends Fragment {
     public Map(){
 
     }
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        rootView = inflater.inflate(R.layout.activity_map, container, false);
-        googleMap = ((MapView) rootView.findViewById(
-                R.id.map)).getMap();
+
+
+    public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
+       // googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
+         //       R.id.map)).getMap();
+        if(rootView==null)
+            rootView = (ScrollView)inflater.inflate(R.layout.activity_map,container,false);
+        ViewGroup parent = (ViewGroup) rootView.getParent();
+        if(parent!=null)
+            parent.removeView(rootView);
         createMapView();
         addOnMapClickListener();
         setOnMarkerDragListener();
         return rootView;
-    }
+}
 
     private void createMapView() {
         if (googleMap == null) {
-            googleMap = ((MapView) rootView.findViewById(
-                    R.id.map)).getMap();
+            googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
+                    R.id.map)).getMap();}
             if (googleMap != null) {
                 googleMap.setMyLocationEnabled(true);
                 try {
@@ -77,7 +86,7 @@ public class Map extends Fragment {
                 {
                 }
             }
-        }
+
     }
 
     private void setMarker(LatLng position, String titulo, String info) {
@@ -122,8 +131,8 @@ public class Map extends Fragment {
 
     public void addOnMapClickListener()
     {
-        googleMap = ((MapView) rootView.findViewById(
-                R.id.map)).getMap();
+        //googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
+          //      R.id.map)).getMap();
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
