@@ -1,8 +1,10 @@
 package com.example.nuuk.nuukappmobile;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -11,8 +13,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
+import com.example.nuuk.nuukappmobile.SQLite.UpdateRecords;
 
 public class MainActivity extends Activity {
 
@@ -21,16 +22,19 @@ public class MainActivity extends Activity {
     float max = 1;
     float update = 0;
     boolean threadRunning = false;
+
     String[] tableCarrera               = {"id", "carrera","tipoCarrera"};
     String[] tableEncuesta              = {"id", "pregunta","tipoCarrera"};
     String[] tableEscuela               = {"id", "tipo", "nombre", "direccion" ,"latitud", "longitud",
             "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};
-    String[] tableLocalidad             = {"id", "localidad", "idmunicipio"};
+    String[] tableMunicipio={"id","municipio","cabecera"};
+    String[] tableLocalidad             = {"id", "localidad", "idMunicipio"};
     String[] tableRelacionEscuela       = {"id", "idEscuela", "idCarrera"};
-    String[] tableResultado_Sugerencias = {"id", "curp", "carrera"};
+    String[] tableResultado_Sugerencias = {"id", "curp", "idCarrera"};
     String[] tableTipo                  = {"tipo", "nombre"};
     String[] tableUsuario               = {"curp", "direccion"};
 
+    private UpdateRecords download;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +58,15 @@ public class MainActivity extends Activity {
         mProgressIndicator3.setForegroundColor(Color.parseColor("#4a148c"));
         mProgressIndicator3.setBackgroundColor(Color.parseColor("#ce93d8"));
         startThread();
-
+        download= new UpdateRecords(this,"carrera",tableCarrera);
+        download= new UpdateRecords(this,"encuesta",tableEncuesta);
+        download= new UpdateRecords(this,"escuela",tableEscuela);
+        download= new UpdateRecords(this,"localidad",tableLocalidad);
+        download= new UpdateRecords(this,"municipio",tableMunicipio);
+        download= new UpdateRecords(this,"relacion_escuela",tableRelacionEscuela);
+        download= new UpdateRecords(this,"resultado_sugerencia",tableResultado_Sugerencias);
+        download= new UpdateRecords(this,"tipo",tableTipo);
+        download= new UpdateRecords(this,"usuario",tableUsuario);
     }
 
 

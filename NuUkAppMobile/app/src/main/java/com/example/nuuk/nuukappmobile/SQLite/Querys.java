@@ -25,15 +25,15 @@ public class Querys {
         admin = new AdminSQLiteOpenHelper(this.context,
                 this.tableName, null, 1);
     }
-    public void insertar(String columnas, String valores)
+    public void insertar(String []columnas, String []valores)
     {
-        columns=columnas.split(",");
-        values=valores.split(",");
+       /* columns=columnas.split(",");
+        values=valores.split(",");*/
         SQLiteDatabase bd = admin.getWritableDatabase();
         ContentValues registro = new ContentValues();
-        for(int i=0;i<columns.length;i++)
+        for(int i=0;i<columnas.length;i++)
         {
-            registro.put(columns[i],values[i]);
+            registro.put(columnas[i],valores[i]);
         }
         bd.insert(this.tableName, null, registro);
         bd.close();
