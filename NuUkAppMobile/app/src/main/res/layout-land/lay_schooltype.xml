@@ -40,7 +40,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spin_type"
+                android:id="@+id/spin_type2"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -54,7 +54,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spin_carrer"
+                android:id="@+id/spin_carrer2"
                 android:layout_gravity="center_horizontal" />
 
             <TextView
@@ -68,7 +68,7 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/spin_school"
+                android:id="@+id/spin_school2"
                 android:layout_gravity="center_horizontal" />
 
             <ImageView
@@ -76,7 +76,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_gobutton"
                 android:layout_gravity="right"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:id="@+id/goschool" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
