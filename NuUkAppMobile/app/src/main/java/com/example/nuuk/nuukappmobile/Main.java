@@ -180,5 +180,4 @@ public class Main extends ActionBarActivity {
         // Cambiar las configuraciones del drawer si hubo modificaciones
         drawerToggle.onConfigurationChanged(newConfig);
     }
-
 }

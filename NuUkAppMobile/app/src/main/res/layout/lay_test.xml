@@ -34,6 +34,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/preg1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -54,6 +55,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/preg2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -74,6 +76,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/preg3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -94,6 +97,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/preg4"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -114,6 +118,7 @@
                 android:padding="10dp">
 
                 <TextView
+                    android:id="@+id/preg5"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.8"
@@ -132,6 +137,7 @@
                 android:orientation="horizontal">
 
                 <ImageView
+                    android:visibility="invisible"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.5"
@@ -145,7 +151,8 @@
                     android:layout_gravity="left"
                     android:layout_weight="0.5"
                     android:baselineAlignBottom="true"
-                    android:src="@drawable/ic_gobutton" />
+                    android:src="@drawable/ic_gobutton"
+                    android:id="@+id/nextbutton"/>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
