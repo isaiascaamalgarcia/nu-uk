@@ -1,13 +1,12 @@
 package com.example.nuuk.nuukappmobile;
 
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.Point;
-import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -125,7 +123,7 @@ public class Main extends ActionBarActivity {
 
     private void selectItem(int position) {
         // Reemplazar el contenido del layout principal por un fragmento
-        FragmentManager fm = getFragmentManager();
+        FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
         WindowManager wm = getWindowManager();
         Display d = wm.getDefaultDisplay();
@@ -148,12 +146,12 @@ public class Main extends ActionBarActivity {
                 fragment1 = new Sec_carrer();
                 break;
             case 3:
-                fragment1 = new Sec_location();
+                fragment1= new Sec_location();
                 break;
             default:break;
         }
 
-        FragmentManager fragmentManager = getFragmentManager();
+        FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.content_frame, fragment1).commit();
 
         // Se actualiza el item seleccionado y el título, después de cerrar el drawer
