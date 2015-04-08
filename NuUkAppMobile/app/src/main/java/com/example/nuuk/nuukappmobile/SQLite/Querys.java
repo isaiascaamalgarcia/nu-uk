@@ -4,6 +4,8 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,6 +20,7 @@ public class Querys {
     public String [] values;
     public AdminSQLiteOpenHelper admin;
     public Variables variables;
+    public List<String> lista;
     public Querys(Context context, String table)
     {
         this.context=context;
@@ -61,21 +64,30 @@ public class Querys {
         //bd.close();
     }
 
-    public List<Variables> listadoTest() {
-        List<Variables> testList = new ArrayList<Variables>();
-        String selectQuery = "SELECT  * FROM " + this.tableName;
-
-        SQLiteDatabase bd = admin.getWritableDatabase();
-        Cursor cursor = bd.rawQuery(selectQuery, null);
-        if (cursor.moveToFirst()) {
-            do {
-                Variables tabla_x = new Variables();
-
-                tabla_x.setPreguntaEncuesta(cursor.getString(0));
-                testList.add(tabla_x);
-            } while (cursor.moveToNext());
+    public void listado(String []columnas, int numColumna) {
+        String dato;
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+            String selectQuery = "SELECT  *FROM "+ this.tableName;
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor = bd.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                     valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[numColumna]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
         }
-            return testList;
+        catch (Exception e)
+        {
+        }
+
     }
 
     public int conteoRegistros() {

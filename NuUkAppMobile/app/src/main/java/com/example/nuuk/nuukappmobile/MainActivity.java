@@ -13,6 +13,8 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
+import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.SQLite.UpdateRecords;
 
 public class MainActivity extends Activity {
@@ -22,17 +24,7 @@ public class MainActivity extends Activity {
     float max = 1;
     float update = 0;
     boolean threadRunning = false;
-
-    String[] tableCarrera               = {"id", "carrera","tipoCarrera"};
-    String[] tableEncuesta              = {"id", "pregunta","tipoCarrera"};
-    String[] tableEscuela               = {"id", "tipo", "nombre", "direccion" ,"latitud", "longitud",
-            "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};
-    String[] tableMunicipio={"id","municipio","cabecera"};
-    String[] tableLocalidad             = {"id", "localidad", "idMunicipio"};
-    String[] tableRelacionEscuela       = {"id", "idEscuela", "idCarrera"};
-    String[] tableResultado_Sugerencias = {"id", "curp", "idCarrera"};
-    String[] tableTipo                  = {"tipo", "nombre"};
-    String[] tableUsuario               = {"curp", "direccion"};
+    ColumnsTables columnas= new ColumnsTables();
 
     private UpdateRecords download;
     @Override
@@ -58,15 +50,15 @@ public class MainActivity extends Activity {
         mProgressIndicator3.setForegroundColor(Color.parseColor("#4a148c"));
         mProgressIndicator3.setBackgroundColor(Color.parseColor("#ce93d8"));
         startThread();
-        download= new UpdateRecords(this,"carrera",tableCarrera);
-        download= new UpdateRecords(this,"encuesta",tableEncuesta);
-        download= new UpdateRecords(this,"escuela",tableEscuela);
-        download= new UpdateRecords(this,"localidad",tableLocalidad);
-        download= new UpdateRecords(this,"municipio",tableMunicipio);
-        download= new UpdateRecords(this,"relacion_escuela",tableRelacionEscuela);
-        download= new UpdateRecords(this,"resultado_sugerencia",tableResultado_Sugerencias);
-        download= new UpdateRecords(this,"tipo",tableTipo);
-        download= new UpdateRecords(this,"usuario",tableUsuario);
+        download= new UpdateRecords(this,"carrera",columnas.getTableCarrera());
+        download= new UpdateRecords(this,"encuesta",columnas.getTableEncuesta());
+        download= new UpdateRecords(this,"escuela",columnas.getTableEscuela());
+        download= new UpdateRecords(this,"localidad",columnas.getTableLocalidad());
+        download= new UpdateRecords(this,"municipio",columnas.getTableMunicipio());
+        download= new UpdateRecords(this,"relacion_escuela",columnas.getTableRelacionEscuela());
+        download= new UpdateRecords(this,"resultado_sugerencia",columnas.getTableResultado_Sugerencias());
+        download= new UpdateRecords(this,"tipo",columnas.getTableTipo());
+        download= new UpdateRecords(this,"usuario",columnas.getTableUsuario());
     }
 
 
