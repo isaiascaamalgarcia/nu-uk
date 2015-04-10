@@ -6,6 +6,11 @@
     android:baselineAligned="false"
     android:background="#69008C">
     <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/vista_schoooltype"></LinearLayout>
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:padding="20dp"
@@ -35,7 +40,8 @@
                 android:text="Nivel Educativo"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:id="@+id/tv_carrer" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -49,7 +55,8 @@
                 android:text="Carreras"
                 android:layout_gravity="center_horizontal"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:id="@+id/tv2_carrer" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -63,7 +70,8 @@
                 android:layout_gravity="center_horizontal"
                 android:text="Instituciones"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:textSize="30sp"
+                android:id="@+id/tv3_carrer" />
 
             <Spinner
                 android:layout_width="match_parent"
@@ -77,7 +85,7 @@
                 android:src="@drawable/ic_gobutton"
                 android:layout_gravity="right"
                 android:layout_marginRight="20dp"
-                android:id="@+id/goschool" />
+                android:id="@+id/imagen" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

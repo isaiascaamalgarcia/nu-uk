@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
@@ -25,6 +26,7 @@ public class Sec_carrer extends Fragment {
     private Spinner spinCarreras;
     private Spinner spinEscuelas;
     private ImageView img;
+    private TextView tv1,tv2,tv3;
     private ArrayAdapter<String> adapter;
     public List<String> listaMunicipio, listaEscuela;
     View rootView;
@@ -44,10 +46,16 @@ public class Sec_carrer extends Fragment {
                 Fragment f = new Selected_school();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.vista_schoooltype, f);
-                fragmentTransaction.commit();
+                fragmentTransaction.replace(R.id.vista_schoooltype, f). addToBackStack(null);
             }
         });
+        tv1 = (TextView)rootView.findViewById(R.id.tv_carrer);
+        tv2 = (TextView)rootView.findViewById(R.id.tv2_carrer);
+        tv3 = (TextView)rootView.findViewById(R.id.tv3_carrer);
+        setFont sf = new setFont();
+        sf.setFontTextView(tv1,getActivity());
+        sf.setFontTextView(tv2,getActivity());
+        sf.setFontTextView(tv3,getActivity());
              listadoCarreras();
         return rootView;
     }

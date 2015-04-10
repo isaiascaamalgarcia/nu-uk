@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
@@ -25,6 +26,7 @@ public class Sec_location extends Fragment{
     private Spinner spinMunicipio;
     private Spinner spinEscuela;
     private ArrayAdapter<String> adapter;
+    private TextView tv1,tv2,tv3;
     public List<String> listaMunicipio,listaEscuela;
     View rootView;
     Querys querys;
@@ -35,6 +37,13 @@ public class Sec_location extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         rootView = inflater.inflate(R.layout.lay_location, container, false);
+        tv1 = (TextView)rootView.findViewById(R.id.tv_loc);
+        tv2 = (TextView)rootView.findViewById(R.id.tv_loc2);
+        tv3 = (TextView)rootView.findViewById(R.id.tv_loc3);
+        setFont sf = new setFont();
+        sf.setFontTextView(tv1,getActivity());
+        sf.setFontTextView(tv2,getActivity());
+        sf.setFontTextView(tv3,getActivity());
         listado();
         return rootView;
     }
@@ -59,9 +68,6 @@ public class Sec_location extends Fragment{
             listaEscuela=querys.lista;
             adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
             spinEscuela.setAdapter(adapter);
-
-
-
         }
            catch (Exception e) {
         }

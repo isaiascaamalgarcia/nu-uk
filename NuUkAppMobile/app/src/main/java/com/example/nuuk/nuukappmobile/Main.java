@@ -2,6 +2,7 @@ package com.example.nuuk.nuukappmobile;
 
 import android.content.res.Configuration;
 import android.graphics.Point;
+import android.graphics.Typeface;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -10,6 +11,8 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.text.Spannable;
+import android.text.SpannableString;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,6 +21,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -114,6 +118,16 @@ public class Main extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    public void onBackPressed() {
+        if(getSupportFragmentManager().getBackStackEntryCount() == 1) {
+            moveTaskToBack(true);
+        }
+        else {
+            getSupportFragmentManager().popBackStackImmediate();
+        }
+    }
+
     /* La escucha del ListView en el Drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
@@ -126,15 +140,11 @@ public class Main extends ActionBarActivity {
         // Reemplazar el contenido del layout principal por un fragmento
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction ft = fm.beginTransaction();
-        WindowManager wm = getWindowManager();
-        Display d = wm.getDefaultDisplay();
-        Point p = new Point();
-        d.getSize(p);
         Fragment fragment = new ArticleFragment();
         Bundle args = new Bundle();
         args.putInt(ArticleFragment.ARG_ARTICLES_NUMBER, position);
         fragment.setArguments(args);
-
+        //Toast.makeText(getApplication(),String.valueOf(getSupportFragmentManager().getBackStackEntryCount()),Toast.LENGTH_LONG).show();
         Fragment fragment1 = null;
         switch (position){
             case 0:
@@ -153,7 +163,7 @@ public class Main extends ActionBarActivity {
         }
 
         FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment1).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment1). addToBackStack(null). commit();
 
         // Se actualiza el item seleccionado y el título, después de cerrar el drawer
         drawerList.setItemChecked(position, true);

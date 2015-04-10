@@ -10,11 +10,14 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Message;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,6 +35,7 @@ public class Sec_home extends Fragment {
     private ImageView imageViewRound;
     private TextView tv;
     private Bitmap bitmap;
+    private EditText et;
     private ProgressDialog pDialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -41,8 +45,11 @@ public class Sec_home extends Fragment {
         //loadImageFromURL("http://imagenestiernas.info/wp-content/uploads/2013/03/16917_540713432628376_2067568813_n-550x550.jpg",imageViewRound);
         /*Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.logobw);
         imageViewRound.setImageBitmap(icon);*/
-            //Typeface font = Typeface.createFromAsset(getActivity().getAssets(), "fonts/dungeon.ttf");
-            //tv.setTypeface(font);
+        tv = (TextView)rootView.findViewById(R.id.tv_home);
+        et = (EditText)rootView.findViewById(R.id.et_home);
+        setFont sf = new setFont();
+        sf.setFontTextView(tv,getActivity());
+
         return rootView;
     }
     private class LoadImage extends AsyncTask<String, String, Bitmap> {

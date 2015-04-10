@@ -18,7 +18,8 @@
             android:layout_gravity="center_horizontal"
 
             android:src="@drawable/logonuukfinal"
-            android:background="#DC73FF" />
+            android:background="#DC73FF"
+            android:id="@+id/iv_home" />
     </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
@@ -39,7 +40,8 @@
                 android:layout_marginBottom="30dp"
                 android:textColor="#ffffffff"
                 android:layout_gravity="center_horizontal"
-                android:textSize="40sp" />
+                android:textSize="30sp"
+                android:id="@+id/tv_home" />
 
             <EditText
                 android:layout_width="match_parent"
@@ -47,15 +49,17 @@
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:background="@drawable/rounded_edittext"
-                android:id="@+id/editText"
-                android:inputType="text" />
+                android:id="@+id/et_home"
+                android:inputType="text"
+                android:maxLength="18"/>
 
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_okbutton"
                 android:paddingTop="30dp"
-                android:paddingBottom="30dp"/>
+                android:paddingBottom="30dp"
+                android:id="@+id/iv2_home" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
