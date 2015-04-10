@@ -121,11 +121,12 @@ public class Querys {
 
     public void listadoInnerJoin() {
         String dato;
-        String []columnas={"tipo","nombre"};
+        lista= new ArrayList<String>();
+        String []columnas={"tipo", "nombre"};
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT tipo,nombre, FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=?";
+            String selectQuery = "SELECT tipo,nombre FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=1 AND escuela.tipo=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
             Cursor cursor=bd.rawQuery(selectQuery, new String[]{"1"});
@@ -140,7 +141,6 @@ public class Querys {
             }
             cursor.close();
             bd.close();
-
         } catch(Exception e)
         {
         }
