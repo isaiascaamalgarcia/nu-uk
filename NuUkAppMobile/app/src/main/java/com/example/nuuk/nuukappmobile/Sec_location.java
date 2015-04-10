@@ -54,8 +54,11 @@ public class Sec_location extends Fragment{
                     x=spinType.getSelectedItemPosition()+1;
                     x1=spinMunicipio.getSelectedItemPosition()+1;
 
-                    querys = new Querys(rootView.getContext(), "escuela");
+                   /* querys = new Querys(rootView.getContext(), "escuela");
                     querys.listadoJoin(columnas.getTableEscuela(),"localidad",2,"idlocalidad","id","idMunicipio","tipo",String.valueOf(x1),String.valueOf(x));
+                    */
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoin();
                     listaEscuela=querys.lista;
                     adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
                     spinEscuela.setAdapter(adapter);

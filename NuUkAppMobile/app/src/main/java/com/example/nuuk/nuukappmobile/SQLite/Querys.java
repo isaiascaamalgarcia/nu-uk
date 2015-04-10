@@ -119,6 +119,34 @@ public class Querys {
                 }
             }
 
+    public void listadoInnerJoin() {
+        String dato;
+        String []columnas={"tipo","nombre"};
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+            String selectQuery = "SELECT tipo,nombre FROM escuela\n" +
+                    "INNER JOIN localidad\n" +
+                    "ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=?";
+
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{"1"});
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[1]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+
+        } catch(Exception e)
+        {
+        }
+    }
 
 
     public void listadoCondicionId(String []columnas, int numColumna,String campoClausula, int condicion) {
