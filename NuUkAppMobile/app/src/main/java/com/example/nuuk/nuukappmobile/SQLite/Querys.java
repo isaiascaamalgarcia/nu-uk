@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -87,7 +88,88 @@ public class Querys {
         catch (Exception e)
         {
         }
+    }
 
+    public void listadoJoin(String []columnas, String tableName2,int numColumna,String valorCondicion, String valorCondicion2,int condicion,
+                            String condicion1,String condicion2) {
+        String dato;
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+
+            String selectQuery = "SELECT "+columnas+" FROM "+ this.tableName+" INNER JOIN "+ tableName2+
+                    " ON "+this.tableName+"."+condicion+"="+tableName2+"."+condicion2+
+                    " AND "+tableName2+"."+condicion+"="+valorCondicion+" AND "+this.tableName+"=?";
+
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{condicion2});
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[numColumna]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+
+        } catch(Exception e)
+                {
+                }
+            }
+
+
+
+    public void listadoCondicionId(String []columnas, int numColumna,String campoClausula, int condicion) {
+        String dato;
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+            String selectQuery = "SELECT  *FROM "+ this.tableName +" WHERE "+ campoClausula+"="+condicion;
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor = bd.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[numColumna]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+        }
+        catch (Exception e)
+        {
+        }
+    }
+
+    public void listadoCondicionesId(String []columnas, int numColumna,String campoClausula, int condicion,String campoClausula2, int condicion2) {
+        String dato;
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+            String selectQuery = "SELECT  * FROM "+ this.tableName +" WHERE "+ campoClausula+"="+condicion+" AND "+ campoClausula2 + "=" + condicion2;
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor = bd.rawQuery(selectQuery, null);
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[numColumna]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+        }
+        catch (Exception e)
+        {
+        }
     }
 
     public int conteoRegistros() {

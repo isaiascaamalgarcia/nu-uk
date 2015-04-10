@@ -10,8 +10,11 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -24,7 +27,7 @@ import java.util.Vector;
 /**
  * Created by Izzy-Izumi on 04/04/2015.
  */
-public class Selected_school extends FragmentActivity{
+public class Selected_school extends Fragment{
     ImageView img;
     Bitmap bitmap;
     Pager_schools mPagerAdapter;
@@ -35,8 +38,9 @@ public class Selected_school extends FragmentActivity{
             R.drawable.ic_angular,
     };
     ViewPager pager;
+    View rootView;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    /*protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.lay_selectedschool);
         //getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -45,17 +49,25 @@ public class Selected_school extends FragmentActivity{
         new LoadImage().execute("https://pbs.twimg.com/profile_images/537990267572191232/Tcpm1Ty2.jpeg");
         initializePagin();
 
+    }*/
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
+        rootView = inflater.inflate(R.layout.lay_selectedschool, container, false);
+        img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
+        new LoadImage().execute("https://pbs.twimg.com/profile_images/537990267572191232/Tcpm1Ty2.jpeg");
+        initializePagin();
+        return rootView;
     }
+
 
     private void initializePagin() {
         List<Fragment> fragments = new Vector<Fragment>();
-        fragments.add(Fragment.instantiate(this, frag_infoschools.class.getName()));
-        fragments.add(Fragment.instantiate(this,frag_carrersonschool.class.getName()));
-        fragments.add(Fragment.instantiate(this,Map.class.getName()));
-        mPagerAdapter = new Pager_schools(getSupportFragmentManager(),fragments,this);
-        pager = (ViewPager)findViewById(R.id.schoolpager);
+        fragments.add(Fragment.instantiate(getActivity(), frag_infoschools.class.getName()));
+        fragments.add(Fragment.instantiate(getActivity(),frag_carrersonschool.class.getName()));
+        fragments.add(Fragment.instantiate(getActivity(),Map.class.getName()));
+        mPagerAdapter = new Pager_schools(getActivity().getSupportFragmentManager(),fragments,getActivity());
+        pager = (ViewPager)rootView.findViewById(R.id.schoolpager);
         pager.setAdapter(mPagerAdapter);
-        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) findViewById(R.id.sliding_tabs);
+        SlidingTabLayout slidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);
         slidingTabLayout.setCustomTabView(R.layout.custom_tab, 0);
         slidingTabLayout.setDistributeEvenly(true);
         slidingTabLayout.setCustomTabColorizer(new SlidingTabLayout.TabColorizer() {
@@ -85,17 +97,17 @@ public class Selected_school extends FragmentActivity{
             if(image != null){
                 img.setImageBitmap(image);
             }else{
-                Toast.makeText(Selected_school.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(Selected_school.this, "Image Does Not exist or Network Error", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    @Override
+   /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+        getActivity().getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
-    }
+    }*/
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

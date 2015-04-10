@@ -14,6 +14,7 @@ public class ColumnsTables {
     private String[] tableResultado_Sugerencias = {"id", "curp", "idCarrera"};
     private String[] tableTipo                  = {"tipo", "nombre"};
     private String[] tableUsuario               = {"curp", "direccion"};
+    private String[] nivelEducativo               = {"Media Superior", "Superior"};
 
     public String[] getTableCarrera() {
         return tableCarrera;
@@ -85,5 +86,13 @@ public class ColumnsTables {
 
     public void setTableUsuario(String[] tableUsuario) {
         this.tableUsuario = tableUsuario;
+    }
+
+    public String[] getNivelEducativo() {
+        return nivelEducativo;
+    }
+
+    public void setNivelEducativo(String[] nivelEducativo) {
+        this.nivelEducativo = nivelEducativo;
     }
 }

@@ -1,7 +1,11 @@
 package com.example.nuuk.nuukappmobile;
 
+<<<<<<< HEAD
 import android.app.Fragment;
 import android.app.FragmentManager;
+=======
+import android.support.v4.app.Fragment;
+>>>>>>> origin/master
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +18,10 @@ import android.widget.ToggleButton;
 import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
 /**
  * Created by Kody on 28/03/2015.
  */

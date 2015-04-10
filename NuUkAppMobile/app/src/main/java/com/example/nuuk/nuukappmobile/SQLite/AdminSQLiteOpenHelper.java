@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  */
 public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME = "nuuk";
+    private static final String DATABASE_NAME = "nuuk.db";
 
     private static final String TABLE_MUNICIPIO = "municipio";
         private static final String MUNICIPIO_ID = "id";
@@ -68,7 +68,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
 
     public AdminSQLiteOpenHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+        super(context,DATABASE_NAME, factory, version);
     }
 
     @Override
