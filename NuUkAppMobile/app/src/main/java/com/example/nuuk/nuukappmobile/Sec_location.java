@@ -48,19 +48,47 @@ public class Sec_location extends Fragment{
             adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
             spinType.setAdapter(adapter);
 
+            spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinMunicipio.getSelectedItemPosition()+1;
+                    x1=spinType.getSelectedItemPosition();
+
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinLoc("tipo,nombre",String.valueOf(x),String.valueOf(x1));
+                    listaEscuela=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
+                    spinEscuela.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
             querys = new Querys(rootView.getContext(), "municipio");
-            querys.listado(columnas.getTableMunicipio(),1);
+            querys.listado(columnas.getTableMunicipio(), 1);
             listaMunicipio=querys.lista;
             adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaMunicipio);
             spinMunicipio.setAdapter(adapter);
 
-            querys = new Querys(rootView.getContext(), "escuela");
-            querys.listadoInnerJoin();
-            listaEscuela=querys.lista;
-            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
-            spinEscuela.setAdapter(adapter);
+            spinMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinMunicipio.getSelectedItemPosition()+1;
+                    x1=spinType.getSelectedItemPosition();
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinLoc("tipo,nombre",String.valueOf(x),String.valueOf(x1));
+                    listaEscuela=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
+                    spinEscuela.setAdapter(adapter);
+                }
 
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
 
+                }
+            });
 
         }
            catch (Exception e) {

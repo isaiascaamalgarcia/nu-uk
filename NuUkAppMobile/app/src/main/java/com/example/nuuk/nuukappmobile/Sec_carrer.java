@@ -26,10 +26,10 @@ public class Sec_carrer extends Fragment {
     private Spinner spinEscuelas;
     private ImageView img;
     private ArrayAdapter<String> adapter;
-    public List<String> listaMunicipio, listaEscuela;
+    public List<String> listaCarreras, listaEscuelas;
     View rootView;
     Querys querys;
-    int x = 1;
+    int x = 1,x1=1;
     ColumnsTables columnas = new ColumnsTables();
 
     @Override
@@ -60,6 +60,50 @@ public class Sec_carrer extends Fragment {
             adapter = new ArrayAdapter<String>(rootView.getContext(),
                     android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
             spinTipos.setAdapter(adapter);
+
+            spinTipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinCarreras.getSelectedItemPosition()+1;
+                    x1=spinTipos.getSelectedItemPosition();
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinCarr("tipo,nombre",String.valueOf(x),String.valueOf(x1));
+                    listaEscuelas=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    spinEscuelas.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            querys = new Querys(rootView.getContext(), "carrera");
+            querys.listado(columnas.getTableCarrera(),1);
+            listaCarreras=querys.lista;
+            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaCarreras);
+            spinCarreras.setAdapter(adapter);
+
+            spinCarreras.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinCarreras.getSelectedItemPosition()+1;
+                    x1=spinTipos.getSelectedItemPosition();
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinCarr("tipo,nombre",String.valueOf(x),String.valueOf(x1));
+                    listaEscuelas=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    spinEscuelas.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
         } catch (Exception e) {
         }
 
