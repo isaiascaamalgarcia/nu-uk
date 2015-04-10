@@ -15,6 +15,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
+import com.example.nuuk.nuukappmobile.NuukClass.arrayEscuela;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
 import java.util.List;
@@ -35,6 +36,7 @@ public class Sec_carrer extends Fragment {
     Querys querys;
     int x = 1,x1=1;
     ColumnsTables columnas = new ColumnsTables();
+    arrayEscuela listado= new arrayEscuela();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
@@ -113,6 +115,10 @@ public class Sec_carrer extends Fragment {
                     listaEscuelas=querys.lista;
                     adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
                     spinEscuelas.setAdapter(adapter);
+
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listado(columnas.getTableEscuela(),1);
+                    listaEscuelas=querys.lista;
                 }
 
                 @Override

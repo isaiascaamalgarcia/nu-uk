@@ -125,9 +125,10 @@ public class Querys {
     public void listadoInnerJoinLoc(String column, String idMun, String nivel) {
         String dato;
         lista= new ArrayList<String>();
+        lista1= new ArrayList<String>();
         String []columnas=column.split(",");
         String [] valor= new String[columnas.length];
-        lista= new ArrayList<String>();
+
         try {
             String selectQuery = "SELECT ".concat(column.toString())+" FROM "+"escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio="+idMun+" AND escuela.tipo=?";
             Log.i("QUERY ", selectQuery);
@@ -154,7 +155,6 @@ public class Querys {
         lista= new ArrayList<String>();
         String []columnas=column.split(",");
         String [] valor= new String[columnas.length];
-        lista= new ArrayList<String>();
         try {
             //String selectQuery = "SELECT ".concat(column.toString())+" FROM "+"escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio="+idMun+" AND escuela.tipo=?";
             String selectQuery = "SELECT ".concat(column.toString())+" FROM escuela INNER JOIN relacion_escuela ON escuela.id = relacion_escuela.idEscuela INNER JOIN carrera ON carrera.id = relacion_escuela.idCarrera WHERE relacion_escuela.idCarrera ="+idCar+" AND escuela.tipo =?";
@@ -204,30 +204,6 @@ public class Querys {
         }
     }
 
-    public void listadoCondicionesId(String []columnas, int numColumna,String campoClausula, int condicion,String campoClausula2, int condicion2) {
-        String dato;
-        String [] valor= new String[columnas.length];
-        lista= new ArrayList<String>();
-        try {
-            String selectQuery = "SELECT  * FROM "+ this.tableName +" WHERE "+ campoClausula+"="+condicion+" AND "+ campoClausula2 + "=" + condicion2;
-            SQLiteDatabase bd = admin.getWritableDatabase();
-            Cursor cursor = bd.rawQuery(selectQuery, null);
-            if (cursor.moveToFirst()) {
-                do {
-                    for (int i=0;i<columnas.length;i++)
-                    {
-                        valor[i]=cursor.getString(i);
-                    }
-                    lista.add(valor[numColumna]);
-                } while (cursor.moveToNext());
-            }
-            cursor.close();
-            bd.close();
-        }
-        catch (Exception e)
-        {
-        }
-    }
 
     public int conteoRegistros() {
         String countQuery = "SELECT  * FROM " + this.tableName;
