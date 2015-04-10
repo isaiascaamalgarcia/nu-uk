@@ -7,10 +7,16 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/vista_schoooltype"></LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:padding="10dp"
         android:background="#DC73FF"
         android:orientation="vertical"
-        android:gravity="center">
+        android:gravity="center"
+        android:id="@+id/lli">
 
         <ImageView
             android:layout_width="wrap_content"
@@ -77,7 +83,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_gobutton"
                 android:layout_gravity="right"
-                android:layout_marginRight="20dp"/>
+                android:layout_marginRight="20dp"
+                android:id="@+id/imagen" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

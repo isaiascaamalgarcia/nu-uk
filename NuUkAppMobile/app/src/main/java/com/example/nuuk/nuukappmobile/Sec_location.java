@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by Kody on 28/03/2015.
  */
-public class Sec_location extends Fragment {
+public class Sec_location extends Fragment{
     private Spinner spinType;
     private Spinner spinMunicipio;
     private Spinner spinEscuela;
@@ -28,6 +29,7 @@ public class Sec_location extends Fragment {
     View rootView;
     Querys querys;
     int x=1;
+    private ImageView img;
     ColumnsTables columnas= new ColumnsTables();
 
     @Override
@@ -45,35 +47,6 @@ public class Sec_location extends Fragment {
         try {
             adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
             spinType.setAdapter(adapter);
-            spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    x=spinMunicipio.getSelectedItemPosition()+1;
-                    querys = new Querys(rootView.getContext(), "localidad");
-                    querys.listadoCondicionId(columnas.getTableLocalidad(), 0, "idMunicipio", x);
-                    listaEscuela=querys.lista;
-                    x=spinType.getSelectedItemPosition();
-                    String[] stockArr = new String[listaEscuela.size()];
-                    stockArr = listaEscuela.toArray(stockArr);
-                    listaEscuela.clear();
-                    for(String s : stockArr) {
-                        querys = new Querys(rootView.getContext(), "escuela");
-                        querys.listadoCondicionesId(columnas.getTableEscuela(), 2, "idLocalidad", Integer.parseInt(s),"tipo",x);
-                        stockArr = new String[querys.lista.size()];
-                        stockArr = querys.lista.toArray(stockArr);
-                        for(String s2 : stockArr) {
-                            listaEscuela.add(s2);
-                        }
-                    }
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
-                    spinEscuela.setAdapter(adapter);
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
-
-                }
-            });
 
 
             querys = new Querys(rootView.getContext(), "municipio");
@@ -82,38 +55,15 @@ public class Sec_location extends Fragment {
             adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaMunicipio);
             spinMunicipio.setAdapter(adapter);
 
-            spinMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-                @Override
-                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    x=spinMunicipio.getSelectedItemPosition()+1;
-                    querys = new Querys(rootView.getContext(), "localidad");
-                    querys.listadoCondicionId(columnas.getTableLocalidad(), 0, "idMunicipio", x);
-                    listaEscuela=querys.lista;
-                    x=spinType.getSelectedItemPosition();
-                    String[] stockArr = new String[listaEscuela.size()];
-                    stockArr = listaEscuela.toArray(stockArr);
-                    listaEscuela.clear();
-                    for(String s : stockArr) {
-                        querys = new Querys(rootView.getContext(), "escuela");
-                        querys.listadoCondicionesId(columnas.getTableEscuela(), 2, "idLocalidad", Integer.parseInt(s),"tipo",x);
-                        stockArr = new String[querys.lista.size()];
-                        stockArr = querys.lista.toArray(stockArr);
-                        for(String s2 : stockArr) {
-                            listaEscuela.add(s2);
-                        }
-                    }
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
-                    spinEscuela.setAdapter(adapter);
-                }
+            querys = new Querys(rootView.getContext(), "escuela");
+            querys.listadoJoin();
+            listaEscuela=querys.lista;
+            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
+            spinEscuela.setAdapter(adapter);
 
-                @Override
-                public void onNothingSelected(AdapterView<?> parent) {
 
-                }
-            });
-        } catch (Exception e) {
+        }
+           catch (Exception e) {
         }
     }
-
-
 }

@@ -2,6 +2,8 @@ package com.example.nuuk.nuukappmobile;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,14 +35,20 @@ public class Sec_carrer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_schooltype, container, false);
-        img = (ImageView)rootView.findViewById(R.id.goschool);
-        img.setOnClickListener(new View.OnClickListener() {
+        img = (ImageView)rootView.findViewById(R.id.imagen);
+        img.setOnClickListener(new View.OnClickListener()
+        {
             @Override
-            public void onClick(View arg0) {
-                Fragment fragment = new Selected_school();
+            public void onClick(View v)
+            {
+                Fragment f = new Selected_school();
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.vista_schoooltype, f);
+                fragmentTransaction.commit();
             }
         });
-        listadoCarreras();
+             listadoCarreras();
         return rootView;
     }
 
@@ -52,144 +60,6 @@ public class Sec_carrer extends Fragment {
             adapter = new ArrayAdapter<String>(rootView.getContext(),
                     android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
             spinTipos.setAdapter(adapter);
-            spinTipos.setOnItemSelectedListener(new
-                                                        AdapterView.OnItemSelectedListener() {
-                                                            @Override
-                                                            public void onItemSelected(AdapterView<?> parent, View view,
-                                                                                       int position, long id) {
-                                                                x = spinTipos.getSelectedItemPosition();
-                                                                querys = new Querys(rootView.getContext(), "escuela");
-                                                                querys.listadoCondicionId(columnas.getTableEscuela(), 0,
-                                                                        "tipo", x);
-                                                                listaEscuela = querys.lista;
-                                                                String[] stockArr = new String[listaEscuela.size()];
-                                                                stockArr = listaEscuela.toArray(stockArr);
-                                                                listaEscuela.clear();
-                                                                for (String s : stockArr) {
-                                                                    querys = new Querys(rootView.getContext(),
-                                                                            "relacion_escuela");
-                                                                    querys.listadoCondicionId
-                                                                            (columnas.getTableRelacionEscuela(), 2, "idEscuela", Integer.parseInt(s));
-                                                                    stockArr = new String[querys.lista.size()];
-                                                                    stockArr = querys.lista.toArray(stockArr);
-                                                                    for (String s2 : stockArr) {
-                                                                        listaEscuela.add(s2);
-                                                                    }
-                                                                }
-                                                                stockArr = new String[listaEscuela.size()];
-                                                                stockArr = listaEscuela.toArray(stockArr);
-                                                                listaEscuela.clear();
-                                                                for (String s : stockArr) {
-                                                                    querys = new Querys(rootView.getContext(), "carrera");
-                                                                    querys.listadoCondicionId(columnas.getTableCarrera(), 0,
-                                                                            "idEscuela", Integer.parseInt(s));
-                                                                    stockArr = new String[querys.lista.size()];
-                                                                    stockArr = querys.lista.toArray(stockArr);
-                                                                    for (String s2 : stockArr) {
-                                                                        listaEscuela.add(s2);
-                                                                    }
-                                                                }
-
-                                                                querys=new Querys(rootView.getContext(),"carrera");
-                                                                querys.listado(columnas.getTableCarrera(),0);
-                                                                String[] stockArr3 = new String[querys.lista.size()];
-                                                                stockArr3 = querys.lista.toArray(stockArr3);
-
-                                                                for (String s3 : stockArr3){
-                                                                    for (String s4 : stockArr){
-                                                                        if(s3==s4)
-                                                                            listaMunicipio.add(s3);
-
-                                                                    }
-                                                                }
-                                                                adapter = new ArrayAdapter<String>(rootView.getContext(),
-                                                                        android.R.layout.simple_spinner_item, listaMunicipio);
-                                                                spinCarreras.setAdapter(adapter);
-
-                                                                querys = new Querys(rootView.getContext(), "escuela");
-                                                                querys.listadoCondicionId(columnas.getTableEscuela(), 0,
-                                                                        "tipo", x);
-                                                                listaEscuela = querys.lista;
-                                                                stockArr = new String[listaEscuela.size()];
-                                                                stockArr = listaEscuela.toArray(stockArr);
-                                                                stockArr3 = new String[querys.lista.size()];
-                                                                stockArr3 = listaMunicipio.toArray(stockArr3);
-                                                                listaMunicipio.clear();
-                                                                for(String s5 : stockArr) {
-                                                                    for (String s6 : stockArr3) {
-                                                                        querys = new Querys(rootView.getContext(), "relacion_escuela");
-                                                                        querys.listadoCondicionesId(columnas.getTableRelacionEscuela(), 1, "idEscuela", Integer.parseInt(s5), "idCarrera", Integer.parseInt(s6));
-                                                                        listaMunicipio.add(querys.lista.get(0));
-                                                                    }
-                                                                }
-                                                                listaMunicipio=querys.lista;
-                                                                stockArr3 = new String[querys.lista.size()];
-                                                                stockArr3 = listaMunicipio.toArray(stockArr3);
-                                                            }
-
-                                                            @Override
-                                                            public void onNothingSelected(AdapterView<?> parent) {
-
-                                                            }
-                                                        });
-
-
-            querys = new Querys(rootView.getContext(), "carrera");
-            querys.listado(columnas.getTableCarrera(), 1);
-            listaMunicipio = querys.lista;
-            adapter = new ArrayAdapter<String>(rootView.getContext(),
-                    android.R.layout.simple_spinner_item, listaMunicipio);
-            spinCarreras.setAdapter(adapter);
-
-            spinCarreras.setOnItemSelectedListener(new
-                                                           AdapterView.OnItemSelectedListener() {
-                                                               @Override
-                                                               public void onItemSelected(AdapterView<?> parent, View view,
-                                                                                          int position, long id) {
-                                                                   x = spinTipos.getSelectedItemPosition();
-                                                                   querys = new Querys(rootView.getContext(), "escuela");
-                                                                   querys.listadoCondicionId(columnas.getTableEscuela(), 0,
-                                                                           "tipo", x);
-                                                                   listaEscuela = querys.lista;
-                                                                   String[] stockArr = new String[listaEscuela.size()];
-                                                                   stockArr = listaEscuela.toArray(stockArr);
-                                                                   listaEscuela.clear();
-                                                                   x = spinCarreras.getSelectedItemPosition();
-                                                                   for (String s : stockArr) {
-                                                                       querys = new Querys(rootView.getContext(),
-                                                                               "relacion_escuela");
-                                                                       querys.listadoCondicionesId
-                                                                               (columnas.getTableRelacionEscuela(), 1, "idEscuela", Integer.parseInt
-                                                                                       (s), "idCarrera", x);
-                                                                       stockArr = new String[querys.lista.size()];
-                                                                       stockArr = querys.lista.toArray(stockArr);
-                                                                       for (String s2 : stockArr) {
-                                                                           listaEscuela.add(s2);
-                                                                       }
-                                                                   }
-                                                                   stockArr = new String[listaEscuela.size()];
-                                                                   stockArr = listaEscuela.toArray(stockArr);
-                                                                   listaEscuela.clear();
-                                                                   for (String s : stockArr) {
-                                                                       querys = new Querys(rootView.getContext(), "escuela");
-                                                                       querys.listadoCondicionId(columnas.getTableEscuela(), 2,
-                                                                               "idEscuela", Integer.parseInt(s));
-                                                                       stockArr = new String[querys.lista.size()];
-                                                                       stockArr = querys.lista.toArray(stockArr);
-                                                                       for (String s2 : stockArr) {
-                                                                           listaEscuela.add(s2);
-                                                                       }
-                                                                   }
-                                                                   adapter = new ArrayAdapter<String>(rootView.getContext(),
-                                                                           android.R.layout.simple_spinner_item, listaEscuela);
-                                                                   spinEscuelas.setAdapter(adapter);
-                                                               }
-
-                                                               @Override
-                                                               public void onNothingSelected(AdapterView<?> parent) {
-
-                                                               }
-                                                           });
         } catch (Exception e) {
         }
 

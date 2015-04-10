@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Adapter;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -89,6 +90,30 @@ public class Querys {
         }
     }
 
+    public void listadoJoin() {
+        String dato;
+        String []columnas={"tipo", "nombre", "direccion" ,"latitud", "longitud",
+                "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+
+            String selectQuery = "SELECT tipo,nombre FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=0";
+
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            //Cursor cursor = bd.rawQuery(selectQuery, null);
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{String.valueOf(1)});
+            lista.add(cursor.toString());
+            Toast toast=Toast.makeText(this.context,""+lista,Toast.LENGTH_SHORT);
+            toast.show();;
+
+        } catch(Exception e)
+                {
+                }
+            }
+
+
+
     public void listadoCondicionId(String []columnas, int numColumna,String campoClausula, int condicion) {
         String dato;
         String [] valor= new String[columnas.length];
@@ -113,6 +138,7 @@ public class Querys {
         {
         }
     }
+
     public void listadoCondicionesId(String []columnas, int numColumna,String campoClausula, int condicion,String campoClausula2, int condicion2) {
         String dato;
         String [] valor= new String[columnas.length];

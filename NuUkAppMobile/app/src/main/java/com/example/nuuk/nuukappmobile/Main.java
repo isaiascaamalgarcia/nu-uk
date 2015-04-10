@@ -69,6 +69,7 @@ public class Main extends ActionBarActivity {
             public void onDrawerClosed(View view) {
                 getSupportActionBar().setTitle(itemTitle);
 
+
                 /*Usa este método si vas a modificar la action bar
                 con cada fragmento
                  */
