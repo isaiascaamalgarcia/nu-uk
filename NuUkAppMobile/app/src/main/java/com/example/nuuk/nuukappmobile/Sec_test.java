@@ -1,12 +1,9 @@
 package com.example.nuuk.nuukappmobile;
 
-<<<<<<< HEAD
-import android.app.Fragment;
-import android.app.FragmentManager;
-=======
-import android.support.v4.app.Fragment;
->>>>>>> origin/master
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,10 +15,6 @@ import android.widget.ToggleButton;
 import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/master
 /**
  * Created by Kody on 28/03/2015.
  */
@@ -104,7 +97,7 @@ public class Sec_test extends Fragment {
         }
         else {
             resetCurrentSize();
-            Fragment fragment = new Sec_result();
+            Fragment fragment= new Sec_result();
             FragmentManager fragmentManager = getFragmentManager();
             fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
         }

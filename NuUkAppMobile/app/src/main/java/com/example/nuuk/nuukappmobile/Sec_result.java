@@ -1,6 +1,6 @@
 package com.example.nuuk.nuukappmobile;
 
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,8 +10,6 @@ import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
-import java.lang.reflect.Constructor;
-import java.util.List;
 
 /**
  * Created by Kody on 09/04/2015.
