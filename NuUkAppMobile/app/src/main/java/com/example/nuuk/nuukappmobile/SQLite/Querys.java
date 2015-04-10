@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 import android.widget.Adapter;
 import android.widget.Toast;
 
@@ -21,7 +22,7 @@ public class Querys {
     public String [] values;
     public AdminSQLiteOpenHelper admin;
     public Variables variables;
-    public List<String> lista;
+    public List<String> lista,lista1;
     public Querys(Context context, String table)
     {
         this.context=context;
@@ -69,6 +70,7 @@ public class Querys {
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
+        lista1= new ArrayList<String>();
         try {
             String selectQuery = "SELECT  *FROM "+ this.tableName;
             SQLiteDatabase bd = admin.getWritableDatabase();
@@ -80,6 +82,7 @@ public class Querys {
                      valor[i]=cursor.getString(i);
                     }
                     lista.add(valor[numColumna]);
+                    lista1.add(valor[0]);
                 } while (cursor.moveToNext());
             }
             cursor.close();
@@ -119,17 +122,46 @@ public class Querys {
                 }
             }
 
-    public void listadoInnerJoin() {
+    public void listadoInnerJoinLoc(String column, String idMun, String nivel) {
         String dato;
         lista= new ArrayList<String>();
-        String []columnas={"tipo", "nombre"};
+        String []columnas=column.split(",");
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT tipo,nombre FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=1 AND escuela.tipo=?";
-
+            String selectQuery = "SELECT ".concat(column.toString())+" FROM "+"escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio="+idMun+" AND escuela.tipo=?";
+            Log.i("QUERY ", selectQuery);
             SQLiteDatabase bd = admin.getWritableDatabase();
-            Cursor cursor=bd.rawQuery(selectQuery, new String[]{"1"});
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{nivel});
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[1]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+        } catch(Exception e)
+        {
+        }
+    }
+
+    public void listadoInnerJoinCarr(String column, String idCar, String nivel) {
+        String dato;
+        lista= new ArrayList<String>();
+        String []columnas=column.split(",");
+        String [] valor= new String[columnas.length];
+        lista= new ArrayList<String>();
+        try {
+            //String selectQuery = "SELECT ".concat(column.toString())+" FROM "+"escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio="+idMun+" AND escuela.tipo=?";
+            String selectQuery = "SELECT ".concat(column.toString())+" FROM escuela INNER JOIN relacion_escuela ON escuela.id = relacion_escuela.idEscuela INNER JOIN carrera ON carrera.id = relacion_escuela.idCarrera WHERE relacion_escuela.idCarrera ="+idCar+" AND escuela.tipo =?";
+
+            Log.i("QUERY ", selectQuery);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{nivel});
             if (cursor.moveToFirst()) {
                 do {
                     for (int i=0;i<columnas.length;i++)
