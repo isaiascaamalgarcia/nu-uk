@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,10 +29,11 @@ public class Sec_carrer extends Fragment {
     private ImageView img;
     private TextView tv1,tv2,tv3;
     private ArrayAdapter<String> adapter;
-    public List<String> listaMunicipio, listaEscuela;
+    private String[] stockArr;
+    public List<String> listaCarreras, listaEscuelas,listaEscuelasId;
     View rootView;
     Querys querys;
-    int x = 1;
+    int x = 1,x1=1;
     ColumnsTables columnas = new ColumnsTables();
 
     @Override
@@ -68,6 +70,59 @@ public class Sec_carrer extends Fragment {
             adapter = new ArrayAdapter<String>(rootView.getContext(),
                     android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
             spinTipos.setAdapter(adapter);
+
+            querys = new Querys(rootView.getContext(), "carrera");
+            querys.listado(columnas.getTableCarrera(),1);
+            listaCarreras=querys.lista;
+            listaEscuelasId=querys.lista1;
+            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaCarreras);
+            spinCarreras.setAdapter(adapter);
+            stockArr = new String[listaEscuelasId.size()];
+            stockArr = listaEscuelasId.toArray(stockArr);
+
+            spinTipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinCarreras.getSelectedItemPosition();
+                    x1=spinTipos.getSelectedItemPosition();
+                    String aux=stockArr[x];
+                    Log.i("AUX ",aux);
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
+                    listaEscuelas=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    spinEscuelas.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+            spinCarreras.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=spinCarreras.getSelectedItemPosition();
+                    x1=spinTipos.getSelectedItemPosition();
+                    String aux=stockArr[x];
+                    Log.i("AUX ",aux);
+                    querys = new Querys(rootView.getContext(), "escuela");
+                    querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
+                    listaEscuelas=querys.lista;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    spinEscuelas.setAdapter(adapter);
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
+
+
+
         } catch (Exception e) {
         }
 
