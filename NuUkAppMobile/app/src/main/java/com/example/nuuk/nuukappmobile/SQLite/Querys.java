@@ -90,19 +90,18 @@ public class Querys {
         }
     }
 
-    public void listadoJoin(String []columnas, String tableName2,int numColumna,String valorCondicion, String valorCondicion2,int condicion,
-                            String condicion1,String condicion2) {
+    public void listadoJoin(String []columnas, String tableName2,int numColumna,String condicion,
+                            String condicion1,String condicion2,String condicion3, String valorCondicion, String valorCondicion2) {
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-
             String selectQuery = "SELECT "+columnas+" FROM "+ this.tableName+" INNER JOIN "+ tableName2+
-                    " ON "+this.tableName+"."+condicion+"="+tableName2+"."+condicion2+
-                    " AND "+tableName2+"."+condicion+"="+valorCondicion+" AND "+this.tableName+"=?";
+                    " ON "+this.tableName+"."+condicion+"="+tableName2+"."+condicion1+
+                    " AND "+tableName2+"."+condicion2+"="+valorCondicion+" AND "+this.tableName+"."+condicion3+"=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
-            Cursor cursor=bd.rawQuery(selectQuery, new String[]{condicion2});
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{valorCondicion2});
             if (cursor.moveToFirst()) {
                 do {
                     for (int i=0;i<columnas.length;i++)
