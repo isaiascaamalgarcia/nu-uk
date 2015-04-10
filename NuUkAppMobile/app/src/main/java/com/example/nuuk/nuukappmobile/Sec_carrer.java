@@ -70,14 +70,14 @@ public class Sec_carrer extends Fragment {
         spinEscuelas = (Spinner) rootView.findViewById(R.id.spin_school2);
         try {
             adapter = new ArrayAdapter<String>(rootView.getContext(),
-                    android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
+                    R.layout.spinner_item, columnas.getNivelEducativo());
             spinTipos.setAdapter(adapter);
 
             querys = new Querys(rootView.getContext(), "carrera");
             querys.listado(columnas.getTableCarrera(),1);
             listaCarreras=querys.lista;
             listaEscuelasId=querys.lista1;
-            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaCarreras);
+            adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaCarreras);
             spinCarreras.setAdapter(adapter);
             stockArr = new String[listaEscuelasId.size()];
             stockArr = listaEscuelasId.toArray(stockArr);
@@ -92,7 +92,7 @@ public class Sec_carrer extends Fragment {
                     querys = new Querys(rootView.getContext(), "escuela");
                     querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
                     listaEscuelas=querys.lista;
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaEscuelas);
                     spinEscuelas.setAdapter(adapter);
                 }
 
@@ -113,7 +113,7 @@ public class Sec_carrer extends Fragment {
                     querys = new Querys(rootView.getContext(), "escuela");
                     querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
                     listaEscuelas=querys.lista;
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuelas);
+                    adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaEscuelas);
                     spinEscuelas.setAdapter(adapter);
 
                     querys = new Querys(rootView.getContext(), "escuela");
