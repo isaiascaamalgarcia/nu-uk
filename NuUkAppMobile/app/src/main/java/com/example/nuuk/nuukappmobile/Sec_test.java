@@ -53,7 +53,7 @@ public class Sec_test extends Fragment {
     /*----------------Local Function for test-----------------------------------------*/
     public void generateQuestionSection(){
         int size = getCurrentSize();
-        if(size>5 ) {
+        if(size>=5 ) {
             /*----------------------Question section-------------------------------------*/
             question = (TextView) rootView.findViewById(R.id.preg1);
             question.setText(querys.lista.get(currentPosition));
@@ -96,10 +96,142 @@ public class Sec_test extends Fragment {
             setCurrentSize(getCurrentSize()-5);
         }
         else {
-            resetCurrentSize();
-            Fragment fragment= new Sec_result();
-            FragmentManager fragmentManager = getFragmentManager();
-            fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+            switch(size){
+                case 5:
+                    question = (TextView) rootView.findViewById(R.id.preg1);
+                    question.setText(querys.lista.get(currentPosition));
+                    question = (TextView) rootView.findViewById(R.id.preg2);
+                    question.setText(querys.lista.get(currentPosition+1));
+                    question = (TextView) rootView.findViewById(R.id.preg3);
+                    question.setText(querys.lista.get(currentPosition+2));
+                    question = (TextView) rootView.findViewById(R.id.preg4);
+                    question.setText(querys.lista.get(currentPosition+3));
+                    question = (TextView) rootView.findViewById(R.id.preg5);
+                    question.setVisibility(View.INVISIBLE);
+                    tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
+                    tb1.setChecked(false);
+                    tb1.setText("No");
+                    tb1.setTextOn("SI");
+                    tb1.setTextOff("NO");
+                    tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
+                    tb2.setChecked(false);
+                    tb2.setText("No");
+                    tb2.setTextOn("SI");
+                    tb2.setTextOff("NO");
+                    tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
+                    tb3.setChecked(false);
+                    tb3.setText("No");
+                    tb3.setTextOn("SI");
+                    tb3.setTextOff("NO");
+                    tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
+                    tb4.setChecked(false);
+                    tb4.setText("No");
+                    tb4.setTextOn("SI");
+                    tb4.setTextOff("NO");
+                    tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
+                    tb5.setVisibility(View.INVISIBLE);
+                    currentPosition += 4;
+                    setCurrentSize(getCurrentSize()-4);
+                    break;
+                case 4:
+                    question = (TextView) rootView.findViewById(R.id.preg1);
+                    question.setText(querys.lista.get(currentPosition));
+                    question = (TextView) rootView.findViewById(R.id.preg2);
+                    question.setText(querys.lista.get(currentPosition+1));
+                    question = (TextView) rootView.findViewById(R.id.preg3);
+                    question.setText(querys.lista.get(currentPosition+2));
+                    question = (TextView) rootView.findViewById(R.id.preg4);
+                    question.setVisibility(View.INVISIBLE);
+                    question = (TextView) rootView.findViewById(R.id.preg5);
+                    question.setVisibility(View.INVISIBLE);
+                    tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
+                    tb1.setChecked(false);
+                    tb1.setText("No");
+                    tb1.setTextOn("SI");
+                    tb1.setTextOff("NO");
+                    tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
+                    tb2.setChecked(false);
+                    tb2.setText("No");
+                    tb2.setTextOn("SI");
+                    tb2.setTextOff("NO");
+                    tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
+                    tb3.setChecked(false);
+                    tb3.setText("No");
+                    tb3.setTextOn("SI");
+                    tb3.setTextOff("NO");
+                    tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
+                    tb4.setVisibility(View.INVISIBLE);
+                    tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
+                    tb5.setVisibility(View.INVISIBLE);
+                    currentPosition += 3;
+                    setCurrentSize(getCurrentSize()-3);
+                    break;
+                case 3:
+                    question = (TextView) rootView.findViewById(R.id.preg1);
+                    question.setText(querys.lista.get(currentPosition));
+                    question = (TextView) rootView.findViewById(R.id.preg2);
+                    question.setText(querys.lista.get(currentPosition+1));
+                    question = (TextView) rootView.findViewById(R.id.preg3);
+                    question.setVisibility(View.INVISIBLE);
+                    question = (TextView) rootView.findViewById(R.id.preg4);
+                    question.setVisibility(View.INVISIBLE);
+                    question = (TextView) rootView.findViewById(R.id.preg5);
+                    question.setVisibility(View.INVISIBLE);
+                    tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
+                    tb1.setChecked(false);
+                    tb1.setText("No");
+                    tb1.setTextOn("SI");
+                    tb1.setTextOff("NO");
+                    tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
+                    tb2.setChecked(false);
+                    tb2.setText("No");
+                    tb2.setTextOn("SI");
+                    tb2.setTextOff("NO");
+                    tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
+                    tb3.setVisibility(View.INVISIBLE);
+                    tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
+                    tb4.setVisibility(View.INVISIBLE);
+                    tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
+                    tb5.setVisibility(View.INVISIBLE);
+                    currentPosition += 2;
+                    setCurrentSize(getCurrentSize()-2);
+                    break;
+                case 2:
+                    question = (TextView) rootView.findViewById(R.id.preg1);
+                    question.setText(querys.lista.get(currentPosition));
+                    question.setVisibility(View.INVISIBLE);
+                    question.setText(querys.lista.get(currentPosition+1));
+                    question = (TextView) rootView.findViewById(R.id.preg3);
+                    question.setVisibility(View.INVISIBLE);
+                    question = (TextView) rootView.findViewById(R.id.preg4);
+                    question.setVisibility(View.INVISIBLE);
+                    question = (TextView) rootView.findViewById(R.id.preg5);
+                    question.setVisibility(View.INVISIBLE);
+                    tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
+                    tb1.setChecked(false);
+                    tb1.setText("No");
+                    tb1.setTextOn("SI");
+                    tb1.setTextOff("NO");
+                    tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
+                    tb3.setVisibility(View.INVISIBLE);
+                    tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
+                    tb3.setVisibility(View.INVISIBLE);
+                    tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
+                    tb4.setVisibility(View.INVISIBLE);
+                    tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
+                    tb5.setVisibility(View.INVISIBLE);
+                    currentPosition += 1;
+                    setCurrentSize(getCurrentSize()-1);
+                    break;
+                case 1:
+                    resetCurrentSize();
+                    Fragment fragment= new Sec_result();
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    break;
+                default:break;
+            }
+
         }
     }
     /*-------------get & set values for table size---------------------------*/
@@ -114,7 +246,7 @@ public class Sec_test extends Fragment {
     }
     /*-----------------Count for question result--------------------------------*/
     public void getResultByUser(){
-        if(tb1.isChecked()){
+        if(tb1.isChecked() && getCurrentSize()>1){
             if(querysAnswer.lista.get(currentPosition).equals("A")){
                 art++;
             }
@@ -137,7 +269,7 @@ public class Sec_test extends Fragment {
                 med++;
             }
         }
-        if(tb2.isChecked()){
+        if(tb2.isChecked() && getCurrentSize()>2){
             if(querysAnswer.lista.get(currentPosition+1).equals("A")){
                 art++;
             }
@@ -160,7 +292,7 @@ public class Sec_test extends Fragment {
                 med++;
             }
         }
-        if(tb3.isChecked()){
+        if(tb3.isChecked() && getCurrentSize()>3){
             if(querysAnswer.lista.get(currentPosition+2).equals("A")){
                 art++;
             }
@@ -183,7 +315,7 @@ public class Sec_test extends Fragment {
                 med++;
             }
         }
-        if(tb4.isChecked()){
+        if(tb4.isChecked() && getCurrentSize()>4){
             if(querysAnswer.lista.get(currentPosition+3).equals("A")){
                 art++;
             }
@@ -206,7 +338,7 @@ public class Sec_test extends Fragment {
                 med++;
             }
         }
-        if(tb5.isChecked()){
+        if(tb5.isChecked() && getCurrentSize()>5){
             if(querysAnswer.lista.get(currentPosition+4).equals("A")){
                 art++;
             }

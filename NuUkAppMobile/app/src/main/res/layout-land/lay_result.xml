@@ -3,29 +3,126 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">-->
-    <HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+                      android:layout_width="wrap_content"
+                      android:layout_height="match_parent">
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:orientation="horizontal">
-    <LinearLayout
-        android:id="@+id/chart"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/view"
-        android:gravity="bottom"
-        android:layout_margin="20dp"
-        android:layout_marginTop="60dp"
-        android:orientation="horizontal"/>
-    <View
-        android:id="@+id/view"
-        android:layout_width="match_parent"
-        android:layout_height="35dp"
-        android:layout_margin="30dp"
-        android:background="#00ff00"
-        android:layout_alignParentBottom="true"
-        />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:id="@+id/imageView2"
+                android:background="#CC5314"/>
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#37B212"
+                />
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#1E1EFF"
+                />
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#3BFF00"
+                />
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#B23D00"
+                />
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#484848"
+                />
+            <ImageView
+                android:layout_marginTop="1dp"
+                android:layout_width="19dp"
+                android:layout_height="19dp"
+                android:background="#121212"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Artistica"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Administacion"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Defensa y seguridad"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ciencias"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Humanista y social"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ingenieria"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Medicina"/>
+        </LinearLayout>
+
+
+
+
+
+
+
+        <LinearLayout
+            android:id="@+id/chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/view"
+            android:gravity="bottom"
+            android:layout_margin="20dp"
+            android:layout_marginTop="60dp"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:layout_margin="30dp"
+            android:background="#00ff00"
+            android:layout_alignParentBottom="true"
+            />
+        <TextView
+            android:id="@+id/value"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
-    </HorizontalScrollView>
+</HorizontalScrollView>

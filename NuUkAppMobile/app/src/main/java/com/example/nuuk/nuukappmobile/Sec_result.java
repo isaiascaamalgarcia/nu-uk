@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 
 /**
@@ -18,7 +20,7 @@ public class Sec_result extends Fragment{
     LinearLayout la;
     View rootView;
     String[] lista;
-    int art,adm,def,cien,hum,ing,med;
+    int art=0,adm=0,def=0,cien=0,hum=0,ing=0,med=0;
 
 
     public Sec_result() {
@@ -52,27 +54,35 @@ public class Sec_result extends Fragment{
     private void drawChart(int count, int color, int height) {
         System.out.println(count+color+height);
         if(color==0){
-            color = Color.RED;
+            color = Color.rgb(204,83,20);
         }
         if(color==1){
-            color = Color.BLUE;
+            color = Color.rgb(55,178,18);
         }if(color==2) {
-            color = Color.YELLOW;
+            color = Color.rgb(30,30,255);
         }if(color==3) {
-            color = Color.GREEN;
+            color = Color.rgb(59,255,0);
         }if(color==4){
-            color = Color.rgb(120,120,120);
+            color = Color.rgb(178,61,0);
         }if(color==5){
             color = Color.rgb(140,140,140);
         }if(color==6){
             color = Color.rgb(160,160,180);
         }
-        for(int k = 0; k<= count; k++){
-            View view = new View(rootView.getContext());//
+//los for de android no sirven
+            RelativeLayout view = new RelativeLayout(rootView.getContext());//
+            view.setId(color);
             view.setBackgroundColor(color);
-            view.setLayoutParams(new HorizontalScrollView.LayoutParams(20,height*20));
+            view.setLayoutParams(new RelativeLayout.LayoutParams(30, height * 17));
+            TextView tv = new TextView(getActivity());
+            RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            p.addRule(RelativeLayout.ABOVE,view.getId());
+            double porcent = (height*100)/14;
+            tv.setText("" + String.valueOf(porcent) + "%");
+
+            view.addView(tv);
             la.addView(view);
-        }
+
 
     }
 }
