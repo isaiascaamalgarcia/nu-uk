@@ -54,7 +54,7 @@ public class Sec_location extends Fragment{
         spinEscuela = (Spinner) rootView.findViewById(R.id.spin_school);
 
         try {
-            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, columnas.getNivelEducativo());
+            adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, columnas.getNivelEducativo());
             spinType.setAdapter(adapter);
 
             spinType.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -66,7 +66,7 @@ public class Sec_location extends Fragment{
                     querys = new Querys(rootView.getContext(), "escuela");
                     querys.listadoInnerJoinLoc("tipo,nombre",String.valueOf(x),String.valueOf(x1));
                     listaEscuela=querys.lista;
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
+                    adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaEscuela);
                     spinEscuela.setAdapter(adapter);
                 }
 
@@ -78,7 +78,7 @@ public class Sec_location extends Fragment{
             querys = new Querys(rootView.getContext(), "municipio");
             querys.listado(columnas.getTableMunicipio(), 1);
             listaMunicipio=querys.lista;
-            adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaMunicipio);
+            adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaMunicipio);
             spinMunicipio.setAdapter(adapter);
 
             spinMunicipio.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -89,7 +89,7 @@ public class Sec_location extends Fragment{
                     querys = new Querys(rootView.getContext(), "escuela");
                     querys.listadoInnerJoinLoc("tipo,nombre",String.valueOf(x),String.valueOf(x1));
                     listaEscuela=querys.lista;
-                    adapter = new ArrayAdapter<String>(rootView.getContext(), android.R.layout.simple_spinner_item, listaEscuela);
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaEscuela);
                     spinEscuela.setAdapter(adapter);
                 }
 
