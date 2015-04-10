@@ -125,9 +125,7 @@ public class Querys {
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT tipo,nombre FROM escuela\n" +
-                    "INNER JOIN localidad\n" +
-                    "ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=?";
+            String selectQuery = "SELECT tipo,nombre, FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
             Cursor cursor=bd.rawQuery(selectQuery, new String[]{"1"});
