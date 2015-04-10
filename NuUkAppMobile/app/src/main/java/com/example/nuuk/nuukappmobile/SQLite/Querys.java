@@ -92,20 +92,28 @@ public class Querys {
 
     public void listadoJoin() {
         String dato;
-        String []columnas={"tipo", "nombre", "direccion" ,"latitud", "longitud",
-                "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};
+        String []columnas={"tipo", "nombre"};
+       /* String []columnas={"tipo", "nombre", "direccion" ,"latitud", "longitud",
+                "telefono" , "pagina", "correo", "facebook", "twitter", "sector", "modificacion", "idLocalidad", "estado"};*/
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
 
-            String selectQuery = "SELECT tipo,nombre FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=5 AND escuela.tipo=0";
+            String selectQuery = "SELECT tipo,nombre FROM escuela INNER JOIN localidad ON escuela.idlocalidad=localidad.id AND localidad.idMunicipio=1 AND escuela.tipo=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
-            //Cursor cursor = bd.rawQuery(selectQuery, null);
-            Cursor cursor=bd.rawQuery(selectQuery, new String[]{String.valueOf(1)});
-            lista.add(cursor.toString());
-            Toast toast=Toast.makeText(this.context,""+lista,Toast.LENGTH_SHORT);
-            toast.show();;
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{"1"});
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<columnas.length;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[0]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
 
         } catch(Exception e)
                 {
