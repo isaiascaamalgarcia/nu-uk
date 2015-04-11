@@ -63,10 +63,30 @@
 				<h4><?=$estado;?></h4>
 			</center>
 			<hr>
+			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url();?>/index.php/admin_school/add_exist_carrera">
+				<div class="form-group col-sm-12">
+					<input type="text" class="form-control hidden" value="<?php echo $query->id;?>" name="idEscuela" />
+					<label>Carreras Disponibles</label>
+					<select class="form-control" name="carrera">
+			        	<?php
+			        		$query2 = $this->db->get('carrera');
+			        		$query2 = $query2->result();
+			        	?>
+			        	<?php foreach ($query2 as $fila): ?>
+			        		<option><?=$fila->carrera;?></option>
+			        	<?php  endforeach;?>
+			        </select>
+			    </div>
+			    <center>
+			    	<button type="submit" class="btn btn-primary">Aceptar</button>
+			    	<button type="reset" class="btn btn-default">Cancelar</button>
+			    </center>
+				
+			</form>
 			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url();?>/index.php/admin_school/add_carrera">
 				<div class="form-group col-sm-6">
 					<input type="text" class="form-control hidden" value="<?php echo $query->id;?>" name="idEscuela" />
-			        <label>Carrera</label>
+			        <label>Nueva Carrera</label>
 			        <input type="text" class="form-control" name="carrera" placeholder="Carrera">
 			    </div>
 			    <div class="form-group col-sm-6">

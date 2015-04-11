@@ -58,6 +58,17 @@ class Admin_school extends CI_Controller {
 		$this->db->insert('relacion_escuela',$dato);
 		$this->load->view('admin/admin_carreras');
 	}
+	public function add_exist_carrera() {
+		$carrera = $this->input->post('carrera');
+		$value = $this->input->post('idEscuela');
+		$this->db->where('carrera', $carrera);
+		$query = $this->db->get('carrera');
+		$query = $query->row();
+		$dato['idCarrera'] = $query->id;
+		$dato['idEscuela'] = $value;
+		$this->db->insert('relacion_escuela',$dato);
+		$this->load->view('admin/admin_carreras');
+	}
 
 	public function saveChangesSchool(){
 		$idescuela = $this->input->post('ides');
