@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -33,6 +34,12 @@ public class Selected_school extends Fragment{
     Pager_schools mPagerAdapter;
     ActionBar abar;
     private String[] tabs = { "", ""};
+
+    public Selected_school(String informacionEscuela)
+    {
+        Log.i("INF ",informacionEscuela);
+
+    }
     final int[] ICONS = new int[] {
             R.drawable.ic_launcher,
             R.drawable.ic_angular,
@@ -50,6 +57,8 @@ public class Selected_school extends Fragment{
         initializePagin();
 
     }*/
+
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_selectedschool, container, false);
         img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
@@ -57,6 +66,7 @@ public class Selected_school extends Fragment{
         initializePagin();
         return rootView;
     }
+
 
 
     private void initializePagin() {
