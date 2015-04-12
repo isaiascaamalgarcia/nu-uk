@@ -33,7 +33,7 @@ public class Sec_carrer extends Fragment {
     private TextView tv1,tv2,tv3;
     private ArrayAdapter<String> adapter;
     private String[] stockArr;
-    public static String escuelaInf="",aux="";
+    public String escuelaInf="",aux="";
     public List<String> listaCarreras, listaEscuelas,listaEscuelasId;
     View rootView;
     Querys querys;

@@ -25,7 +25,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="Av. Arco Bincentenario, Mza. 11, Lote 1119-33, Sm. 255"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_direccion" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -43,7 +44,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="(998) 283 1859"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_tel" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -61,7 +63,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="http://www.upqroo.edu.mx/"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_pagina" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -79,7 +82,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="upqroo.info@upqroo.edu.mx"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_correo" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -97,7 +101,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="/upqroo"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_face" />
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -115,7 +120,8 @@
                 android:layout_gravity="center_vertical"
                 android:text="\@upqroo"
                 android:layout_marginLeft="10dp"
-                android:textColor="#ffffffff" />
+                android:textColor="#ffffffff"
+                android:id="@+id/_twitter" />
         </LinearLayout>
     </LinearLayout>
 </ScrollView>
