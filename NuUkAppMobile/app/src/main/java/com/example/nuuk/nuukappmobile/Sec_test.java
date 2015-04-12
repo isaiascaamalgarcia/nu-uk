@@ -232,11 +232,16 @@ public class Sec_test extends Fragment {
                     Fragment fragment= new Sec_result();
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    resetResult();
                     break;
                 default:break;
             }
 
         }
+    }
+
+    private void resetResult() {
+        tableSize=0; currentPosition = 1; ing=0; art=0; adm=0; def=0; cien=0; hum=0; med=0;
     }
 
     private void generateCustomButtons() {
