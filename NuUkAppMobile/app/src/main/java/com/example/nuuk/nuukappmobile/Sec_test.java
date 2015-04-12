@@ -21,6 +21,7 @@ import com.example.nuuk.nuukappmobile.SQLite.Querys;
 public class Sec_test extends Fragment {
     ToggleButton tb1, tb2, tb3, tb4, tb5;
     TextView question;
+    String[] status = new String[5];
     View rootView;
     public static Querys querys, querysAnswer;
     ColumnsTables ct;
@@ -29,24 +30,50 @@ public class Sec_test extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.lay_test, container, false);
-        next = (ImageView)rootView.findViewById(R.id.nextbutton);
-        next.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View v)
+
+        if(savedInstanceState==null){
+            next = (ImageView)rootView.findViewById(R.id.nextbutton);
+            next.setOnClickListener(new View.OnClickListener()
             {
-                getResultByUser();
-                generateQuestionSection();
-            }
-        });
-        querys = new Querys(rootView.getContext(),"encuesta");
-        querysAnswer = new Querys(rootView.getContext(),"encuesta");
-        ct = new ColumnsTables();
-        querys.listado(ct.getTableEncuesta(),1);
-        querysAnswer.listado(ct.getTableEncuesta(),2);
-        setCurrentSize(querys.lista.size());
-        currentPosition=1;
-        generateQuestionSection();
+                @Override
+                public void onClick(View v)
+                {
+                    getResultByUser();
+                    generateQuestionSection();
+                }
+            });
+            querys = new Querys(rootView.getContext(),"encuesta");
+            querysAnswer = new Querys(rootView.getContext(),"encuesta");
+            ct = new ColumnsTables();
+            querys.listado(ct.getTableEncuesta(),1);
+            querysAnswer.listado(ct.getTableEncuesta(),2);
+            setCurrentSize(querys.lista.size());
+            currentPosition=1;
+            generateQuestionSection();
+        }else {
+            next = (ImageView)rootView.findViewById(R.id.nextbutton);
+            next.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    getResultByUser();
+                    generateQuestionSection();
+                }
+            });
+            status=savedInstanceState.getStringArray("values");
+            question = (TextView) rootView.findViewById(R.id.preg1);
+            question.setText(status[0]);
+            question = (TextView) rootView.findViewById(R.id.preg2);
+            question.setText(status[1]);
+            question = (TextView) rootView.findViewById(R.id.preg3);
+            question.setText(status[2]);
+            question = (TextView) rootView.findViewById(R.id.preg4);
+            question.setText(status[3]);
+            question = (TextView) rootView.findViewById(R.id.preg5);
+            question.setText(status[4]);
+            generateCustomButtons();
+        }
 
         return rootView;
     }
@@ -66,31 +93,8 @@ public class Sec_test extends Fragment {
             question = (TextView) rootView.findViewById(R.id.preg5);
             question.setText(querys.lista.get(currentPosition+4));
             /*---------------------Toggle Button Section----------------------------------*/
-            tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
-            tb1.setChecked(false);
-            tb1.setText("No");
-            tb1.setTextOn("SI");
-            tb1.setTextOff("NO");
-            tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
-            tb2.setChecked(false);
-            tb2.setText("No");
-            tb2.setTextOn("SI");
-            tb2.setTextOff("NO");
-            tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
-            tb3.setChecked(false);
-            tb3.setText("No");
-            tb3.setTextOn("SI");
-            tb3.setTextOff("NO");
-            tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
-            tb4.setChecked(false);
-            tb4.setText("No");
-            tb4.setTextOn("SI");
-            tb4.setTextOff("NO");
-            tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
-            tb5.setChecked(false);
-            tb5.setText("No");
-            tb5.setTextOn("SI");
-            tb5.setTextOff("NO");
+            generateCustomButtons();
+
 
             currentPosition += 5;
             setCurrentSize(getCurrentSize()-5);
@@ -228,12 +232,46 @@ public class Sec_test extends Fragment {
                     Fragment fragment= new Sec_result();
                     FragmentManager fragmentManager = getFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+                    resetResult();
                     break;
                 default:break;
             }
 
         }
     }
+
+    private void resetResult() {
+        tableSize=0; currentPosition = 1; ing=0; art=0; adm=0; def=0; cien=0; hum=0; med=0;
+    }
+
+    private void generateCustomButtons() {
+        tb1=(ToggleButton)rootView.findViewById(R.id.tb1);
+        tb1.setChecked(false);
+        tb1.setText("No");
+        tb1.setTextOn("SI");
+        tb1.setTextOff("NO");
+        tb2=(ToggleButton)rootView.findViewById(R.id.tb2);
+        tb2.setChecked(false);
+        tb2.setText("No");
+        tb2.setTextOn("SI");
+        tb2.setTextOff("NO");
+        tb3=(ToggleButton)rootView.findViewById(R.id.tb3);
+        tb3.setChecked(false);
+        tb3.setText("No");
+        tb3.setTextOn("SI");
+        tb3.setTextOff("NO");
+        tb4=(ToggleButton)rootView.findViewById(R.id.tb4);
+        tb4.setChecked(false);
+        tb4.setText("No");
+        tb4.setTextOn("SI");
+        tb4.setTextOff("NO");
+        tb5=(ToggleButton)rootView.findViewById(R.id.tb5);
+        tb5.setChecked(false);
+        tb5.setText("No");
+        tb5.setTextOn("SI");
+        tb5.setTextOff("NO");
+    }
+
     /*-------------get & set values for table size---------------------------*/
     public int getCurrentSize() {
         return tableSize;
@@ -364,4 +402,15 @@ public class Sec_test extends Fragment {
         Log.i("Ingeniera", "value" + ing);
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        status[0] = querys.lista.get(currentPosition-5);
+        status[1] = querys.lista.get(currentPosition-4);
+        status[2] = querys.lista.get(currentPosition-3);
+        status[3] = querys.lista.get(currentPosition-2);
+        status[4] = querys.lista.get(currentPosition-1);
+        outState.putStringArray("values", status);
+
+    }
 }

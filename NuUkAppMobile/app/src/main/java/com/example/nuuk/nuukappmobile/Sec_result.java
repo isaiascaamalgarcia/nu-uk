@@ -3,10 +3,12 @@ package com.example.nuuk.nuukappmobile;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,13 +22,14 @@ public class Sec_result extends Fragment{
     LinearLayout la;
     View rootView;
     String[] lista;
+    Button btn;
     int art=0,adm=0,def=0,cien=0,hum=0,ing=0,med=0;
 
 
     public Sec_result() {
         Sec_test object = new Sec_test();
         this.lista =  object.querysAnswer.lista.toArray(new String[object.querysAnswer.lista.size()]);
-        this.art= object.ing;
+        this.art = object.ing;
         this.adm = object.adm;
         this.def = object.def;
         this.cien = object.cien;
@@ -38,8 +41,21 @@ public class Sec_result extends Fragment{
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+        super.onSaveInstanceState(saveInstanceState);
         rootView = inflater.inflate(R.layout.lay_result, container, false);
         la = (LinearLayout)rootView.findViewById(R.id.chart);
+        btn = (Button) rootView.findViewById(R.id.button);
+        btn.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                Fragment fr;
+                fr = new Sec_carrer();
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, fr).commit();
+            }
+        });
         int color[] = new int[this.lista.length];
         for(int i = 0;i<lista.length;i++){
             color[i] = i;
@@ -49,8 +65,10 @@ public class Sec_result extends Fragment{
             Log.i("Ramon", "Value j:" + j);
             drawChart(1, color[j], height[j]);
         }
+
         return rootView;
     }
+
     private void drawChart(int count, int color, int height) {
         System.out.println(count+color+height);
         if(color==0){
