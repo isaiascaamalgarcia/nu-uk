@@ -12,6 +12,7 @@ import android.widget.ScrollView;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Izzy-Izumi on 05/04/2015.
@@ -19,7 +20,7 @@ import java.util.ArrayList;
 public class frag_carrersonschool extends Fragment{
     private String[]informacion;
     private Querys query;
-    public ArrayList<String> listado;
+    public List<String> listado;
     View rootView;
 
         @Override

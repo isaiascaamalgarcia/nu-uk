@@ -107,7 +107,9 @@ public class Sec_carrer extends Fragment {
                     spinCarreras.setAdapter(adapter);
 
                     x=spinCarreras.getSelectedItemPosition();
+                    Log.i("sele",String.valueOf(x));
                     stockArr = new String[listaEscuelasId.size()];
+                    Log.i("tama",String.valueOf(listaEscuelasId.size()));
                     stockArr = listaEscuelasId.toArray(stockArr);
                     aux=stockArr[x];
                     Log.i("AUX ",aux);
