@@ -1,9 +1,12 @@
 package com.example.nuuk.nuukappmobile;
 
+import android.app.Activity;
+import android.content.pm.ActivityInfo;
 import android.support.v4.app.Fragment;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +23,7 @@ import android.widget.TextView;
  */
 public class Sec_result extends Fragment{
     LinearLayout la;
+    TestResult tr;
     View rootView;
     String[] lista;
     Button btn;
@@ -29,7 +33,7 @@ public class Sec_result extends Fragment{
     public Sec_result() {
         Sec_test object = new Sec_test();
         this.lista =  object.querysAnswer.lista.toArray(new String[object.querysAnswer.lista.size()]);
-        this.art = object.ing;
+        this.art = object.art;
         this.adm = object.adm;
         this.def = object.def;
         this.cien = object.cien;
@@ -50,10 +54,13 @@ public class Sec_result extends Fragment{
             @Override
             public void onClick(View v)
             {
-                Fragment fr;
-                fr = new Sec_carrer();
+
+                Fragment f = new Sec_carrer();
                 FragmentManager fragmentManager = getFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.content_frame, fr).commit();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.content_frame, f). addToBackStack(null);
+                fragmentTransaction.commit();
+
             }
         });
         int color[] = new int[this.lista.length];
@@ -102,5 +109,14 @@ public class Sec_result extends Fragment{
             la.addView(view);
 
 
+    }
+
+    @Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+        if(isVisibleToUser) {
+            Activity a = getActivity();
+            if(a != null) a.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        }
     }
 }
