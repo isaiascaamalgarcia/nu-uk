@@ -2,6 +2,7 @@ package com.example.nuuk.nuukappmobile;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
@@ -21,18 +22,37 @@ public class Pager_schools extends FragmentStatePagerAdapter {
             R.drawable.ic_majors,
             R.drawable.ic_map
     };
+    String varString;
     Context ctx;
     private List<Fragment> fragments;
 
-    public Pager_schools(FragmentManager fm, List<Fragment> fragments,Context ctx) {
+    public Pager_schools(FragmentManager fm, List<Fragment> fragments,Context ctx,String var) {
         super(fm);
         this.fragments = fragments;
         this.ctx = ctx;
+        this.varString = var;
     }
 
     @Override
     public Fragment getItem(int i) {
-        return this.fragments.get(i);
+        switch (i){
+            case 0:
+                Fragment finfoschool = new frag_infoschools();
+                Bundle inf= new Bundle();
+                inf.putString("QUERY",varString);
+                finfoschool.setArguments(inf);
+                return finfoschool;
+
+            case 1:
+                Fragment finfoschool1 = new frag_carrersonschool();
+                Bundle inf1= new Bundle();
+                inf1.putString("QUERYC",varString);
+                finfoschool1.setArguments(inf1);
+                return finfoschool1;
+
+            default: return this.fragments.get(i);
+        }
+
     }
 
     @Override
