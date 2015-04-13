@@ -80,11 +80,14 @@ public class Querys {
     WHERE escuela.id =9*/
     public void listadoJoin() {
         String columnaTable1="carrera";
-        String []columnas;
+        String []columnas={"carrera"};
         String tableName2="relacion_escuela";
         String tableName3="escuela";
-        String condicion,
-                String condicion1,String condicion2,String condicion3, String valorCondicion, String valorCondicion2
+        String condicion="id";
+        String condicion1="idCarrera";
+        String condicion2="idEscuela";
+        String condicion3="9";
+        int numColumna=0;
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
