@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
@@ -16,6 +17,7 @@ import android.widget.TextView;
 public class frag_infoschools extends Fragment {
     private String [] informacion;
     private TextView direccion,telefono,pagina,correo,facebook,twitter;
+    private LinearLayout lDireccion,lTelefono,lPagina,lCorreo,lFacebook,lTwitter;
     View rootView;
     private Sec_carrer carrera= new Sec_carrer();
     @Override
@@ -37,16 +39,65 @@ public class frag_infoschools extends Fragment {
         facebook=(TextView)rootView.findViewById(R.id._face);
         twitter=(TextView)rootView.findViewById(R.id._twitter);
 
+        lDireccion=(LinearLayout)rootView.findViewById(R.id._linearDireccion);
+        lTelefono=(LinearLayout)rootView.findViewById(R.id._linearTelefono);
+        lPagina=(LinearLayout)rootView.findViewById(R.id._linearPagina);
+        lCorreo=(LinearLayout)rootView.findViewById(R.id._linearCorreo);
+        lFacebook=(LinearLayout)rootView.findViewById(R.id._linearFacebook);
+        lTwitter=(LinearLayout)rootView.findViewById(R.id._linearTwitter);
+
         informacion=getArguments().getString("QUERY").split(",");
-        direccion.setText(informacion[3]);
-        telefono.setText(informacion[6]);
-        pagina.setText(informacion[7]);
-        correo.setText(informacion[8]);
-        facebook.setText(informacion[9]);
-        twitter.setText(informacion[10]);
 
 
+        if(informacion[3].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lDireccion.setLayoutParams(var);
+        }
+        else
+            direccion.setText(informacion[3]);
 
+        if(informacion[6].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lTelefono.setLayoutParams(var);
+        }
+        else
+            telefono.setText(informacion[6]);
+
+
+        if(informacion[7].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lPagina.setLayoutParams(var);
+        }
+        else
+            pagina.setText(informacion[7]);
+
+
+        if(informacion[8].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lCorreo.setLayoutParams(var);
+        }
+        else
+            correo.setText(informacion[8]);
+
+        if(informacion[9].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lFacebook.setLayoutParams(var);
+        }
+        else
+            facebook.setText(informacion[9]);
+
+        if(informacion[10].equals("NULL"))
+        {
+            LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
+            lTwitter.setLayoutParams(var);
+        }
+        else
+            twitter.setText(informacion[10]);
     }
 
 }

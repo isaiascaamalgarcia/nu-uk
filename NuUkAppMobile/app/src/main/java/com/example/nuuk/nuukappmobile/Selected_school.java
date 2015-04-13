@@ -18,6 +18,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.InputStream;
@@ -33,13 +34,17 @@ public class Selected_school extends Fragment{
     Bitmap bitmap;
     Pager_schools mPagerAdapter;
     ActionBar abar;
+    private String informacion;
+    private String []info;
     private String[] tabs = { "", ""};
+    private TextView escuela,lema;
 
-    public Selected_school(String informacionEscuela)
+    public Selected_school(String informacion)
     {
-        Log.i("INF ",informacionEscuela);
-
+        this.informacion=informacion;
+        info=this.informacion.split(",");
     }
+
     final int[] ICONS = new int[] {
             R.drawable.ic_launcher,
             R.drawable.ic_angular,
@@ -64,6 +69,10 @@ public class Selected_school extends Fragment{
         img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
         new LoadImage().execute("https://pbs.twimg.com/profile_images/537990267572191232/Tcpm1Ty2.jpeg");
         initializePagin();
+        escuela=(TextView)rootView.findViewById(R.id._escuela);
+        lema=(TextView)rootView.findViewById(R.id._lema);
+        escuela.setText(info[2]);
+        lema.setText("");
         return rootView;
     }
 
@@ -74,7 +83,7 @@ public class Selected_school extends Fragment{
         fragments.add(Fragment.instantiate(getActivity(), frag_infoschools.class.getName()));
         fragments.add(Fragment.instantiate(getActivity(),frag_carrersonschool.class.getName()));
         fragments.add(Fragment.instantiate(getActivity(),Map.class.getName()));
-        mPagerAdapter = new Pager_schools(getActivity().getSupportFragmentManager(),fragments,getActivity());
+        mPagerAdapter = new Pager_schools(getActivity().getSupportFragmentManager(),fragments,getActivity(),this.informacion);
         pager = (ViewPager)rootView.findViewById(R.id.schoolpager);
         pager.setAdapter(mPagerAdapter);
         SlidingTabLayout slidingTabLayout = (SlidingTabLayout) rootView.findViewById(R.id.sliding_tabs);

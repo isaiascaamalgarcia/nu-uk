@@ -34,12 +34,14 @@
                 android:layout_margin="5dp"
                 android:text="UPQROO"
                 android:layout_gravity="center"
-                android:textColor="#69008C" />
+                android:textColor="#69008C"
+                android:id="@+id/_escuela" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
-                android:text="&quot;Formando Triunfadores&quot;"/>
+                android:text="&quot;Formando Triunfadores&quot;"
+                android:id="@+id/_lema" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
