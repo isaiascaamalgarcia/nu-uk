@@ -11,8 +11,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ScrollView;
@@ -20,12 +18,9 @@ import android.widget.ScrollView;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.List;
@@ -42,9 +37,6 @@ public class Map extends Fragment {
     private Activity context;
     private String []informacion;
     private View rootView;
-    public Map(){
-
-    }
 
 
     public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
@@ -66,8 +58,9 @@ public class Map extends Fragment {
 
     private void createMapView() {
         if (googleMap == null) {
-            googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
-                    R.id.map)).getMap();}
+            SupportMapFragment f = ((SupportMapFragment)getChildFragmentManager().findFragmentById(
+                    R.id.map));
+            googleMap = f.getMap();}
             if (googleMap != null) {
                 googleMap.setMyLocationEnabled(true);
                 try {
