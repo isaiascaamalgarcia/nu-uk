@@ -92,19 +92,20 @@ public class Querys {
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT "+columnaTable1.toString()+" FROM "+ this.tableName+" INNER JOIN "+ tableName2+
-                    " ON "+this.tableName+"."+condicion+"="+tableName2+"."+condicion1+
-                    " INNER JOIN "+ tableName3+" ON "+tableName3+"."+condicion+"="+tableName2+"."+condicion2+
-                    " WHERE "+tableName3+"."+condicion+"=?";
+            String selectQuery = "SELECT "+columnaTable1.toString()+" FROM "+ this.tableName.toString()+" INNER JOIN "+ tableName2.toString()+
+                    " ON "+this.tableName.toString()+"."+condicion.toString()+"="+tableName2.toString()+"."+condicion1.toString()+
+                    " INNER JOIN "+ tableName3.toString()+" ON "+tableName3.toString()+"."+condicion.toString()+"="+tableName2.toString()+"."+condicion2.toString()+
+                    " WHERE "+tableName3.toString()+"."+condicion.toString()+"=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
-            Cursor cursor=bd.rawQuery(selectQuery, new String[]{condicion3});
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{condicion3.toString()});
             if (cursor.moveToFirst()) {
                 do {
                     for (int i=0;i<columnas.length;i++)
                     {
                         valor[i]=cursor.getString(i);
                     }
+                    Log.i("IMP ",valor[numColumna]);
                     lista.add(valor[numColumna]);
                 } while (cursor.moveToNext());
             }
