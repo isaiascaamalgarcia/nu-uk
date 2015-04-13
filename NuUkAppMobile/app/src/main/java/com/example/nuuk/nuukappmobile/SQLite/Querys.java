@@ -73,21 +73,8 @@ public class Querys {
         }
     }
 
-    /*SELECT DISTINCT carrera
-    FROM carrera
-    INNER JOIN relacion_escuela ON carrera.id = relacion_escuela.idCarrera
-    INNER JOIN escuela ON escuela.id = relacion_escuela.idEscuela
-    WHERE escuela.id =9*/
-    public void listadoJoin() {
-        String columnaTable1="carrera";
-        String []columnas={"carrera"};
-        String tableName2="relacion_escuela";
-        String tableName3="escuela";
-        String condicion="id";
-        String condicion1="idCarrera";
-        String condicion2="idEscuela";
-        String condicion3="9";
-        int numColumna=0;
+    public void listadoJoin(String columnaTable1,String []columnas,String tableName2,String tableName3
+    ,String condicion,String condicion1,String condicion2,String condicion3,int numColumna) {
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();

@@ -7,6 +7,10 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Adapter;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.ScrollView;
 
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
@@ -20,6 +24,8 @@ public class frag_carrersonschool extends Fragment{
     private String[]informacion;
     private Querys query;
     public ArrayList<String> listado;
+    private ListView listView;
+    private String[] stockArr;
     View rootView;
 
         @Override
@@ -29,11 +35,30 @@ public class frag_carrersonschool extends Fragment{
                 return null;
             }
             Log.i("SHARY ", getArguments().getString("QUERYC"));
-            informacion= getArguments().getString("QUERYC").split(",");
-            query=new Querys(rootView.getContext(),"carrera");
-            query.listadoJoin();
-            listado=query.lista;
-            Log.i("QQQ ",String.valueOf(listado.size()));
+            consultaCarreras();
             return (ScrollView)rootView;
         }
+    public void consultaCarreras()
+    {
+        informacion= getArguments().getString("QUERYC").split(",");
+        listView = (ListView) rootView.findViewById(R.id.listView);
+        String columnaTable1="carrera";
+        String []columnas={"carrera"};
+        String tableName2="relacion_escuela";
+        String tableName3="escuela";
+        String condicion="id";
+        String condicion1="idCarrera";
+        String condicion2="idEscuela";
+        String condicion3=informacion[0].toString();
+        int numColumna=0;
+
+
+        query=new Querys(rootView.getContext(),"carrera");
+        query.listadoJoin(columnaTable1,columnas,tableName2,tableName3,condicion,condicion1,condicion2,condicion3,numColumna);
+        listado=query.lista;
+
+        ArrayAdapter<String> itemsAdapter =
+                new ArrayAdapter<String>(rootView.getContext(), R.layout.list_item, listado);
+        listView.setAdapter(itemsAdapter);
+    }
 }

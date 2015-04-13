@@ -49,6 +49,12 @@ public class Pager_schools extends FragmentStatePagerAdapter {
                 inf1.putString("QUERYC",varString);
                 finfoschool1.setArguments(inf1);
                 return finfoschool1;
+            case 2:
+                Fragment finfoschool2 = new Map();
+                Bundle inf2= new Bundle();
+                inf2.putString("QUERYM",varString);
+                finfoschool2.setArguments(inf2);
+                return finfoschool2;
 
             default: return this.fragments.get(i);
         }

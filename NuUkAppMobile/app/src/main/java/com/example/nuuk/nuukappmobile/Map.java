@@ -9,6 +9,7 @@ import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,6 +40,7 @@ public class Map extends Fragment {
     private double longitude=0;
     private LocationManager locationManager;
     private Activity context;
+    private String []informacion;
     private View rootView;
     public Map(){
 
@@ -46,18 +48,21 @@ public class Map extends Fragment {
 
 
     public View onCreateView(LayoutInflater inflater,@Nullable ViewGroup container,@Nullable Bundle savedInstanceState) {
-       // googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
-         //       R.id.map)).getMap();
         if(rootView==null)
             rootView = (ScrollView)inflater.inflate(R.layout.activity_map,container,false);
         ViewGroup parent = (ViewGroup) rootView.getParent();
         if(parent!=null)
             parent.removeView(rootView);
+        latLon();
         createMapView();
-        addOnMapClickListener();
-        setOnMarkerDragListener();
+        //addOnMapClickListener();
         return rootView;
 }
+    public void latLon()
+    {
+        Log.i("SHARYMAP ", getArguments().getString("QUERYM"));
+        informacion= getArguments().getString("QUERYM").split(",");
+    }
 
     private void createMapView() {
         if (googleMap == null) {
@@ -68,8 +73,11 @@ public class Map extends Fragment {
                 try {
                     locationManager = (LocationManager)getActivity().getSystemService(Context.LOCATION_SERVICE);
                     location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
+                    //longitude = location.getLongitude();
+                    //latitude = location.getLatitude();
+                    longitude = Double.parseDouble(informacion[5]);
+                    latitude = Double.parseDouble(informacion[4]);
+                    Log.i("DIRE",informacion[4]);
                     LatLng latLng=new LatLng(latitude,longitude);
 
                     List<Address> addresses;
@@ -99,40 +107,15 @@ public class Map extends Fragment {
                 .draggable(true));
 
         // mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude)).title("Yo aqui").icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_VIOLET)).snippet("App Nu'uk"));
-        mcamera= CameraUpdateFactory.newLatLngZoom((position), 14);
+        mcamera= CameraUpdateFactory.newLatLngZoom((position), 15);
         googleMap.animateCamera(mcamera);
 
 
     }
 
 
-
-    public void setOnMarkerDragListener()
-    {
-        googleMap.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-                marker.getId();
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-                marker.getId();
-                marker.getPosition();
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-                marker.getId();
-            }
-        });
-
-    }
-
     public void addOnMapClickListener()
     {
-        //googleMap = ((MapFragment) getActivity().getFragmentManager().findFragmentById(
-          //      R.id.map)).getMap();
         googleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {

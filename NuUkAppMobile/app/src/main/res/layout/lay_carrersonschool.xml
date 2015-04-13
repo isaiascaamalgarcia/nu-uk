@@ -9,30 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-        <TextView
+        <ListView
+            android:id="@+id/listView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Carrera 1"
-            android:textColor="#FFFFFF" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Carrera 2"
-            android:textColor="#FFFFFF" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Carrera 3"
-            android:textColor="#FFFFFF" />
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:text="Carrera 4"
-            android:textColor="#FFFFFF" />
+            android:layout_height="624dp" />
+
 
     </LinearLayout>
 </ScrollView>
