@@ -78,8 +78,13 @@ public class Querys {
     INNER JOIN relacion_escuela ON carrera.id = relacion_escuela.idCarrera
     INNER JOIN escuela ON escuela.id = relacion_escuela.idEscuela
     WHERE escuela.id =9*/
-    public void listadoJoin(String columnaTable1,String []columnas, String tableName2,String tableName3,int numColumna,String condicion,
-                            String condicion1,String condicion2,String condicion3, String valorCondicion, String valorCondicion2) {
+    public void listadoJoin() {
+        String columnaTable1="carrera";
+        String []columnas;
+        String tableName2="relacion_escuela";
+        String tableName3="escuela";
+        String condicion,
+                String condicion1,String condicion2,String condicion3, String valorCondicion, String valorCondicion2
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
