@@ -35,7 +35,7 @@ public class Sec_carrer extends Fragment {
     private ArrayAdapter<String> adapter;
     private String[] stockArr;
     public String escuelaInf="",aux="";
-    public ArrayList<String> listaCarreras, listaEscuelas,listaEscuelasId;
+    public List<String> listaCarreras, listaEscuelas,listaEscuelasId;
     View rootView;
     Querys querys;
     int x = 0,x1=0;

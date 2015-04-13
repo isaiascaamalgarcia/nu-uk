@@ -40,7 +40,8 @@ public class UpdateRecords {
     }
     public void getData() {
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.1.68/nu-uk/Administrador/index.php/consultas";
+        /*String url = "http://192.168.1.68/nu-uk/Administrador/index.php/consultas";*/
+        String url = "http://nuuk.esy.es/index.php/consultas";
         RequestParams params = new RequestParams();
         params.put("tableName", this.tableName);
 

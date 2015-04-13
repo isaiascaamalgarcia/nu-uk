@@ -22,7 +22,7 @@ public class Querys {
     public String [] values;
     public AdminSQLiteOpenHelper admin;
     public Variables variables;
-    public ArrayList<String> lista,lista1;
+    public List<String> lista,lista1;
     public  String informacionEscuela="";
     public Querys(Context context, String table)
     {
