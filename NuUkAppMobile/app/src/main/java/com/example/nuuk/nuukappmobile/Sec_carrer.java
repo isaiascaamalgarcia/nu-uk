@@ -18,6 +18,7 @@ import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.NuukClass.arrayEscuela;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -31,7 +32,7 @@ public class Sec_carrer extends Fragment {
     private TextView tv1,tv2,tv3;
     private ArrayAdapter<String> adapter;
     private String[] stockArr;
-    public List<String> listaCarreras, listaEscuelas,listaEscuelasId;
+    public ArrayList<String> listaCarreras, listaEscuelas,listaEscuelasId;
     View rootView;
     Querys querys;
     int x = 1,x1=1;
@@ -41,7 +42,7 @@ public class Sec_carrer extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_schooltype, container, false);
-        img = (ImageView)rootView.findViewById(R.id.imagen);
+        img = (ImageView)rootView.findViewById(R.id.goschool);
         img.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -50,7 +51,8 @@ public class Sec_carrer extends Fragment {
                 Fragment f = new Selected_school();
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.vista_schoooltype, f). addToBackStack(null);
+                fragmentTransaction.replace(R.id.vista, f). addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         tv1 = (TextView)rootView.findViewById(R.id.tv_carrer);
@@ -62,6 +64,12 @@ public class Sec_carrer extends Fragment {
         sf.setFontTextView(tv3,getActivity());
              listadoCarreras();
         return rootView;
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("titulo",getActivity().getActionBar().getTitle().toString());
     }
 
     public void listadoCarreras() {
