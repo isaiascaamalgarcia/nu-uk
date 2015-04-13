@@ -22,7 +22,8 @@ public class Querys {
     public String [] values;
     public AdminSQLiteOpenHelper admin;
     public Variables variables;
-    public List<String> lista,lista1;
+    public ArrayList<String> lista,lista1;
+    public  String informacionEscuela="";
     public Querys(Context context, String table)
     {
         this.context=context;
@@ -44,27 +45,6 @@ public class Querys {
         bd.close();
     }
 
-    public void buscar(int id, String columnas,String campoClausula)
-    {
-        columns=columnas.split(",");
-        SQLiteDatabase bd = admin.getReadableDatabase();
-        Cursor cursor =
-                bd.query(tableName,
-                        columns,campoClausula+"= ?",
-                        new String[] { String.valueOf(id) },
-                        null, // e. group by
-                        null, // f. having
-                        null, // g. order by
-                        null); // h. limit
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        for(int i=0;i<columnas.length();i++)
-        {
-            cursor.getString(i);
-        }
-        //bd.close();
-    }
 
     public void listado(String []columnas, int numColumna) {
         String dato;
@@ -93,24 +73,39 @@ public class Querys {
         }
     }
 
-    public void listadoJoin(String []columnas, String tableName2,int numColumna,String condicion,
-                            String condicion1,String condicion2,String condicion3, String valorCondicion, String valorCondicion2) {
+    /*SELECT DISTINCT carrera
+    FROM carrera
+    INNER JOIN relacion_escuela ON carrera.id = relacion_escuela.idCarrera
+    INNER JOIN escuela ON escuela.id = relacion_escuela.idEscuela
+    WHERE escuela.id =9*/
+    public void listadoJoin() {
+        String columnaTable1="carrera";
+        String []columnas={"carrera"};
+        String tableName2="relacion_escuela";
+        String tableName3="escuela";
+        String condicion="id";
+        String condicion1="idCarrera";
+        String condicion2="idEscuela";
+        String condicion3="9";
+        int numColumna=0;
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT "+columnas+" FROM "+ this.tableName+" INNER JOIN "+ tableName2+
-                    " ON "+this.tableName+"."+condicion+"="+tableName2+"."+condicion1+
-                    " AND "+tableName2+"."+condicion2+"="+valorCondicion+" AND "+this.tableName+"."+condicion3+"=?";
+            String selectQuery = "SELECT "+columnaTable1.toString()+" FROM "+ this.tableName.toString()+" INNER JOIN "+ tableName2.toString()+
+                    " ON "+this.tableName.toString()+"."+condicion.toString()+"="+tableName2.toString()+"."+condicion1.toString()+
+                    " INNER JOIN "+ tableName3.toString()+" ON "+tableName3.toString()+"."+condicion.toString()+"="+tableName2.toString()+"."+condicion2.toString()+
+                    " WHERE "+tableName3.toString()+"."+condicion.toString()+"=?";
 
             SQLiteDatabase bd = admin.getWritableDatabase();
-            Cursor cursor=bd.rawQuery(selectQuery, new String[]{valorCondicion2});
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{condicion3.toString()});
             if (cursor.moveToFirst()) {
                 do {
                     for (int i=0;i<columnas.length;i++)
                     {
                         valor[i]=cursor.getString(i);
                     }
+                    Log.i("IMP ",valor[numColumna]);
                     lista.add(valor[numColumna]);
                 } while (cursor.moveToNext());
             }
@@ -150,7 +145,7 @@ public class Querys {
         }
     }
 
-    public void listadoInnerJoinCarr(String column, String idCar, String nivel) {
+    public void listadoInnerJoinCarrEscuela(String column, String idCar, String nivel) {
         String dato;
         lista= new ArrayList<String>();
         String []columnas=column.split(",");
@@ -178,13 +173,44 @@ public class Querys {
         }
     }
 
+    public void listadoInnerJoinCarrCarrera(String nivel) {
+        String dato;
+        lista= new ArrayList<String>();
+        lista1= new ArrayList<String>();
+        String [] valor= new String[2];
+        try {
+            String selectQuery="SELECT DISTINCT carrera, carrera.id\n" +
+                    "FROM carrera\n" +
+                    "INNER JOIN relacion_escuela ON carrera.id = relacion_escuela.idCarrera\n" +
+                    "INNER JOIN escuela ON escuela.id = relacion_escuela.idEscuela\n" +
+                    "WHERE escuela.tipo =?";
+            Log.i("QUERY ", selectQuery);
+            SQLiteDatabase bd = admin.getWritableDatabase();
+            Cursor cursor=bd.rawQuery(selectQuery, new String[]{nivel});
+            if (cursor.moveToFirst()) {
+                do {
+                    for (int i=0;i<2;i++)
+                    {
+                        valor[i]=cursor.getString(i);
+                    }
+                    lista.add(valor[0]);
+                    lista1.add(valor[1]);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+            bd.close();
+        } catch(Exception e)
+        {
+        }
+    }
 
-    public void listadoCondicionId(String []columnas, int numColumna,String campoClausula, int condicion) {
+
+    public void listadoCondicionId(String []columnas, int numColumna,String campoClausula, String condicion) {
         String dato;
         String [] valor= new String[columnas.length];
         lista= new ArrayList<String>();
         try {
-            String selectQuery = "SELECT  *FROM "+ this.tableName +" WHERE "+ campoClausula+"="+condicion;
+            String selectQuery = "SELECT  *FROM "+ this.tableName +" WHERE "+ campoClausula+"="+"'"+condicion+"'";
             SQLiteDatabase bd = admin.getWritableDatabase();
             Cursor cursor = bd.rawQuery(selectQuery, null);
             if (cursor.moveToFirst()) {
@@ -192,6 +218,7 @@ public class Querys {
                     for (int i=0;i<columnas.length;i++)
                     {
                         valor[i]=cursor.getString(i);
+                        informacionEscuela+=valor[i]+",";
                     }
                     lista.add(valor[numColumna]);
                 } while (cursor.moveToNext());

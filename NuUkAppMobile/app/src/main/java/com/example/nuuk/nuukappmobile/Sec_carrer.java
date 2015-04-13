@@ -1,5 +1,6 @@
 package com.example.nuuk.nuukappmobile;
 
+import android.media.Image;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -18,6 +19,8 @@ import com.example.nuuk.nuukappmobile.NuukClass.ColumnsTables;
 import com.example.nuuk.nuukappmobile.NuukClass.arrayEscuela;
 import com.example.nuuk.nuukappmobile.SQLite.Querys;
 
+import java.util.ArrayList;
+import java.security.spec.ECParameterSpec;
 import java.util.List;
 
 /**
@@ -31,26 +34,29 @@ public class Sec_carrer extends Fragment {
     private TextView tv1,tv2,tv3;
     private ArrayAdapter<String> adapter;
     private String[] stockArr;
-    public List<String> listaCarreras, listaEscuelas,listaEscuelasId;
+    public String escuelaInf="",aux="";
+    public ArrayList<String> listaCarreras, listaEscuelas,listaEscuelasId;
     View rootView;
     Querys querys;
-    int x = 1,x1=1;
+    int x = 0,x1=0;
     ColumnsTables columnas = new ColumnsTables();
     arrayEscuela listado= new arrayEscuela();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_schooltype, container, false);
-        img = (ImageView)rootView.findViewById(R.id.imagen);
+        img = (ImageView)rootView.findViewById(R.id.goschool);
         img.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                Fragment f = new Selected_school();
+                mostrarEscuela();
+                Fragment f = new Selected_school(escuelaInf);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-                fragmentTransaction.replace(R.id.vista_schoooltype, f). addToBackStack(null);
+                fragmentTransaction.replace(R.id.vista, f). addToBackStack(null);
+                fragmentTransaction.commit();
             }
         });
         tv1 = (TextView)rootView.findViewById(R.id.tv_carrer);
@@ -64,6 +70,20 @@ public class Sec_carrer extends Fragment {
         return rootView;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putString("titulo",getActivity().getActionBar().getTitle().toString());
+    }
+
+    public void mostrarEscuela()
+    {
+        querys = new Querys(rootView.getContext(), "escuela");
+        querys.listadoCondicionId(columnas.getTableEscuela(),1,"nombre",spinEscuelas.getSelectedItem().toString());
+        escuelaInf=querys.informacionEscuela;
+        //Log.i("CADENA ",escuelaInf);
+    }
+
     public void listadoCarreras() {
         spinTipos = (Spinner) rootView.findViewById(R.id.spin_type2);
         spinCarreras = (Spinner) rootView.findViewById(R.id.spin_carrer2);
@@ -73,24 +93,26 @@ public class Sec_carrer extends Fragment {
                     R.layout.spinner_item, columnas.getNivelEducativo());
             spinTipos.setAdapter(adapter);
 
-            querys = new Querys(rootView.getContext(), "carrera");
-            querys.listado(columnas.getTableCarrera(),1);
-            listaCarreras=querys.lista;
-            listaEscuelasId=querys.lista1;
-            adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaCarreras);
-            spinCarreras.setAdapter(adapter);
-            stockArr = new String[listaEscuelasId.size()];
-            stockArr = listaEscuelasId.toArray(stockArr);
-
-            spinTipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+             spinTipos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                    x=spinCarreras.getSelectedItemPosition();
+                    x=0;
+                    x1=0;
                     x1=spinTipos.getSelectedItemPosition();
-                    String aux=stockArr[x];
+                    querys = new Querys(rootView.getContext(), "carrera");
+                    querys.listadoInnerJoinCarrCarrera(String.valueOf(x1));
+                    listaCarreras=querys.lista;
+                    listaEscuelasId=querys.lista1;
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaCarreras);
+                    spinCarreras.setAdapter(adapter);
+
+                    x=spinCarreras.getSelectedItemPosition();
+                    stockArr = new String[listaEscuelasId.size()];
+                    stockArr = listaEscuelasId.toArray(stockArr);
+                    aux=stockArr[x];
                     Log.i("AUX ",aux);
                     querys = new Querys(rootView.getContext(), "escuela");
-                    querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
+                    querys.listadoInnerJoinCarrEscuela("tipo,nombre",aux,String.valueOf(x1));
                     listaEscuelas=querys.lista;
                     adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaEscuelas);
                     spinEscuelas.setAdapter(adapter);
@@ -103,22 +125,33 @@ public class Sec_carrer extends Fragment {
             });
 
 
+            x1=spinTipos.getSelectedItemPosition();
+            querys = new Querys(rootView.getContext(), "carrera");
+            querys.listadoInnerJoinCarrCarrera(String.valueOf(x1));
+            listaCarreras=querys.lista;
+            listaEscuelasId=querys.lista1;
+            adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaCarreras);
+            spinCarreras.setAdapter(adapter);
+            stockArr = new String[listaEscuelasId.size()];
+            stockArr = listaEscuelasId.toArray(stockArr);
+
             spinCarreras.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
                 @Override
                 public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    x=0;
+                    x1=0;
                     x=spinCarreras.getSelectedItemPosition();
                     x1=spinTipos.getSelectedItemPosition();
-                    String aux=stockArr[x];
+                    stockArr = new String[listaEscuelasId.size()];
+                    stockArr = listaEscuelasId.toArray(stockArr);
+                    aux=stockArr[x];
                     Log.i("AUX ",aux);
                     querys = new Querys(rootView.getContext(), "escuela");
-                    querys.listadoInnerJoinCarr("tipo,nombre",aux,String.valueOf(x1));
+                    querys.listadoInnerJoinCarrEscuela("tipo,nombre",aux,String.valueOf(x1));
                     listaEscuelas=querys.lista;
-                    adapter = new ArrayAdapter<String>(rootView.getContext(),R.layout.spinner_item, listaEscuelas);
+                    adapter = new ArrayAdapter<String>(rootView.getContext(), R.layout.spinner_item, listaEscuelas);
                     spinEscuelas.setAdapter(adapter);
 
-                    querys = new Querys(rootView.getContext(), "escuela");
-                    querys.listado(columnas.getTableEscuela(),1);
-                    listaEscuelas=querys.lista;
                 }
 
                 @Override
@@ -126,8 +159,6 @@ public class Sec_carrer extends Fragment {
 
                 }
             });
-
-
 
         } catch (Exception e) {
         }

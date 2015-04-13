@@ -40,7 +40,8 @@ public class UpdateRecords {
     }
     public void getData() {
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = "http://192.168.1.72/nu-uk/Administrador/index.php/consultas";
+        String url = "http://nuuk.esy.es/index.php/consultas";
+
         RequestParams params = new RequestParams();
         params.put("tableName", this.tableName);
 
@@ -49,6 +50,7 @@ public class UpdateRecords {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if(statusCode == 200) {
                     //call function...
+
                     getJSONData(new String(responseBody));
                 }
             }
