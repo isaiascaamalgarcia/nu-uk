@@ -4,6 +4,7 @@ package com.example.nuuk.nuukappmobile;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +24,7 @@ public class Sec_test extends Fragment {
     TextView question;
     String[] status = new String[5];
     View rootView;
+    TestResult tr = new TestResult();
     public static Querys querys, querysAnswer;
     ColumnsTables ct;
     ImageView next;
@@ -30,7 +32,7 @@ public class Sec_test extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         rootView = inflater.inflate(R.layout.lay_test, container, false);
-
+        resetResult();
         if(savedInstanceState==null){
             next = (ImageView)rootView.findViewById(R.id.nextbutton);
             next.setOnClickListener(new View.OnClickListener()
@@ -229,10 +231,13 @@ public class Sec_test extends Fragment {
                     break;
                 case 1:
                     resetCurrentSize();
-                    Fragment fragment= new Sec_result();
+
+                    Fragment f = new Sec_result();
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
-                    resetResult();
+                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.content_frame, f). addToBackStack(null);
+                    fragmentTransaction.commit();
+
                     break;
                 default:break;
             }
@@ -287,130 +292,169 @@ public class Sec_test extends Fragment {
         if(tb1.isChecked() && getCurrentSize()>1){
             if(querysAnswer.lista.get(currentPosition).equals("A")){
                 art++;
+                tr.setArt(art);
             }
             if(querysAnswer.lista.get(currentPosition).equals("C")){
                 adm++;
+                tr.setAdm(adm);
             }
             if(querysAnswer.lista.get(currentPosition).equals("D")){
                 def++;
+                tr.setDef(def);
             }
             if(querysAnswer.lista.get(currentPosition).equals("E")){
                 cien++;
+                tr.setCien(cien);
             }
             if(querysAnswer.lista.get(currentPosition).equals("H")){
                 hum++;
+                tr.setHum(hum);
             }
             if(querysAnswer.lista.get(currentPosition).equals("I")){
                 ing++;
+                tr.setIng(ing);
             }
             if(querysAnswer.lista.get(currentPosition).equals("S")){
                 med++;
+                tr.setMed(med);
             }
         }
         if(tb2.isChecked() && getCurrentSize()>2){
             if(querysAnswer.lista.get(currentPosition+1).equals("A")){
                 art++;
+                tr.setArt(art);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("C")){
                 adm++;
+                tr.setAdm(adm);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("D")){
                 def++;
+                tr.setDef(def);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("E")){
                 cien++;
+                tr.setCien(cien);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("H")){
                 hum++;
+                tr.setHum(hum);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("I")){
                 ing++;
+                tr.setIng(ing);
             }
             if(querysAnswer.lista.get(currentPosition+1).equals("S")){
                 med++;
+                tr.setMed(med);
             }
         }
         if(tb3.isChecked() && getCurrentSize()>3){
             if(querysAnswer.lista.get(currentPosition+2).equals("A")){
                 art++;
+                tr.setArt(art);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("C")){
                 adm++;
+                tr.setAdm(adm);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("D")){
                 def++;
+                tr.setDef(def);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("E")){
                 cien++;
+                tr.setCien(cien);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("H")){
                 hum++;
+                tr.setHum(hum);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("I")){
                 ing++;
+                tr.setIng(ing);
             }
             if(querysAnswer.lista.get(currentPosition+2).equals("S")){
                 med++;
+                tr.setMed(med);
             }
         }
         if(tb4.isChecked() && getCurrentSize()>4){
             if(querysAnswer.lista.get(currentPosition+3).equals("A")){
                 art++;
+                tr.setArt(art);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("C")){
                 adm++;
+                tr.setAdm(adm);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("D")){
                 def++;
+                tr.setDef(def);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("E")){
                 cien++;
+                tr.setCien(cien);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("H")){
                 hum++;
+                tr.setHum(hum);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("I")){
                 ing++;
+                tr.setIng(ing);
             }
             if(querysAnswer.lista.get(currentPosition+3).equals("S")){
                 med++;
+                tr.setMed(med);
             }
         }
         if(tb5.isChecked() && getCurrentSize()>5){
             if(querysAnswer.lista.get(currentPosition+4).equals("A")){
                 art++;
+                tr.setArt(art);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("C")){
                 adm++;
+                tr.setAdm(adm);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("D")){
                 def++;
+                tr.setDef(def);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("E")){
                 cien++;
+                tr.setCien(cien);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("H")){
                 hum++;
+                tr.setHum(hum);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("I")){
                 ing++;
+                tr.setIng(ing);
             }
             if(querysAnswer.lista.get(currentPosition+4).equals("S")){
                 med++;
+                tr.setMed(med);
             }
         }
-        Log.i("Ingeniera", "value" + ing);
+        Log.i("Ingeniera", "value" + tr.getArt());
     }
 
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        status[0] = querys.lista.get(currentPosition-5);
-        status[1] = querys.lista.get(currentPosition-4);
-        status[2] = querys.lista.get(currentPosition-3);
-        status[3] = querys.lista.get(currentPosition-2);
-        status[4] = querys.lista.get(currentPosition-1);
+        if(currentPosition != 1) {
+            status[0] = querys.lista.get(currentPosition - 5);
+            status[1] = querys.lista.get(currentPosition - 4);
+            status[2] = querys.lista.get(currentPosition - 3);
+            status[3] = querys.lista.get(currentPosition - 2);
+            status[4] = querys.lista.get(currentPosition - 1);
+
+        }
         outState.putStringArray("values", status);
+
 
     }
 }
