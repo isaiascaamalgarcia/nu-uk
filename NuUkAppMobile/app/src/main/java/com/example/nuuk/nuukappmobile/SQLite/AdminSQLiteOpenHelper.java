@@ -124,7 +124,23 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        db.execSQL("DROP DATABASE IF EXISTS " + DATABASE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_CARRERA);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ENCUESTA);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_ESCUELA);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCALIDAD);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_MUNICIPIO);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RELACION_ESC);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_RESULTADO_SUG);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TIPO_CARRERA);
+        onCreate(db);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USUARIO);
         onCreate(db);
     }
 }

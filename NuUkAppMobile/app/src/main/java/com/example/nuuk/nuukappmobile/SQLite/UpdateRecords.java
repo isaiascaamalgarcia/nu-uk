@@ -50,7 +50,6 @@ public class UpdateRecords {
             public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
                 if(statusCode == 200) {
                     //call function...
-
                     getJSONData(new String(responseBody));
                 }
             }
@@ -70,8 +69,6 @@ public class UpdateRecords {
                 for(int j=0;j<this.columnas.length;j++)
                 {
                     valores[j]=jsonArray.getJSONObject(i).getString(this.columnas[j]);
-                    /*Toast toast=Toast.makeText(context,valores[j],Toast.LENGTH_LONG);
-                    toast.show();*/
                     registro.put(this.columnas[j], valores[j]);
 
                 }
