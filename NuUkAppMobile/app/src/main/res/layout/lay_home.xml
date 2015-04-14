@@ -35,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
-                android:text="Ingrese su curp"
+                android:text="Bienvenido"
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="30dp"
                 android:textColor="#ffffffff"
@@ -43,23 +43,18 @@
                 android:textSize="30sp"
                 android:id="@+id/tv_home" />
 
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="30dp"
-                android:layout_marginRight="30dp"
-                android:background="@drawable/rounded_edittext"
-                android:id="@+id/et_home"
-                android:inputType="text"
-                android:maxLength="18"/>
-
-            <ImageView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_okbutton"
-                android:paddingTop="30dp"
-                android:paddingBottom="30dp"
-                android:id="@+id/iv2_home" />
+                android:textAlignment="center"
+                android:text="Estudiante"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
+                android:textColor="#ffffffff"
+                android:layout_gravity="center_horizontal"
+                android:textSize="30sp"
+                android:id="@+id/textView2"/>
+
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

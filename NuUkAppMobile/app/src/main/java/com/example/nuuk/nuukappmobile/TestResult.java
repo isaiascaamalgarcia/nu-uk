@@ -6,6 +6,7 @@ import java.util.List;
  * Created by Kody on 13/04/2015.
  */
 public class TestResult {
+    private boolean session;
     private int art;
     private int adm;
     private int def;
@@ -76,5 +77,13 @@ public class TestResult {
 
     public void setList(List list) {
         this.list = list;
+    }
+
+    public boolean isSession() {
+        return session;
+    }
+
+    public void setSession(boolean session) {
+        this.session = session;
     }
 }

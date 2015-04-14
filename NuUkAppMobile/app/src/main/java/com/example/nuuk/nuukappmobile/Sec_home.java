@@ -36,6 +36,8 @@ public class Sec_home extends Fragment {
     private TextView tv;
     private Bitmap bitmap;
     private EditText et;
+    String curp;
+    TestResult tr = new TestResult();
     private ProgressDialog pDialog;
     String mensaje;
     @Override
@@ -46,34 +48,14 @@ public class Sec_home extends Fragment {
         //loadImageFromURL("http://imagenestiernas.info/wp-content/uploads/2013/03/16917_540713432628376_2067568813_n-550x550.jpg",imageViewRound);
         /*Bitmap icon = BitmapFactory.decodeResource(getResources(),R.drawable.logobw);
         imageViewRound.setImageBitmap(icon);*/
-        imageViewRound = (ImageView)rootView.findViewById(R.id.iv2_home);
+
 
         tv = (TextView)rootView.findViewById(R.id.tv_home);
-        et = (EditText)rootView.findViewById(R.id.et_home);
+
+
         setFont sf = new setFont();
         sf.setFontTextView(tv,getActivity());
 
-        if(savedInstanceState==null){
-            imageViewRound.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    String curp = String.valueOf(et.getText());
-                    if(validateCurp(curp)) {
-                        Log.i("Ramon", "Correto curp");
-                        tv.setText("Bienvenido");
-                        imageViewRound.setVisibility(View.INVISIBLE);
-                        et.setVisibility(View.INVISIBLE);
-                    }else{
-                        Toast.makeText(rootView.getContext(),"Formato no valido",Toast.LENGTH_SHORT).show();
-                    }
-                }
-            });
-        }else {
-            mensaje=savedInstanceState.getString("values");
-            tv.setText(mensaje);
-            imageViewRound.setVisibility(View.INVISIBLE);
-            et.setVisibility(View.INVISIBLE);
-        }
         return rootView;
     }
     public boolean validateCurp(String curp) {
@@ -108,9 +90,4 @@ public class Sec_home extends Fragment {
         }
     }
 
-    @Override
-    public void onSaveInstanceState(Bundle outState) {
-        super.onSaveInstanceState(outState);
-        outState.putString("values", "Bienvenido");
-    }
 }
