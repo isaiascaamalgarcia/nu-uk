@@ -98,7 +98,7 @@ public class Sec_result extends Fragment{
             RelativeLayout view = new RelativeLayout(rootView.getContext());//
             view.setId(color);
             view.setBackgroundColor(color);
-            view.setLayoutParams(new RelativeLayout.LayoutParams(30, height * 17));
+            view.setLayoutParams(new RelativeLayout.LayoutParams(80, height * 17));
             TextView tv = new TextView(getActivity());
             RelativeLayout.LayoutParams p = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
             p.addRule(RelativeLayout.ABOVE,view.getId());

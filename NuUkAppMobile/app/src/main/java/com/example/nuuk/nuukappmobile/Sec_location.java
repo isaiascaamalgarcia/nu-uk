@@ -1,7 +1,10 @@
 package com.example.nuuk.nuukappmobile;
 
+import android.media.Image;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.internal.view.menu.ListMenuItemView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,8 +28,10 @@ public class Sec_location extends Fragment{
     private Spinner spinType;
     private Spinner spinMunicipio;
     private Spinner spinEscuela;
+    private ImageView flecha;
     private ArrayAdapter<String> adapter;
     private TextView tv1,tv2,tv3;
+    public String escuelaInf="",aux="";
     public List<String> listaMunicipio,listaEscuela;
     View rootView;
     Querys querys;
@@ -40,12 +45,36 @@ public class Sec_location extends Fragment{
         tv1 = (TextView)rootView.findViewById(R.id.tv_loc);
         tv2 = (TextView)rootView.findViewById(R.id.tv_loc2);
         tv3 = (TextView)rootView.findViewById(R.id.tv_loc3);
+        flecha = (ImageView)rootView.findViewById(R.id.schoolocated);
+        flecha.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mostrarEscuela();
+                //Fragment f = new Selected_school(escuelaInf);
+                Bundle bun = new Bundle();
+                bun.putString("escuelaInf",escuelaInf);
+                Fragment f = new Selected_school();
+                f.setArguments(bun);
+                FragmentManager fragmentManager = getFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.irA, f). addToBackStack(null);
+                fragmentTransaction.commit();
+            }
+        });
         setFont sf = new setFont();
         sf.setFontTextView(tv1,getActivity());
         sf.setFontTextView(tv2,getActivity());
         sf.setFontTextView(tv3,getActivity());
         listado();
         return rootView;
+    }
+
+    public void mostrarEscuela()
+    {
+        querys = new Querys(rootView.getContext(), "escuela");
+        querys.listadoCondicionId(columnas.getTableEscuela(),1,"nombre",spinEscuela.getSelectedItem().toString());
+        escuelaInf=querys.informacionEscuela;
+        //Log.i("CADENA ",escuelaInf);
     }
 
     public void listado() {
