@@ -24,8 +24,7 @@ class Admin_school extends CI_Controller {
 		{
 			redirect(base_url().'index.php/login');
 		}
-		$data["error"] = "";
-		$this->load->view('admin/admin_edit', $data);
+		$this->load->view('admin/admin_edit');
 	}
 
 	public function carreras(){

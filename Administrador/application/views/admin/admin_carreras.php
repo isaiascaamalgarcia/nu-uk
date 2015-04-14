@@ -83,7 +83,7 @@
 			    </center>
 				
 			</form>
-			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url();?>/index.php/admin_school/add_carrera">
+			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url();?>index.php/admin_school/add_carrera">
 				<div class="form-group col-sm-6">
 					<input type="text" class="form-control hidden" value="<?php echo $query->id;?>" name="idEscuela" />
 			        <label>Nueva Carrera</label>

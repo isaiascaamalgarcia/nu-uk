@@ -149,16 +149,17 @@ public class frag_infoschools extends Fragment {
             SpannableString content = new SpannableString(informacion[9]);
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             facebook.setText(content);
-
+        try {
             facebook.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     AsyncHttpClient client = new AsyncHttpClient();
 
                     //String url = "http://nuuk.esy.es/img/getfbid.php";
-                    String url = "http://192.168.1.69/iqm/getfbid.php";
+                    String url = "http://192.168.100.25/iqm/getfbid.php";
                     RequestParams params = new RequestParams();
-                    params.put("url",facebook.getText());
+                    //params.put("url",facebook.getText());
+                    params.put("url","/sharyChuc");
 
                     client.post(url,params, new AsyncHttpResponseHandler() {
                         @Override
@@ -182,6 +183,14 @@ public class frag_infoschools extends Fragment {
                 }
             });
         }
+        catch (Exception e)
+        {
+            String url = "http://www.faceboook.com"+facebook.getText();
+            Intent i = new Intent(Intent.ACTION_VIEW);
+            i.setData(Uri.parse(url));
+            startActivity(i);
+        }
+  }
 
         if(informacion[10].equals("NULL"))
         {

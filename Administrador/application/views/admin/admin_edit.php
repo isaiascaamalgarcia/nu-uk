@@ -67,7 +67,7 @@
 				<h4><?=$estado;?></h4>
 			</center>
 			<hr>
-			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url()?>/index.php/admin_school/saveChangesSchool">
+			<form class="form-group col-sm-4 form-div" method="post" action="<?php echo base_url()?>index.php/admin_school/saveChangesSchool">
 				<div class="form-group col-sm-6">
 					<input class="hidden" value="<?=$query->id;?>" name="ides">
 			        <label >Nombre</label>
@@ -128,8 +128,7 @@
 			    	<button type="reset" class="btn btn-default">Cancelar</button>
 			    </center>
 			</form>
-		
-<?php echo $error; ?>  <!-- Error Message will show up here -->
+		  <!-- Error Message will show up here -->
 <?php echo form_open_multipart('admin_school/do_upload');?>
 <?php echo "<input type='file' name='userfile' size='20' class='btn btn-default'/>"; ?>
 <?php echo "<input type='submit' name='submit' value='upload' /> ";?>
