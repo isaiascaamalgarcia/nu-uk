@@ -52,7 +52,11 @@ public class Sec_carrer extends Fragment {
             public void onClick(View v)
             {
                 mostrarEscuela();
-                Fragment f = new Selected_school(escuelaInf);
+                //Fragment f = new Selected_school(escuelaInf);
+                Bundle bun = new Bundle();
+                bun.putString("escuelaInf",escuelaInf);
+                Fragment f = new Selected_school();
+                f.setArguments(bun);
                 FragmentManager fragmentManager = getFragmentManager();
                 FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                 fragmentTransaction.replace(R.id.vista, f). addToBackStack(null);
@@ -73,7 +77,7 @@ public class Sec_carrer extends Fragment {
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString("titulo",getActivity().getActionBar().getTitle().toString());
+        //outState.putString("titulo",getActivity().getActionBar().getTitle().toString());
     }
 
     public void mostrarEscuela()

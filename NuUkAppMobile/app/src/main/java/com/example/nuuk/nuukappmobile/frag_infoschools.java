@@ -1,8 +1,12 @@
 package com.example.nuuk.nuukappmobile;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,16 +58,36 @@ public class frag_infoschools extends Fragment {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lDireccion.setLayoutParams(var);
         }
-        else
+        else {
             direccion.setText(informacion[3]);
+            direccion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String uri = "fb://messaging/1393506494";
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(intent);
+                }
+            });
+        }
 
         if(informacion[6].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lTelefono.setLayoutParams(var);
         }
-        else
-            telefono.setText(informacion[6]);
+        else {
+            SpannableString content = new SpannableString(informacion[6]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            telefono.setText(content);
+            telefono.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent call = new Intent(Intent.ACTION_CALL);
+                    call.setData(Uri.parse("tel:"+telefono.getText()));
+                    startActivity(call);
+                }
+            });
+        }
 
 
         if(informacion[7].equals("NULL"))
@@ -71,33 +95,63 @@ public class frag_infoschools extends Fragment {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lPagina.setLayoutParams(var);
         }
-        else
-            pagina.setText(informacion[7]);
-
+        else {
+            SpannableString content = new SpannableString(informacion[7]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            pagina.setText(content);
+            pagina.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent page = new Intent(Intent.ACTION_VIEW);
+                    page.setData(Uri.parse(""+pagina.getText()));
+                    startActivity(page);
+                }
+            });
+        }
 
         if(informacion[8].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lCorreo.setLayoutParams(var);
         }
-        else
-            correo.setText(informacion[8]);
-
+        else {
+            SpannableString content = new SpannableString(informacion[8]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            correo.setText(content);
+            correo.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent email = new Intent(Intent.ACTION_SEND);
+                    email.setData(Uri.parse("mailto:"));
+                    String[] to = {""+correo.getText()};
+                    email.putExtra(Intent.EXTRA_EMAIL,to);
+                    email.putExtra(Intent.EXTRA_SUBJECT,"Postulante - Nu' uk");
+                    email.setType("message/rfc822");
+                    Intent chooser = Intent.createChooser(email,"Enviar correo");
+                    startActivity(chooser);
+                }
+            });
+        }
         if(informacion[9].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lFacebook.setLayoutParams(var);
         }
-        else
-            facebook.setText(informacion[9]);
-
+        else {
+            SpannableString content = new SpannableString(informacion[9]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            facebook.setText(content);
+        }
         if(informacion[10].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
             lTwitter.setLayoutParams(var);
         }
-        else
-            twitter.setText(informacion[10]);
+        else {
+            SpannableString content = new SpannableString(informacion[10]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            twitter.setText(content);
+        }
     }
 
 }

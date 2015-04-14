@@ -39,11 +39,11 @@ public class Selected_school extends Fragment{
     private String[] tabs = { "", ""};
     private TextView escuela,lema;
 
-    public Selected_school(String informacion)
+    /*public Selected_school(String informacion)
     {
         this.informacion=informacion;
         info=this.informacion.split(",");
-    }
+    }*/
 
     final int[] ICONS = new int[] {
             R.drawable.ic_launcher,
@@ -66,11 +66,13 @@ public class Selected_school extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_selectedschool, container, false);
+        this.informacion = getArguments().getString("escuelaInf");
         img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
         new LoadImage().execute("https://pbs.twimg.com/profile_images/537990267572191232/Tcpm1Ty2.jpeg");
         initializePagin();
         escuela=(TextView)rootView.findViewById(R.id._escuela);
         lema=(TextView)rootView.findViewById(R.id._lema);
+        info = this.informacion.split(",");
         escuela.setText(info[2]);
         lema.setText("");
         return rootView;
