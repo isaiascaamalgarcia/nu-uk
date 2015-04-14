@@ -15,6 +15,9 @@ import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
+import com.example.nuuk.nuukappmobile.SQLite.JsonFace;
+import com.example.nuuk.nuukappmobile.SQLite.UpdateRecords;
+
 /**
  * Created by Izzy-Izumi on 05/04/2015.
  */
@@ -36,6 +39,8 @@ public class frag_infoschools extends Fragment {
     }
     public void informacionEscuela()
     {
+        final String[]columnas={"id","first_name","gender","last_name"};
+        String[]valores;
         direccion=(TextView)rootView.findViewById(R.id._direccion);
         telefono=(TextView)rootView.findViewById(R.id._tel);
         pagina=(TextView)rootView.findViewById(R.id._pagina);
@@ -52,7 +57,6 @@ public class frag_infoschools extends Fragment {
 
         informacion=getArguments().getString("QUERY").split(",");
 
-
         if(informacion[3].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
@@ -63,7 +67,9 @@ public class frag_infoschools extends Fragment {
             direccion.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    String uri = "fb://messaging/1393506494";
+                    /*JsonFace face=new JsonFace(rootView.getContext(),facebook.getText().toString(),columnas);
+                    face.getData();*/
+                    String uri = "fb://messaging/"+"110878572304597";
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                     startActivity(intent);
                 }
