@@ -47,15 +47,22 @@
 		<nav class="side-bar" style="position:fixed;">
 			<ul class="menu">
 				<h2 class="side-bar-title"> Escuelas</h2>
-				<li><a href="<?=base_url();?>index.php/cruds"><span class="glyphicon glyphicon-plus"> Agregar</span></a></li>
-				<li><a href="<?=base_url();?>index.php/cruds/delete"><span class="glyphicon glyphicon-remove"> Eliminar</span></a></li>
-				<li><a href="<?= base_url();?>index.php/cruds/modify"><span class="glyphicon glyphicon-pencil"> Editar</span></a></li>
-				<li><a href="<?=base_url();?>index.php/encuestas"><span class="glyphicon glyphicon-pencil"> Preguntas</span></a></li>
+				<li><a href="<?=base_url();?>index.php/admin_school/edit"><span class="glyphicon glyphicon-pencil"> Modificar</span></a></li>
+				<li><a href="<?php echo base_url();?>index.php/admin_school/carreras"><span class="glyphicon glyphicon-education"> Carreras</span></a></li>
+				<li><a href="<?php echo base_url();?>index.php/admin_school/view_location"><span class="glyphicon glyphicon-eye-open"> Ubicacion</span></a></li>
 			</ul>
 		</nav>
 
 		<div id="body">
 			<center>
+				<?php 
+				$img = $this->session->userdata('id_escuela');
+				$this->db->where('id', $img);
+				$img = $this->db->get('escuela');
+				$img = $img->row();
+				$logo = $img->logo;
+				?>
+				<img src='<?php echo base_url() . "/uploads/" . $logo; ?>' width="150" heigth="200" class="avatar img-circle" alt="avatar">
 				<h1><?=$query->nombre;?></h1>
 				<h4><?=$estado;?></h4>
 			</center>
@@ -121,6 +128,12 @@
 			    	<button type="reset" class="btn btn-default">Cancelar</button>
 			    </center>
 			</form>
+		
+<?php echo $error; ?>  <!-- Error Message will show up here -->
+<?php echo form_open_multipart('admin_school/do_upload');?>
+<?php echo "<input type='file' name='userfile' size='20' class='btn btn-default'/>"; ?>
+<?php echo "<input type='submit' name='submit' value='upload' /> ";?>
+<?php echo "</form>"?>
 
 			
 

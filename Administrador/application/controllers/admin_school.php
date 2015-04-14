@@ -24,7 +24,8 @@ class Admin_school extends CI_Controller {
 		{
 			redirect(base_url().'index.php/login');
 		}
-		$this->load->view('admin/admin_edit');
+		$data["error"] = "";
+		$this->load->view('admin/admin_edit', $data);
 	}
 
 	public function carreras(){
@@ -131,4 +132,35 @@ class Admin_school extends CI_Controller {
 		$this->load->view('admin/admin_ubicacion');
 	}
 
+	public function file_view() {
+		$this->load->view('admin/admin_edit', array('error' => ' '));
+	}
+	public function do_upload() {
+		$config = array(
+			'allowed_types'  => "jpg|png|jpeg|",
+			'max_height' 	 => "768",
+			'max_width' 	 => "1024",
+			'max_size' 		 => "2048000",
+			'overwrite' 	 => true,
+			'upload_path' 	 => "./uploads/",
+		);
+		$this->load->library('upload', $config);
+		if($this->upload->do_upload()) {
+			$data = array('upload_data' => $this->upload->data());
+			$admin_escuela = $this->session->userdata('id_escuela');
+			$raw = $data['upload_data'];
+			echo $raw['file_name'];
+			$dato['logo'] = $raw['file_name'];
+			$this->db->where('id', $admin_escuela);
+			$this->db->update('escuela', $dato);
+			$data["error"] = "";
+			$this->load->view('admin/admin_edit', $data);
+			
+
+		}
+		else {
+			$error = array('error' => $this->upload->display_errors() );
+			$this->load->view('admin/admin_edit', $error);
+		}
+	}
 }

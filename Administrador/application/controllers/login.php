@@ -66,7 +66,7 @@ class Login extends CI_Controller
                     'perfil'           =>       $check_user->perfil,
                     'nombre'           =>       $check_user->nombre,
                     'username'         =>       $check_user->usuario,
-                    'id_escuela'       =>       $check_user->escuela
+                    'id_escuela'       =>       $check_user->escuela,
                     );        
                     $this->session->set_userdata($data);
                     $this->index();

@@ -36,13 +36,14 @@
 	        </div>
 	      </div>
 		</nav>
-
+		
 		
 		<nav class="side-bar">
 			<ul class="menu">
 				<h2 class="side-bar-title"> Escuelas</h2>
-				<li><a href="<?=base_url();?>index.php/admin_school/edit"><span class="glyphicon glyphicon-pencil"> Modificar</span></a></li>
-				<li><a href="<?php echo base_url();?>index.php/admin_school/carreras"><span class="glyphicon glyphicon-pencil"> Carreras</span></a></li>
+				<<li><a href="<?=base_url();?>index.php/admin_school/edit"><span class="glyphicon glyphicon-pencil"> Modificar</span></a></li>
+				<li><a href="<?php echo base_url();?>index.php/admin_school/carreras"><span class="glyphicon glyphicon-education"> Carreras</span></a></li>
+				<li><a href="<?php echo base_url();?>index.php/admin_school/view_location"><span class="glyphicon glyphicon-eye-open"> Ubicacion</span></a></li>
 
 				
 			</ul>
