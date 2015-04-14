@@ -1,0 +1,805 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package PuntodeVenta;
+
+import java.awt.Color;
+import java.awt.MouseInfo;
+import java.awt.Point;
+import DesignSoftware.FrameDesign;
+import DesignSoftware.BordesButton;
+import GestionFactura.CrearPDF;
+import GestionFactura.JavaMail;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import ModelDB.conexion;
+import java.awt.KeyboardFocusManager;
+import java.awt.event.KeyEvent;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import GestionVentas.NumeroALetras;
+import GestionVentas.ReducirArticulos;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.table.DefaultTableModel;
+
+/*
+ *@author Shary Yareli Chuc Ku
+ *Versión: 2.0
+ *Fecha última modificación: 06-12-14
+ */
+//  La función principal de la clase es realizar las ventas del cliente,
+//  generando de esta manera el ticket de compra y/o la factura que se requiere para el cliente.
+public class EmergenteVentas extends javax.swing.JFrame {
+
+    private int x = 0, y = 0;
+    private FrameDesign img;
+    private String busqueda;
+    private BordesButton bordesBoton;
+    private ImageIcon icon;
+    private conexion con = new conexion();
+    private Pattern p;
+    private Matcher m;
+    private NumeroALetras numLetra;
+    private String vendedor, cantidades, unidades,
+            conceptos, precios, importes, subtotal,
+            iva, total;
+    private JTextField txtSubtotal, txtIVA, txtTotal, txtPago, txtCambio;
+    private DefaultTableModel modelo;
+    private JTable jtVentasEmpleado;
+
+    String URL = "../Images/loginImages/";
+    String URL1 = "../Images/articulos/";
+    private int banderaActivo = 0;
+
+    /**
+     * Creates new form Emergente
+     */
+//  Constructor: Contiene varios parametros de SalesSoftwareEmpleado,
+//  esto se debe a que permite actualizar la informacion que se tiene.
+//  Carga las funciones de ValidarTab & Cargar.
+    public EmergenteVentas(String vendedor, String cantidades, String unidades,
+            String conceptos, String precios, String importes, String subtotal,
+            String iva, String total, JTextField txtSubtotal, JTextField txtIVA, JTextField txtTotal,
+            DefaultTableModel modelo, JTable jtVentasEmpleado, JTextField txtPago, JTextField txtCambio) {
+        this.getContentPane().setBackground(Color.WHITE);
+        initComponents();
+        this.setLocationRelativeTo(null);
+        this.setSize(142, 272);
+        this.vendedor = vendedor;
+        this.cantidades = cantidades;
+        this.unidades = unidades;
+        this.conceptos = conceptos;
+        this.precios = precios;
+        this.importes = importes;
+        this.subtotal = subtotal;
+        this.iva = iva;
+        this.total = total;
+        this.txtSubtotal = txtSubtotal;
+        this.txtIVA = txtIVA;
+        this.txtTotal = txtTotal;
+        this.txtPago = txtPago;
+        this.txtCambio = txtCambio;
+        this.modelo = modelo;
+        this.jtVentasEmpleado = jtVentasEmpleado;
+        menuUsuarios.setText("           GENERAR          FACTURA/TICKET ");
+        cargar();
+        validarTab();
+    }
+
+//      Carga el diseño de los botones.
+    public void cargar() {
+        img = new FrameDesign(URL + "buttonMinimize.png");
+        img.addButton(btnMinimizar);
+        img = new FrameDesign(URL + "buttonClose.png");
+        img.addButton(btnCerrar);
+
+    }
+
+//    Valida el tab eb el teclado para los campos de texto.
+    public void validarTab() {
+        //        Campos de texto de Clientes.
+        txtRfc.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+        //        Campos de texto de Clientes.
+        txtEmpresaE.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+        //        Campos de texto de Clientes.
+        txtDomicilioE.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+        //        Campos de texto de Clientes.
+        txtCiudadE.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+        //        Campos de texto de Clientes.
+        txtEstadoE.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+        //        Campos de texto de Clientes.
+        txtEmail.setFocusTraversalKeys(
+                KeyboardFocusManager.FORWARD_TRAVERSAL_KEYS, Collections.EMPTY_SET);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is always
+     * regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        btnMinimizar = new javax.swing.JButton();
+        btnCerrar = new javax.swing.JButton();
+        lbRfc = new javax.swing.JLabel();
+        lbEmpresa = new javax.swing.JLabel();
+        lbDomicilio = new javax.swing.JLabel();
+        lbCiudad = new javax.swing.JLabel();
+        lbEstado = new javax.swing.JLabel();
+        lbEstado1 = new javax.swing.JLabel();
+        txtRfc = new javax.swing.JTextField();
+        txtEmail = new javax.swing.JTextField();
+        txtEmpresaE = new javax.swing.JTextField();
+        txtDomicilioE = new javax.swing.JTextField();
+        txtCiudadE = new javax.swing.JTextField();
+        txtEstadoE = new javax.swing.JTextField();
+        menuUsuarios = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        factura = new javax.swing.JRadioButton();
+        ticket = new javax.swing.JRadioButton();
+        btnGenerar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+        setUndecorated(true);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        btnMinimizar.setBorder(null);
+        btnMinimizar.setBorderPainted(false);
+        btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseExited(evt);
+            }
+        });
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 10, 32, 32));
+
+        btnCerrar.setBorder(null);
+        btnCerrar.setBorderPainted(false);
+        btnCerrar.setContentAreaFilled(false);
+        btnCerrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCerrarMouseExited(evt);
+            }
+        });
+        btnCerrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCerrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 32, 32));
+
+        lbRfc.setBackground(new java.awt.Color(255, 255, 255));
+        lbRfc.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbRfc.setText("RFC");
+        lbRfc.setOpaque(true);
+        getContentPane().add(lbRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 150, 20));
+
+        lbEmpresa.setBackground(new java.awt.Color(255, 255, 255));
+        lbEmpresa.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbEmpresa.setText("Empresa");
+        lbEmpresa.setOpaque(true);
+        getContentPane().add(lbEmpresa, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 150, 20));
+
+        lbDomicilio.setBackground(new java.awt.Color(255, 255, 255));
+        lbDomicilio.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbDomicilio.setText("Domicilio");
+        lbDomicilio.setOpaque(true);
+        getContentPane().add(lbDomicilio, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 170, 150, 20));
+
+        lbCiudad.setBackground(new java.awt.Color(255, 255, 255));
+        lbCiudad.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbCiudad.setText("Ciudad");
+        lbCiudad.setOpaque(true);
+        getContentPane().add(lbCiudad, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 70, 140, 20));
+
+        lbEstado.setBackground(new java.awt.Color(255, 255, 255));
+        lbEstado.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbEstado.setText("Estado");
+        lbEstado.setOpaque(true);
+        getContentPane().add(lbEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 120, 140, 20));
+
+        lbEstado1.setBackground(new java.awt.Color(255, 255, 255));
+        lbEstado1.setFont(new java.awt.Font("Times New Roman", 2, 12)); // NOI18N
+        lbEstado1.setText("E-mail");
+        lbEstado1.setOpaque(true);
+        getContentPane().add(lbEstado1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 170, 140, 20));
+
+        txtRfc.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtRfc.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtRfc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtRfcKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtRfc, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, 200, 30));
+
+        txtEmail.setEditable(false);
+        txtEmail.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtEmail.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtEmail.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmailKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 190, 200, 30));
+
+        txtEmpresaE.setEditable(false);
+        txtEmpresaE.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtEmpresaE.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtEmpresaE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEmpresaEKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtEmpresaE, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 140, 200, 30));
+
+        txtDomicilioE.setEditable(false);
+        txtDomicilioE.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtDomicilioE.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtDomicilioE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtDomicilioEKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtDomicilioE, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 190, 200, 30));
+
+        txtCiudadE.setEditable(false);
+        txtCiudadE.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtCiudadE.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtCiudadE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtCiudadEKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtCiudadE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 90, 200, 30));
+
+        txtEstadoE.setEditable(false);
+        txtEstadoE.setFont(new java.awt.Font("Times New Roman", 0, 11)); // NOI18N
+        txtEstadoE.setSelectionColor(new java.awt.Color(91, 137, 193));
+        txtEstadoE.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtEstadoEKeyPressed(evt);
+            }
+        });
+        getContentPane().add(txtEstadoE, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 140, 200, 30));
+
+        menuUsuarios.setBackground(new java.awt.Color(116, 16, 30));
+        menuUsuarios.setFont(new java.awt.Font("Times New Roman", 1, 14)); // NOI18N
+        menuUsuarios.setForeground(new java.awt.Color(255, 255, 255));
+        menuUsuarios.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        menuUsuarios.setText("       ");
+        menuUsuarios.setDoubleBuffered(true);
+        menuUsuarios.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        menuUsuarios.setOpaque(true);
+        menuUsuarios.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                menuUsuariosMouseDragged(evt);
+            }
+        });
+        menuUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                menuUsuariosMousePressed(evt);
+            }
+        });
+        getContentPane().add(menuUsuarios, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 50));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(116, 16, 30), 1, true), "GENERAR:", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Times New Roman", 0, 10))); // NOI18N
+
+        factura.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(factura);
+        factura.setText("Factura");
+        factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturaActionPerformed(evt);
+            }
+        });
+        jPanel1.add(factura);
+
+        ticket.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(ticket);
+        ticket.setText("Ticket");
+        ticket.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ticketActionPerformed(evt);
+            }
+        });
+        jPanel1.add(ticket);
+
+        btnGenerar.setBackground(new java.awt.Color(255, 255, 255));
+        btnGenerar.setFont(new java.awt.Font("Times New Roman", 1, 12)); // NOI18N
+        btnGenerar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Images/articulos/capture.png"))); // NOI18N
+        btnGenerar.setMnemonic('G');
+        btnGenerar.setBorder(null);
+        btnGenerar.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        btnGenerar.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        btnGenerar.setPreferredSize(new java.awt.Dimension(100, 100));
+        btnGenerar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnGenerarMouseExited(evt);
+            }
+        });
+        btnGenerar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGenerarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnGenerar);
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 120, 190));
+
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel1.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jLabel1.setOpaque(true);
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 120, 20));
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void menuUsuariosMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuUsuariosMousePressed
+        x = evt.getX();
+        y = evt.getY();
+    }//GEN-LAST:event_menuUsuariosMousePressed
+
+    private void menuUsuariosMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuUsuariosMouseDragged
+        Point point = MouseInfo.getPointerInfo().getLocation();
+        setLocation(point.x - x, point.y - y);
+    }//GEN-LAST:event_menuUsuariosMouseDragged
+
+    private void btnGenerarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseEntered
+        bordesBoton = new BordesButton(btnGenerar);
+        bordesBoton.encender();
+    }//GEN-LAST:event_btnGenerarMouseEntered
+
+    private void btnGenerarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGenerarMouseExited
+        bordesBoton = new BordesButton(btnGenerar);
+        bordesBoton.apagar();
+    }//GEN-LAST:event_btnGenerarMouseExited
+
+//    Limpia o reinicia la tabla reiniciarJTableEmpleado.
+    public void reiniciarJTableEmpleado() {
+        try {
+            for (int i = 0; i < jtVentasEmpleado.getRowCount(); i++) {
+                modelo.removeRow(i);
+                i -= 1;
+            }
+        } catch (Exception e) {
+        }
+    }
+
+//    Evento que permite emitir facturas o tickets en caso de ser seleccionado.
+//    Ademas permite agregar y actualizar a varias tablas de la base de datos informacion.
+    private void btnGenerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarActionPerformed
+//        Variables de uso obligatorio.
+        Date hoy = new Date();
+        Calendar cal1 = Calendar.getInstance();
+        SimpleDateFormat formato;
+        String registro = "";
+        String fecha = "", hora = "";
+        formato = new SimpleDateFormat("yyyy/MM/dd");
+        fecha = formato.format(hoy);
+        formato = new SimpleDateFormat("hh:mm:ss");
+        hora = formato.format(hoy);
+        String folio = "";
+        int numFolio = 0;
+        String columnas;
+        int numeroFolioMax = 0;
+        String email = "";
+        String decimal = "", convertidoLetra = "";
+        try {
+//            Genera factura en caso de seleccionar el RadioButton Factura
+            if (factura.isSelected() == true) {
+                if ("".equals(txtRfc.getText()) || "".equals(txtEmpresaE.getText())
+                        || "".equals(txtDomicilioE.getText()) || "".equals(txtCiudadE.getText())
+                        || "".equals(txtEstadoE.getText()) || "".equals(txtEmail.getText())) {
+                    JOptionPane.showMessageDialog(null, "Llene los datos del cliente.");
+                } else {
+                    con.busqueda("folios", "estado", "folio", "1");
+                    folio = con.registro_busqueda;
+                    System.out.println("ENTRO A FACTURA BUSQ FOLIO");
+
+                    if ("".equals(folio)) {
+                        JOptionPane.showMessageDialog(null, "No hay folios disponibles\nSolicite al encargado de sucursal.");
+                    } else {
+                        con.busqueda("folios", "estado", "cantidad", "1");
+                        numeroFolioMax = Integer.parseInt(String.valueOf(con.registro_busqueda));
+
+                        email = txtEmail.getText();
+                        if (banderaActivo == 1) {
+                            String valores = "";
+                            valores += txtRfc.getText() + ",";
+                            valores += txtEmpresaE.getText() + ",";
+                            valores += txtDomicilioE.getText() + ",";
+                            valores += txtCiudadE.getText() + ",";
+                            valores += txtEstadoE.getText() + ",";
+                            valores += txtEmail.getText();
+
+                            columnas = "rfc,nombre_cliente,domicilio,ciudad,estado,email";
+                            con.agregar("clientes", columnas, valores);
+                            banderaActivo = 0;
+                        }
+
+                        registro = txtRfc.getText() + "|" + txtEmpresaE.getText()
+                                + "|" + txtDomicilioE.getText() + "|"
+                                + txtCiudadE.getText() + "|"
+                                + txtEstadoE.getText() + "|" + txtEmail.getText();
+                        limpiar();
+                        columnas = "folio,infoCliente,cantidad,unidad,concepto,precio,"
+                                + "importe,subtotal,iva,total,toLetra,"
+                                + "fecha,hora";
+
+                        decimal = total.substring(total.length() - 2, total.length());
+                        if (".".equals(decimal.substring(0, 1))) {
+                            total = total + "0";
+                        }
+                        numLetra = new NumeroALetras();
+                        convertidoLetra = numLetra.convertir(total, true);
+                        System.out.println(convertidoLetra);
+
+                        con.busquedaID("factura");
+                        String numeroPrueba = String.valueOf(con.registro_busqueda);
+                        System.out.println(con.registro_busqueda);
+                        if ("null".equals(numeroPrueba)) {
+                            numeroPrueba = "0";
+                            numFolio = 1;
+                            System.out.println("SALIENDO NUMFOLIO PRIMERO " + numFolio);
+                        } else {
+                            numFolio = Integer.parseInt(numeroPrueba);
+                            numFolio = numFolio + 1;
+                            System.out.println("SALIENDO NUMFOLIO " + numFolio);
+                        }
+
+                        if (numFolio == (numeroFolioMax + 1)) {
+                            JOptionPane.showMessageDialog(null, "No existen Folios\nDisponibles.");
+                            con.actualizar("folios", "estado", "0", "estado='" + 1 + "';");
+                            this.hide();
+                        } else {
+                            txtSubtotal.setText("");
+                            txtIVA.setText("");
+                            txtTotal.setText("");
+                            txtPago.setText("");
+                            txtCambio.setText("");
+                            reiniciarJTableEmpleado();
+
+                            GestionVentas.ReducirArticulos art = new ReducirArticulos();
+                            art.actualizarBD(cantidades, conceptos);
+
+                            con.agregar("ventas", "vendedor,total,fecha,hora,factura", vendedor + "," + total + ","
+                                    + fecha + "," + hora + "," + "1");
+                            System.out.println("SALIENDO AGREGAR VENTAS");
+
+                            con.agregar("factura", columnas, (folio + numFolio) + "," + registro + "," + cantidades
+                                    + "," + unidades + "," + conceptos + "," + precios + "," + importes + "," + subtotal + ","
+                                    + iva + "," + total + "," + convertidoLetra + "," + fecha + "," + hora);
+                            System.out.println("SALIENDO AGREGAR FACTURA");
+
+                            generarFactura((folio + numFolio), email);
+                            JOptionPane.showMessageDialog(null, "Factura generada y enviada\ncon exito.");
+                            this.hide();
+
+                        }
+
+                    }
+                }
+                //            Genera ticket en caso de seleccionar el RadioButton Ticket
+            } else if (ticket.isSelected() == true) {
+                GestionVentas.ReducirArticulos art = new ReducirArticulos();
+                art.actualizarBD(cantidades, conceptos);
+
+                con.agregar("ventas", "vendedor,total,fecha,hora,factura", vendedor + "," + total + ","
+                        + fecha + "," + hora + "," + "0");
+                JOptionPane.showMessageDialog(null, "Venta realizada\ncon exito.");
+
+                txtSubtotal.setText("");
+                txtIVA.setText("");
+                txtTotal.setText("");
+                txtPago.setText("");
+                txtCambio.setText("");
+                reiniciarJTableEmpleado();
+                this.hide();
+            } else {
+                JOptionPane.showMessageDialog(null, "Total de Compra\n$" + total);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnGenerarActionPerformed
+
+//    Limpia los campos de texto seleccionados.
+    public void limpiar() {
+        txtRfc.setText("");
+        txtEmpresaE.setText("");
+        txtDomicilioE.setText("");
+        txtCiudadE.setText("");
+        txtEstadoE.setText("");
+        txtEmail.setText("");
+
+    }
+    private void facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturaActionPerformed
+        try {
+            if (factura.isSelected() == true) {
+                icon = new ImageIcon(getClass().getResource(URL1 + "factura.png"));
+                btnGenerar.setIcon(icon);
+                this.setSize(580, 270);
+                this.setLocationRelativeTo(null);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_facturaActionPerformed
+
+    private void ticketActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ticketActionPerformed
+        try {
+            if (ticket.isSelected() == true) {
+                icon = new ImageIcon(getClass().getResource(URL1 + "ticket.png"));
+                btnGenerar.setIcon(icon);
+                this.setSize(142, 272);
+            }
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_ticketActionPerformed
+
+    private void txtRfcKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtRfcKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                validarRFC();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_txtRfcKeyPressed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formFocusGained
+
+//    Evento que al presionar enter o tab verifica los atributos del email para ser valido.
+    private void txtEmailKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmailKeyPressed
+        boolean respuesta;
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                p = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                m = p.matcher(txtEmail.getText());
+                m.matches();
+                respuesta = m.matches();
+                if (respuesta == true) {
+                    btnGenerar.requestFocus(true);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Correo Electronico Invalido");
+                    txtEmail.requestFocus(true);
+                }
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_txtEmailKeyPressed
+
+    private void txtEmpresaEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEmpresaEKeyPressed
+        String mayuscula = "";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                mayuscula = txtEmpresaE.getText().trim().toUpperCase();
+                txtEmpresaE.setText(mayuscula);
+                txtDomicilioE.requestFocus();
+            } catch (Exception e) {
+            }
+
+        }
+    }//GEN-LAST:event_txtEmpresaEKeyPressed
+
+    private void txtDomicilioEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDomicilioEKeyPressed
+        String mayuscula = "";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                mayuscula = txtDomicilioE.getText().trim().toUpperCase();
+                txtDomicilioE.setText(mayuscula);
+                txtCiudadE.requestFocus();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_txtDomicilioEKeyPressed
+
+    private void txtCiudadEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCiudadEKeyPressed
+        String mayuscula = "";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                mayuscula = txtCiudadE.getText().trim().toUpperCase();
+                txtCiudadE.setText(mayuscula);
+                txtEstadoE.requestFocus();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_txtCiudadEKeyPressed
+
+    private void txtEstadoEKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEstadoEKeyPressed
+        String mayuscula = "";
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER || evt.getKeyCode() == KeyEvent.VK_TAB) {
+            try {
+                mayuscula = txtEstadoE.getText().trim().toUpperCase();
+                txtEstadoE.setText(mayuscula);
+                txtEmail.requestFocus();
+            } catch (Exception e) {
+            }
+        }
+    }//GEN-LAST:event_txtEstadoEKeyPressed
+
+    private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
+        try {
+            img = new FrameDesign(URL + "buttonMinimize1.png");
+            img.addButton(btnMinimizar);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnMinimizarMouseEntered
+
+    private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
+        try {
+            img = new FrameDesign(URL + "buttonMinimize.png");
+            img.addButton(btnMinimizar);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnMinimizarMouseExited
+
+    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
+        setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMinimizarActionPerformed
+
+    private void btnCerrarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseEntered
+        try {
+            img = new FrameDesign(URL + "buttonClose1.png");
+            img.addButton(btnCerrar);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnCerrarMouseEntered
+
+    private void btnCerrarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCerrarMouseExited
+        try {
+            img = new FrameDesign(URL + "buttonClose.png");
+            img.addButton(btnCerrar);
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_btnCerrarMouseExited
+
+    private void btnCerrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarActionPerformed
+        this.hide();
+    }//GEN-LAST:event_btnCerrarActionPerformed
+
+    //    Valida que el rfc contenga los determinados caracteres en el orden preciso.
+    public void validarRFC() {
+        int v = 0;
+        String RFC = "";
+        try {
+            RFC = txtRfc.getText().trim().toUpperCase();
+            if (RFC.length() < 13 || RFC.length() > 13) {
+                JOptionPane.showMessageDialog(null, "Ingrese un RFC valido", "RFC NO VALIDO",
+                        JOptionPane.INFORMATION_MESSAGE);
+                txtRfc.setText("");
+                txtRfc.requestFocus();
+            } else {
+                if (!RFC.matches("^[a-zA-Z]{4}.*$")) {
+                    RFC = "XXXX" + RFC.substring(4);
+                    v = 1;
+                }
+                if (!RFC.matches("^.{4}\\d{6}.*$")) {
+                    RFC = RFC.substring(0, 4) + "000000" + RFC.substring(10);
+                    v = 1;
+                }
+                if (v == 1) {
+                    JOptionPane.showMessageDialog(null, RFC + " Invalido");
+                    txtRfc.setText("");
+                    txtRfc.requestFocus();
+                } else {
+                    txtRfc.setText(RFC);
+                    con.busqueda("clientes", "rfc", "nombre_cliente,domicilio,ciudad,estado,email", txtRfc.getText());
+                    if ("".equals(con.registro_busqueda) || "null".equals(con.registro_busqueda)) {
+                        activarTxt();
+                        banderaActivo = 1;
+                    } else {
+                        desactivarTxt();
+                        cargarDatos(con.registro_busqueda);
+                        banderaActivo = 0;
+                    }
+                }
+            }
+        } catch (Exception e) {
+        }
+
+    }
+
+//    Permite que los campos de texto sean Editables.
+    public void activarTxt() {
+        txtEmpresaE.setEditable(true);
+        txtDomicilioE.setEditable(true);
+        txtCiudadE.setEditable(true);
+        txtEstadoE.setEditable(true);
+        txtEmail.setEditable(true);
+    }
+
+//    Permite que los campos de texto No sean Editables.
+    public void desactivarTxt() {
+        txtEmpresaE.setEditable(false);
+        txtDomicilioE.setEditable(false);
+        txtCiudadE.setEditable(false);
+        txtEstadoE.setEditable(false);
+        txtEmail.setEditable(false);
+    }
+
+//    Carga a los campos de texto la información del vector.
+    public void cargarDatos(String busqueda) {
+        String[] cadena = busqueda.split(",");
+        txtEmpresaE.setText(cadena[0]);
+        txtDomicilioE.setText(cadena[1]);
+        txtCiudadE.setText(cadena[2]);
+        txtEstadoE.setText(cadena[3]);
+        txtEmail.setText(cadena[4]);
+    }
+//Método que llama a las clases de generar factura & envio al cliente.
+
+    public void generarFactura(String folio, String email) {
+        try {
+            System.out.println(folio + ">>" + email);
+            GestionFactura.CrearPDF crear = new CrearPDF(folio);
+            GestionFactura.JavaMail enviar = new JavaMail(folio, email);
+            enviar.run();
+        } catch (Exception e) {
+        }
+
+    }
+
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCerrar;
+    private javax.swing.JButton btnGenerar;
+    private javax.swing.JButton btnMinimizar;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JRadioButton factura;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbCiudad;
+    private javax.swing.JLabel lbDomicilio;
+    private javax.swing.JLabel lbEmpresa;
+    private javax.swing.JLabel lbEstado;
+    private javax.swing.JLabel lbEstado1;
+    private javax.swing.JLabel lbRfc;
+    private javax.swing.JLabel menuUsuarios;
+    private javax.swing.JRadioButton ticket;
+    private javax.swing.JTextField txtCiudadE;
+    private javax.swing.JTextField txtDomicilioE;
+    private javax.swing.JTextField txtEmail;
+    private javax.swing.JTextField txtEmpresaE;
+    private javax.swing.JTextField txtEstadoE;
+    private javax.swing.JTextField txtRfc;
+    // End of variables declaration//GEN-END:variables
+}
