@@ -67,14 +67,16 @@ public class Selected_school extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState) {
         rootView = inflater.inflate(R.layout.lay_selectedschool, container, false);
         this.informacion = getArguments().getString("escuelaInf");
-        img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
-        new LoadImage().execute("https://pbs.twimg.com/profile_images/537990267572191232/Tcpm1Ty2.jpeg");
+
         initializePagin();
         escuela=(TextView)rootView.findViewById(R.id._escuela);
         lema=(TextView)rootView.findViewById(R.id._lema);
         info = this.informacion.split(",");
         escuela.setText(info[2]);
         lema.setText("");
+        img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
+        new LoadImage().execute("http" +
+                "://nuuk.esy.es/uploads/"+info[14].toString());
         return rootView;
     }
 

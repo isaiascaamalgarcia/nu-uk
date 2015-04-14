@@ -41,6 +41,7 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
         private static final String ESCUELA_SECTOR = "sector";
         private static final String ESCUELA_MODIFICACION = "modificacion";
         private static final String ESCUELA_IDLOC = "idLocalidad";
+    private static final String ESCUELA_LOGO = "logo";
         private static final String ESCUELA_ESTADO = "estado";
 
     private static final String TABLE_CARRERA = "carrera";
@@ -86,8 +87,8 @@ public class AdminSQLiteOpenHelper extends SQLiteOpenHelper {
                 + ESCUELA_ID + " INTEGER PRIMARY KEY," + ESCUELA_TIPO + " INTEGER,"
                 + ESCUELA_NOMBRE + " TEXT,"+ESCUELA_DIRECCION +" TEXT,"+ ESCUELA_LATITUD+ " TEXT," +ESCUELA_LONGITUD+ " TEXT,"
                 +ESCUELA_TELEFONO+ " TEXT,"+ESCUELA_PAGINA+ " TEXT,"+ESCUELA_CORREO+ " TEXT,"+ESCUELA_FACEBOOK+ " TEXT,"
-                +ESCUELA_TWITTER+ " TEXT,"+ESCUELA_SECTOR+ " TEXT,"+ESCUELA_MODIFICACION+ " INTEGER,"+ESCUELA_IDLOC+" INTEGER," +
-                ESCUELA_ESTADO+" INTEGER"+ ")";
+                +ESCUELA_TWITTER+ " TEXT,"+ESCUELA_SECTOR+ " TEXT,"+ESCUELA_MODIFICACION+ " INTEGER,"+ESCUELA_IDLOC+" INTEGER,"
+                +ESCUELA_LOGO+ " TEXT,"+ESCUELA_ESTADO+" INTEGER"+ ")";
 
         String CREATE_LOCALIDAD_TABLE = "CREATE TABLE " + TABLE_LOCALIDAD + "("
                 + LOCALIDAD_ID + " INTEGER PRIMARY KEY," + LOCALIDAD_LOC + " TEXT,"

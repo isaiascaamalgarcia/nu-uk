@@ -17,6 +17,11 @@ import android.widget.TextView;
 
 import com.example.nuuk.nuukappmobile.SQLite.JsonFace;
 import com.example.nuuk.nuukappmobile.SQLite.UpdateRecords;
+import com.loopj.android.http.AsyncHttpClient;
+import com.loopj.android.http.AsyncHttpResponseHandler;
+import com.loopj.android.http.RequestParams;
+
+import org.apache.http.Header;
 
 /**
  * Created by Izzy-Izumi on 05/04/2015.
@@ -25,6 +30,7 @@ public class frag_infoschools extends Fragment {
     private String [] informacion;
     private TextView direccion,telefono,pagina,correo,facebook,twitter;
     private LinearLayout lDireccion,lTelefono,lPagina,lCorreo,lFacebook,lTwitter;
+    private String id="";
     View rootView;
     private Sec_carrer carrera= new Sec_carrer();
     @Override
@@ -63,18 +69,14 @@ public class frag_infoschools extends Fragment {
             lDireccion.setLayoutParams(var);
         }
         else {
-            direccion.setText(informacion[3]);
-            direccion.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    /*JsonFace face=new JsonFace(rootView.getContext(),facebook.getText().toString(),columnas);
-                    face.getData();*/
-                    String uri = "fb://messaging/"+"110878572304597";
-                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-                    startActivity(intent);
-                }
-            });
+            //direccion.setText(informacion[3]);
+
+            SpannableString content = new SpannableString(informacion[3
+                    ]);
+            content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
+            direccion.setText(content);
         }
+
 
         if(informacion[6].equals("NULL"))
         {
@@ -147,7 +149,40 @@ public class frag_infoschools extends Fragment {
             SpannableString content = new SpannableString(informacion[9]);
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             facebook.setText(content);
+
+            facebook.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AsyncHttpClient client = new AsyncHttpClient();
+
+                    //String url = "http://nuuk.esy.es/img/getfbid.php";
+                    String url = "http://192.168.1.69/iqm/getfbid.php";
+                    RequestParams params = new RequestParams();
+                    params.put("url",facebook.getText());
+
+                    client.post(url,params, new AsyncHttpResponseHandler() {
+                        @Override
+                        public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+                            if (statusCode == 200) {
+                                //call function...
+                                Log.i("200","Aqui estoy");
+                                id = getJSONData(new String(responseBody)).toString();
+                                String uri = "fb://messaging/"+id;
+                                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                                startActivity(intent);
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+
+                            Log.i("200","Aqui estoy mal");
+                        }
+                    });
+                }
+            });
         }
+
         if(informacion[10].equals("NULL"))
         {
             LinearLayout.LayoutParams var=new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,0);
@@ -157,7 +192,28 @@ public class frag_infoschools extends Fragment {
             SpannableString content = new SpannableString(informacion[10]);
             content.setSpan(new UnderlineSpan(), 0, content.length(), 0);
             twitter.setText(content);
+            twitter.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String url = "http://www.twitter.com"+twitter.getText();
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+            });
         }
     }
+    public String getJSONData(String response) {
+        String idFace="";
+        try{
+            //JSONArray jsonArray = new JSONArray(response);
+            idFace = response.toString();
+            Log.i("TEXT",idFace);
 
+        }catch(Exception e) {
+
+            Log.i("JSON","aqui ando mal");
+        }
+        return  idFace;
+    }
 }
