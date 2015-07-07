@@ -77,6 +77,8 @@ public class Selected_school extends Fragment{
         img = (ImageView)rootView.findViewById(R.id.schoollogo_round);
         new LoadImage().execute("http" +
                 "://nuuk.esy.es/uploads/"+info[14].toString());
+        //new LoadImage().execute("http://www.logotypes101.com/logos/962/5416D674B2A624A0154296993747BAEA/IT.png");
+
         return rootView;
     }
 
